@@ -3,8 +3,8 @@
 //
 // IEEE 754 binary32 (single precision) format
 
-public import Binary
-import Standards
+public import Binary_Primitives
+
 
 extension IEEE_754 {
     /// IEEE 754 binary32 (single precision) format

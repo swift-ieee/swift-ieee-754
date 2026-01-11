@@ -4,7 +4,7 @@
 // IEEE 754-2019: Binary128 (Quadruple Precision) Format
 // Format specification and constants (no native Swift type available)
 
-import Standards
+
 
 extension IEEE_754 {
     /// Binary128 (Quadruple Precision) Format

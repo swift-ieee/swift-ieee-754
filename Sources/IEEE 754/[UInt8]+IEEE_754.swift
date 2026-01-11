@@ -3,8 +3,8 @@
 //
 // Convenient namespaced access to IEEE 754 serialization
 
-public import Binary
-import Standards
+public import Binary_Primitives
+
 
 extension [UInt8] {
     /// Access to IEEE 754 type-level constants and methods

@@ -1,6 +1,6 @@
 // exports.swift
 // swift-ieee-754
 //
-// Re-export Standards for convenience
+// Re-export Binary Primitives for convenience
 
-@_exported import Standards
+@_exported public import Binary_Primitives

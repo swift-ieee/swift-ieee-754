@@ -3,8 +3,8 @@
 //
 // IEEE 754 extensions for Double (binary64)
 
-public import Binary
-import Standards
+public import Binary_Primitives
+
 
 extension Double {
     /// Access to IEEE 754 binary64 constants and methods

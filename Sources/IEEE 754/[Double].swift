@@ -3,8 +3,8 @@
 //
 // Array extensions for Swift standard library Double (IEEE 754 binary64)
 
-public import Binary
-import Standards
+public import Binary_Primitives
+
 
 extension [Double] {
     /// Creates an array of Doubles from a flat byte collection

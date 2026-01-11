@@ -3,8 +3,8 @@
 //
 // IEEE 754 extensions for Float (binary32)
 
-public import Binary
-import Standards
+public import Binary_Primitives
+
 
 extension Float {
     /// Access to IEEE 754 binary32 constants and methods

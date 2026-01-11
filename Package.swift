@@ -31,7 +31,8 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-standards/swift-standards", from: "0.10.0"),
+        .package(path: "../../swift-primitives/swift-binary-primitives"),
+        .package(path: "../../swift-primitives/swift-test-primitives"),
     ],
     targets: [
         .target(
@@ -41,7 +42,7 @@ let package = Package(
         .target(
             name: "IEEE 754",
             dependencies: [
-                .product(name: "Standards", package: "swift-standards"),
+                .product(name: "Binary Primitives", package: "swift-binary-primitives"),
                 .target(name: "CIEEE754", condition: .when(platforms: [.macOS, .linux, .iOS, .tvOS, .watchOS]))
             ]
         ),
@@ -50,7 +51,7 @@ let package = Package(
             dependencies: [
                 "IEEE 754",
                 .target(name: "CIEEE754", condition: .when(platforms: [.macOS, .linux, .iOS, .tvOS, .watchOS])),
-                .product(name: "StandardsTestSupport", package: "swift-standards")
+                .product(name: "Test Primitives", package: "swift-test-primitives")
             ]
         )
     ],
