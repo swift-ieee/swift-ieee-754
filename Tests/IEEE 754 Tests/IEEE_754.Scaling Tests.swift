@@ -3,7 +3,7 @@
 //
 // Comprehensive tests for IEEE 754-2019 Section 5.3 Scaling operations
 
-import Standards
+import Standard_Library_Extensions
 import Testing
 
 @testable import IEEE_754

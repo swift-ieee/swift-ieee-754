@@ -451,7 +451,7 @@ extension IEEE_754.Comparison {
         /// ## Example
         ///
         /// ```swift
-        /// IEEE_754.Exceptions.clearAll()
+        /// IEEE_754.Exceptions.clear()
         ///
         /// let result = IEEE_754.Comparison.Signaling.equal(Double.nan, 3.14)
         /// // result = false

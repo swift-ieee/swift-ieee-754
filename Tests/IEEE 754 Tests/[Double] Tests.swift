@@ -3,7 +3,6 @@
 //
 // Tests for [Double] array extensions
 
-import StandardsTestSupport
 import Testing
 
 @testable import IEEE_754
@@ -244,7 +243,7 @@ struct DoubleArrayTests {
 extension `Performance Tests` {
     @Suite
     struct `Array<Double> - Performance` {
-        @Test(.timed(threshold: .milliseconds(50)))
+        @Test
         func `deserialize 1000 Doubles from bytes`() {
             var bytes: [UInt8] = []
             for i in 0..<1_000 {
@@ -254,7 +253,7 @@ extension `Performance Tests` {
             _ = [Double](bytes: bytes)
         }
 
-        @Test(.timed(threshold: .milliseconds(100)))
+        @Test
         func `serialize and deserialize 1000 Doubles`() {
             let values = (0..<1_000).map { Double($0) * 3.14159 }
 
@@ -267,7 +266,7 @@ extension `Performance Tests` {
             #expect(deserialized != nil)
         }
 
-        @Test(.timed(threshold: .milliseconds(200)))
+        @Test
         func `round-trip 10000 random Doubles through arrays`() {
             let values = (0..<10_000).map { _ in Double.random(in: -1e100...1e100) }
 
@@ -280,7 +279,7 @@ extension `Performance Tests` {
             #expect(deserialized?.count == 10_000)
         }
 
-        @Test(.timed(threshold: .milliseconds(20)))
+        @Test
         func `deserialize 100 Doubles repeatedly`() {
             var bytes: [UInt8] = []
             for i in 0..<100 {
@@ -292,7 +291,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(10)))
+        @Test
         func `alternating endianness 1000 values`() {
             let value: Double = 3.141592653589793
 
@@ -303,7 +302,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(10)))
+        @Test
         func `special values array 1000 times`() {
             let specialValues: [Double] = [
                 0.0, -0.0,

@@ -4,7 +4,7 @@
 // Exotic and obscure edge cases that have historically broken other implementations
 // These are the final 5% of edge cases that catch implementation bugs
 
-import Foundation
+import Standard_Library_Extensions
 import Testing
 
 @testable import IEEE_754

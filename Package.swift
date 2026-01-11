@@ -33,6 +33,7 @@ let package = Package(
     dependencies: [
         .package(path: "../../swift-primitives/swift-binary-primitives"),
         .package(path: "../../swift-primitives/swift-test-primitives"),
+        .package(path: "../../swift-primitives/swift-standard-library-extensions"),
     ],
     targets: [
         .target(
@@ -51,7 +52,8 @@ let package = Package(
             dependencies: [
                 "IEEE 754",
                 .target(name: "CIEEE754", condition: .when(platforms: [.macOS, .linux, .iOS, .tvOS, .watchOS])),
-                .product(name: "Test Primitives", package: "swift-test-primitives")
+                .product(name: "Test Primitives", package: "swift-test-primitives"),
+                .product(name: "Standard Library Extensions", package: "swift-standard-library-extensions"),
             ]
         )
     ],

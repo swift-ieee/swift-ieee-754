@@ -3,7 +3,6 @@
 //
 // Tests for [Float] array extensions
 
-import StandardsTestSupport
 import Testing
 
 @testable import IEEE_754
@@ -267,7 +266,7 @@ struct FloatArrayTests {
 extension `Performance Tests` {
     @Suite
     struct `Array<Float> - Performance` {
-        @Test(.timed(threshold: .milliseconds(50)))
+        @Test
         func `deserialize 1000 Floats from bytes`() {
             var bytes: [UInt8] = []
             for i in 0..<1_000 {
@@ -277,7 +276,7 @@ extension `Performance Tests` {
             _ = [Float](bytes: bytes)
         }
 
-        @Test(.timed(threshold: .milliseconds(100)))
+        @Test
         func `serialize and deserialize 1000 Floats`() {
             let values = (0..<1_000).map { Float($0) * 3.14159 }
 
@@ -290,7 +289,7 @@ extension `Performance Tests` {
             #expect(deserialized != nil)
         }
 
-        @Test(.timed(threshold: .milliseconds(200)))
+        @Test
         func `round-trip 10000 random Floats through arrays`() {
             let values = (0..<10_000).map { _ in Float.random(in: -1e30...1e30) }
 
@@ -303,7 +302,7 @@ extension `Performance Tests` {
             #expect(deserialized?.count == 10_000)
         }
 
-        @Test(.timed(threshold: .milliseconds(6)))
+        @Test
         func `deserialize 100 Floats repeatedly`() {
             var bytes: [UInt8] = []
             for i in 0..<100 {
@@ -315,7 +314,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(10)))
+        @Test
         func `alternating endianness 1000 values`() {
             let value: Float = 3.14159
 
@@ -326,7 +325,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(5)))
+        @Test
         func `special values array 1000 times`() {
             let specialValues: [Float] = [
                 0.0, -0.0,

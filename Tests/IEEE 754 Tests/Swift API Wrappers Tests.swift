@@ -62,7 +62,7 @@ struct SwiftRoundingControlTests {
 @Suite("Swift API - Exception Handling")
 struct SwiftExceptionHandlingTests {
     @Test func clearAllExceptions() {
-        IEEE_754.Exceptions.clearAll()
+        IEEE_754.Exceptions.clear()
         #expect(!IEEE_754.Exceptions.invalidOperation)
         #expect(!IEEE_754.Exceptions.divisionByZero)
         #expect(!IEEE_754.Exceptions.overflow)
@@ -71,7 +71,7 @@ struct SwiftExceptionHandlingTests {
     }
 
     @Test func raiseAndTestException() {
-        IEEE_754.Exceptions.clearAll()
+        IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.invalid)
 
         #expect(IEEE_754.Exceptions.invalidOperation)
@@ -79,22 +79,22 @@ struct SwiftExceptionHandlingTests {
     }
 
     @Test func fpuExceptionDetection() {
-        IEEE_754.Exceptions.clearFPU()
+        Float.exception.clear()
 
         // Perform operation that might set FPU exceptions
         _ = 1.0 / 3.0  // May set inexact
 
-        let fpuState = IEEE_754.Exceptions.testFPU()
+        let fpuState = Float.exception.test()
 
         // Verify structure is readable
         #expect(fpuState.invalid == false || fpuState.invalid == true)
-        #expect(fpuState.divisionByZero == false || fpuState.divisionByZero == true)
+        #expect(fpuState.division == false || fpuState.division == true)
     }
 
     @Test func fpuStateEquatable() {
-        IEEE_754.Exceptions.clearFPU()
-        let state1 = IEEE_754.Exceptions.testFPU()
-        let state2 = IEEE_754.Exceptions.testFPU()
+        Float.exception.clear()
+        let state1 = Float.exception.test()
+        let state2 = Float.exception.test()
 
         #expect(state1 == state2)
     }
@@ -105,7 +105,7 @@ struct SwiftExceptionHandlingTests {
 @Suite("Swift API - Signaling Comparisons")
 struct SwiftSignalingComparisonTests {
     @Test func signalingEqualNormal() {
-        IEEE_754.Exceptions.clearAll()
+        IEEE_754.Exceptions.clear()
 
         let result = IEEE_754.Comparison.Signaling.equal(3.14, 3.14)
         #expect(result == true)
@@ -113,7 +113,7 @@ struct SwiftSignalingComparisonTests {
     }
 
     @Test func signalingEqualNaN() {
-        IEEE_754.Exceptions.clearAll()
+        IEEE_754.Exceptions.clear()
 
         let result = IEEE_754.Comparison.Signaling.equal(Double.nan, 3.14)
         #expect(result == false)
@@ -121,7 +121,7 @@ struct SwiftSignalingComparisonTests {
     }
 
     @Test func signalingLessNormal() {
-        IEEE_754.Exceptions.clearAll()
+        IEEE_754.Exceptions.clear()
 
         #expect(IEEE_754.Comparison.Signaling.less(2.0, 3.0) == true)
         #expect(IEEE_754.Comparison.Signaling.less(3.0, 2.0) == false)
@@ -129,7 +129,7 @@ struct SwiftSignalingComparisonTests {
     }
 
     @Test func signalingLessNaN() {
-        IEEE_754.Exceptions.clearAll()
+        IEEE_754.Exceptions.clear()
 
         let result = IEEE_754.Comparison.Signaling.less(Double.nan, 3.14)
         #expect(result == false)
@@ -137,14 +137,14 @@ struct SwiftSignalingComparisonTests {
     }
 
     @Test func signalingGreaterFloat() {
-        IEEE_754.Exceptions.clearAll()
+        IEEE_754.Exceptions.clear()
 
         #expect(IEEE_754.Comparison.Signaling.greater(Float(3.0), Float(2.0)) == true)
         #expect(IEEE_754.Comparison.Signaling.greater(Float(2.0), Float(3.0)) == false)
     }
 
     @Test func signalingNotEqualNaN() {
-        IEEE_754.Exceptions.clearAll()
+        IEEE_754.Exceptions.clear()
 
         let result = IEEE_754.Comparison.Signaling.notEqual(Double.nan, 3.14)
         #expect(result == true)  // NaN is not equal to anything
@@ -157,7 +157,7 @@ struct SwiftSignalingComparisonTests {
 @Suite("Swift API - Integration Scenarios")
 struct SwiftAPIIntegrationTests {
     @Test func roundingAndExceptions() throws {
-        IEEE_754.Exceptions.clearAll()
+        IEEE_754.Exceptions.clear()
 
         try IEEE_754.RoundingControl.withMode(.upward) {
             let result = 1.0 / 3.0
@@ -173,7 +173,7 @@ struct SwiftAPIIntegrationTests {
     }
 
     @Test func signalingComparisonSetsException() {
-        IEEE_754.Exceptions.clearAll()
+        IEEE_754.Exceptions.clear()
 
         // This should set the invalid exception
         _ = IEEE_754.Comparison.Signaling.equal(Float.nan, Float.nan)
@@ -182,12 +182,12 @@ struct SwiftAPIIntegrationTests {
         #expect(IEEE_754.Exceptions.invalidOperation)
 
         // Clear for next test
-        IEEE_754.Exceptions.clearAll()
+        IEEE_754.Exceptions.clear()
     }
 
     @Test func fpuAndThreadLocalExceptions() {
-        IEEE_754.Exceptions.clearAll()
-        IEEE_754.Exceptions.clearFPU()
+        IEEE_754.Exceptions.clear()
+        Float.exception.clear()
 
         // Raise thread-local exception
         IEEE_754.Exceptions.raise(.overflow)
@@ -196,7 +196,7 @@ struct SwiftAPIIntegrationTests {
         #expect(IEEE_754.Exceptions.overflow)
 
         // FPU state is independent
-        let fpuState = IEEE_754.Exceptions.testFPU()
+        let fpuState = Float.exception.test()
         // FPU overflow might or might not be set depending on operations
         #expect(fpuState.overflow == false || fpuState.overflow == true)
     }

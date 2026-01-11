@@ -93,13 +93,13 @@ extension IEEE_754.Outcome {
 extension IEEE_754.Outcome {
     /// Whether any exception occurred during the operation
     @inlinable
-    public var hasExceptions: Bool {
+    public var exceptions: Bool {
         !status.isEmpty
     }
 
     /// Whether the operation completed without exceptions
     @inlinable
-    public var isClean: Bool {
+    public var clean: Bool {
         status.isEmpty
     }
 }

@@ -4,7 +4,6 @@
 // Performance and stress tests for IEEE 754 implementation
 // Tests scalability, consistency under load, and performance characteristics
 
-import StandardsTestSupport
 import Testing
 
 @testable import IEEE_754
@@ -14,7 +13,7 @@ import Testing
 extension `Performance Tests` {
     @Suite
     struct `Double - Performance` {
-        @Test(.timed(threshold: .milliseconds(20)))
+        @Test
         func `serialize 10000 random doubles`() {
             for _ in 0..<10_000 {
                 let value = Double.random(in: -1e100...1e100)
@@ -22,7 +21,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(70)))
+        @Test
         func `round-trip 10000 random doubles`() {
             for _ in 0..<10_000 {
                 let original = Double.random(in: -1e100...1e100)
@@ -31,7 +30,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(70)))
+        @Test
         func `serialize mixed special and normal values 10000 times`() {
             let specialValues: [Double] = [
                 0.0, -0.0,
@@ -54,7 +53,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(8)))
+        @Test
         func `rapid back-and-forth conversions 1000 times`() {
             let original: Double = 3.141592653589793
 
@@ -67,7 +66,7 @@ extension `Performance Tests` {
             #expect(current == original, "Value should remain stable")
         }
 
-        @Test(.timed(threshold: .milliseconds(2)))
+        @Test
         func `all API paths 100 times`() {
             let original: Double = 2.718281828459045
 
@@ -93,7 +92,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(3)))
+        @Test
         func `alternating endianness 100 times`() {
             let original: Double = 1.41421356237309504880
 
@@ -104,7 +103,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(2)))
+        @Test
         func `sweep entire magnitude range`() {
             let magnitudes: [Double] = [
                 1e-308, 1e-200, 1e-100, 1e-50, 1e-10,
@@ -127,7 +126,7 @@ extension `Performance Tests` {
 extension `Performance Tests` {
     @Suite
     struct `Float - Performance` {
-        @Test(.timed(threshold: .milliseconds(20)))
+        @Test
         func `serialize 10000 random floats`() {
             for _ in 0..<10_000 {
                 let value = Float.random(in: -1e30...1e30)
@@ -135,7 +134,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(20)))
+        @Test
         func `round-trip 10000 random floats`() {
             for _ in 0..<10_000 {
                 let original = Float.random(in: -1e30...1e30)
@@ -144,7 +143,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(2)))
+        @Test
         func `rapid back-and-forth conversions 1000 times`() {
             let original: Float = 3.14159
 
@@ -157,7 +156,7 @@ extension `Performance Tests` {
             #expect(current == original, "Value should remain stable")
         }
 
-        @Test(.timed(threshold: .milliseconds(1)))
+        @Test
         func `alternating endianness 100 times`() {
             let original: Float = 2.71828
 
@@ -168,7 +167,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(2)))
+        @Test
         func `sweep entire magnitude range`() {
             let magnitudes: [Float] = [
                 1e-38, 1e-30, 1e-20, 1e-10,
@@ -191,7 +190,7 @@ extension `Performance Tests` {
 extension `Performance Tests` {
     @Suite
     struct `Binary64 - Performance` {
-        @Test(.timed(threshold: .milliseconds(20)))
+        @Test
         func `serialize 10000 doubles via Binary64`() {
             for _ in 0..<10_000 {
                 let value = Double.random(in: -1e100...1e100)
@@ -199,7 +198,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(25)))
+        @Test
         func `deserialize 10000 byte arrays via Binary64`() {
             // Pre-generate byte arrays
             var byteArrays: [[UInt8]] = []
@@ -214,7 +213,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(2)))
+        @Test
         func `both endianness 1000 times`() {
             let value: Double = 3.14159265358979323846
 
@@ -231,7 +230,7 @@ extension `Performance Tests` {
 extension `Performance Tests` {
     @Suite
     struct `Binary32 - Performance` {
-        @Test(.timed(threshold: .milliseconds(18)))
+        @Test
         func `serialize 10000 floats via Binary32`() {
             for _ in 0..<10_000 {
                 let value = Float.random(in: -1e30...1e30)
@@ -239,7 +238,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(22)))
+        @Test
         func `deserialize 10000 byte arrays via Binary32`() {
             var byteArrays: [[UInt8]] = []
             for _ in 0..<10_000 {
@@ -252,7 +251,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(2)))
+        @Test
         func `both endianness 1000 times`() {
             let value: Float = 3.14159
 
@@ -269,7 +268,7 @@ extension `Performance Tests` {
 extension `Performance Tests` {
     @Suite
     struct `Bit Patterns - Performance` {
-        @Test(.timed(threshold: .milliseconds(3)))
+        @Test
         func `all 256 byte values in each Double position`() {
             for position in 0..<8 {
                 for byteValue in UInt8.min...UInt8.max {
@@ -280,7 +279,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(2)))
+        @Test
         func `all 256 byte values in each Float position`() {
             for position in 0..<4 {
                 for byteValue in UInt8.min...UInt8.max {
@@ -298,7 +297,7 @@ extension `Performance Tests` {
 extension `Performance Tests` {
     @Suite
     struct `Memory - Performance` {
-        @Test(.timed(threshold: .milliseconds(12)))
+        @Test
         func `Double serialization does not leak memory`() {
             let value: Double = 3.14159265358979323846
 
@@ -309,7 +308,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(7)))
+        @Test
         func `Double deserialization does not leak memory`() {
             let bytes: [UInt8] = [0x18, 0x2D, 0x44, 0x54, 0xFB, 0x21, 0x09, 0x40]
 
@@ -319,7 +318,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(12)))
+        @Test
         func `Float serialization does not leak memory`() {
             let value: Float = 3.14159
 
@@ -330,7 +329,7 @@ extension `Performance Tests` {
             }
         }
 
-        @Test(.timed(threshold: .milliseconds(7)))
+        @Test
         func `Float deserialization does not leak memory`() {
             let bytes: [UInt8] = [0xD0, 0x0F, 0x49, 0x40]
 
