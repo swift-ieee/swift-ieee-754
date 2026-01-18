@@ -22,7 +22,7 @@ let package = Package(
         .iOS(.v26),
         .tvOS(.v26),
         .watchOS(.v26),
-        .visionOS(.v26),
+        .visionOS(.v26)
     ],
     products: [
         .library(
@@ -32,8 +32,7 @@ let package = Package(
     ],
     dependencies: [
         .package(path: "../../swift-primitives/swift-binary-primitives"),
-        .package(path: "../../swift-primitives/swift-test-primitives"),
-        .package(path: "../../swift-primitives/swift-standard-library-extensions"),
+        .package(path: "../../swift-primitives/swift-standard-library-extensions")
     ],
     targets: [
         .target(
@@ -45,16 +44,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Binary Primitives", package: "swift-binary-primitives"),
                 .target(name: "CIEEE754", condition: .when(platforms: [.macOS, .linux, .iOS, .tvOS, .watchOS]))
-            ]
-        ),
-        .testTarget(
-            name: "IEEE 754".tests,
-            dependencies: [
-                "IEEE 754",
-                .target(name: "CIEEE754", condition: .when(platforms: [.macOS, .linux, .iOS, .tvOS, .watchOS])),
-                .product(name: "Test Primitives", package: "swift-test-primitives"),
-                .product(name: "Standard Library Extensions", package: "swift-standard-library-extensions"),
-            ]
+    ]
         )
     ],
     swiftLanguageModes: [.v6]
