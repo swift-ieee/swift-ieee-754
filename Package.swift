@@ -47,7 +47,13 @@ let package = Package(
                 .product(name: "Decimal Primitives", package: "swift-decimal-primitives"),
                 .target(name: "CIEEE754", condition: .when(platforms: [.macOS, .linux, .iOS, .tvOS, .watchOS]))
             ]
-        )
+        ),
+        .testTarget(
+            name: "IEEE 754 Tests",
+            dependencies: [
+                "IEEE 754",
+            ]
+        ),
     ],
     swiftLanguageModes: [.v6]
 )
@@ -62,6 +68,7 @@ for target in package.targets where ![.system, .binary, .plugin, .macro].contain
         .enableUpcomingFeature("ExistentialAny"),
         .enableUpcomingFeature("InternalImportsByDefault"),
         .enableUpcomingFeature("MemberImportVisibility"),
+        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
         .enableExperimentalFeature("Lifetimes"),
         .enableExperimentalFeature("SuppressedAssociatedTypes"),
         .enableExperimentalFeature("SuppressedAssociatedTypesWithDefaults"),
