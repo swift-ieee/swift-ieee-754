@@ -149,7 +149,7 @@
             ///   - mode: The rounding mode to use during closure execution
             ///   - body: The closure to execute
             /// - Returns: The value returned by the closure
-            /// - Throws: Rethrows any error from the closure, or `Error.setFailed`
+            /// - Throws: Any error from the closure
             ///
             /// ## Example
             ///
@@ -159,10 +159,10 @@
             /// }
             /// // Rounding mode is automatically restored here
             /// ```
-            public static func withMode<T>(
+            public static func withMode<T, E: Swift.Error>(
                 _ mode: Mode,
-                _ body: () throws -> T
-            ) rethrows -> T {
+                _ body: () throws(E) -> T
+            ) throws(E) -> T {
                 let originalMode = get()
                 try? set(mode)
                 defer {

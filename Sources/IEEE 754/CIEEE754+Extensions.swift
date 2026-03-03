@@ -32,11 +32,11 @@
     ///   - mode: The rounding mode to use during execution
     ///   - body: The closure to execute with the specified rounding mode
     /// - Returns: The value returned by the closure
-    /// - Throws: Rethrows any error thrown by the closure
-    func withRoundingMode<T>(
+    /// - Throws: Any error thrown by the closure
+    func withRoundingMode<T, E: Swift.Error>(
         _ mode: IEEE754RoundingMode,
-        _ body: () throws -> T
-    ) rethrows -> T {
+        _ body: () throws(E) -> T
+    ) throws(E) -> T {
         let originalMode = ieee754_get_rounding_mode()
         defer { ieee754_set_rounding_mode(originalMode) }
 
@@ -61,8 +61,8 @@
     ///
     /// - Parameter body: The closure to execute with cleared exceptions
     /// - Returns: The value returned by the closure
-    /// - Throws: Rethrows any error thrown by the closure
-    func withClearedExceptions<T>(_ body: () throws -> T) rethrows -> T {
+    /// - Throws: Any error thrown by the closure
+    func withClearedExceptions<T, E: Swift.Error>(_ body: () throws(E) -> T) throws(E) -> T {
         let originalExceptions = ieee754_get_exceptions()
         defer {
             // Restore original exception state
@@ -106,12 +106,12 @@
     ///   - mode: The rounding mode to use during execution
     ///   - body: The closure to execute
     /// - Returns: The value returned by the closure
-    /// - Throws: Rethrows any error thrown by the closure
-    func withRoundingModeAndClearedExceptions<T>(
+    /// - Throws: Any error thrown by the closure
+    func withRoundingModeAndClearedExceptions<T, E: Swift.Error>(
         _ mode: IEEE754RoundingMode,
-        _ body: () throws -> T
-    ) rethrows -> T {
-        try withRoundingMode(mode) {
+        _ body: () throws(E) -> T
+    ) throws(E) -> T {
+        try withRoundingMode(mode) { () throws(E) -> T in
             try withClearedExceptions(body)
         }
     }
