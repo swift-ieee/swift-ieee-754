@@ -34,6 +34,7 @@ let package = Package(
         .package(path: "../../swift-primitives/swift-binary-primitives"),
         .package(path: "../../swift-primitives/swift-standard-library-extensions"),
         .package(path: "../../swift-primitives/swift-decimal-primitives"),
+        .package(path: "../../swift-primitives/swift-dependency-primitives"),
     ],
     targets: [
         .target(
@@ -45,6 +46,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Binary Primitives", package: "swift-binary-primitives"),
                 .product(name: "Decimal Primitives", package: "swift-decimal-primitives"),
+                .product(name: "Dependency Primitives", package: "swift-dependency-primitives"),
                 .target(name: "CIEEE754", condition: .when(platforms: [.macOS, .linux, .iOS, .tvOS, .watchOS]))
             ]
         ),

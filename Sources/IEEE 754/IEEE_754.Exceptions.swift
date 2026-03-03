@@ -5,6 +5,7 @@
 // Authoritative implementations for IEEE 754 exception flags
 
 public import Synchronization
+public import Dependency_Primitives
 
 #if canImport(CIEEE754)
     import CIEEE754
@@ -182,15 +183,33 @@ extension IEEE_754.Exceptions {
 
         @usableFromInline
         init() {}
+
+        /// Process-global exception state (backward compatible).
+        @usableFromInline
+        static let _global = ExceptionState()
     }
 
-    /// Global shared exception state
+    /// Exception state resolved from dependency scope.
     ///
-    /// Uses Swift 6.0 Synchronization.Mutex for Foundation-free thread safety.
-    /// For true thread-local storage, use the CIEEE754 C target which provides
-    /// pthread-based TLS on supported platforms.
+    /// In live context, returns the process-global instance.
+    /// In test context, returns a fresh per-scope instance for isolation.
     @usableFromInline
-    static let sharedState = ExceptionState()
+    static var state: ExceptionState {
+        Dependency.Scope.current[ExceptionState.self]
+    }
+}
+
+// MARK: - ExceptionState Dependency.Key
+
+extension IEEE_754.Exceptions.ExceptionState: Dependency.Key {
+    @usableFromInline
+    typealias Value = IEEE_754.Exceptions.ExceptionState
+
+    @usableFromInline
+    static var liveValue: IEEE_754.Exceptions.ExceptionState { _global }
+
+    @usableFromInline
+    static var testValue: IEEE_754.Exceptions.ExceptionState { .init() }
 }
 
 // MARK: - ExceptionState Methods
@@ -263,7 +282,7 @@ extension IEEE_754.Exceptions {
     ///
     /// Note: This operation is thread-safe.
     public static func raise(_ flag: Flag) {
-        sharedState.set(flag)
+        state.set(flag)
 
         #if canImport(CIEEE754)
             // Also raise in C thread-local storage for consistency
@@ -303,9 +322,9 @@ extension IEEE_754.Exceptions {
             case .underflow: cFlag = IEEE754_EXCEPTION_UNDERFLOW
             case .inexact: cFlag = IEEE754_EXCEPTION_INEXACT
             }
-            return ieee754_test_exception(cFlag) != 0 || sharedState.get(flag)
+            return ieee754_test_exception(cFlag) != 0 || state.get(flag)
         #else
-            return sharedState.get(flag)
+            return state.get(flag)
         #endif
     }
 
@@ -320,7 +339,7 @@ extension IEEE_754.Exceptions {
     /// IEEE_754.Exceptions.clear(.overflow)
     /// ```
     public static func clear(_ flag: Flag) {
-        sharedState.clear(flag)
+        state.clear(flag)
 
         #if canImport(CIEEE754)
             // Also clear in C thread-local storage
@@ -345,7 +364,7 @@ extension IEEE_754.Exceptions {
     /// IEEE_754.Exceptions.clear()
     /// ```
     public static func clear() {
-        sharedState.clearAll()
+        state.clearAll()
 
         #if canImport(CIEEE754)
             // Also clear C thread-local storage
