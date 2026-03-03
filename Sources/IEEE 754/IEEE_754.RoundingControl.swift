@@ -133,7 +133,7 @@
             ///
             /// This only affects the current thread. Other threads maintain their
             /// own rounding mode.
-            public static func set(_ mode: Mode) throws {
+            public static func set(_ mode: Mode) throws(Error) {
                 let result = ieee754_set_rounding_mode(mode.cValue)
                 if result != 0 {
                     throw Error.setFailed
