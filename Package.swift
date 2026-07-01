@@ -54,6 +54,7 @@ let package = Package(
             name: "IEEE 754 Tests",
             dependencies: [
                 "IEEE 754",
+                .product(name: "Standard Library Extensions", package: "swift-standard-library-extensions"),
             ]
         ),
     ],
