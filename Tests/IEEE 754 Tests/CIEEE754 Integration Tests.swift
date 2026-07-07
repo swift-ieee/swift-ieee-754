@@ -3,6 +3,11 @@
 //
 // Integration tests for C target FPU control functions
 
+// The C shim is POSIX/Darwin-only and is not a dependency of this target on
+// Windows; compile these integration tests out there (mirrors the library's
+// CIEEE754_SHIM gating in Package.swift).
+#if CIEEE754_SHIM
+
 import CIEEE754
 import Testing
 
@@ -377,3 +382,5 @@ struct CIEEEIntegrationTests {
         #expect(ieee754_test_exception(IEEE754_EXCEPTION_OVERFLOW) == 0)
     }
 }
+
+#endif  // CIEEE754_SHIM

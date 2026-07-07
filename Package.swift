@@ -67,6 +67,15 @@ let package = Package(
             dependencies: [
                 "IEEE 754",
                 .product(name: "Standard Library Extensions", package: "swift-standard-library-extensions"),
+                .target(name: "CIEEE754", condition: .when(platforms: [.macOS, .linux, .iOS, .tvOS, .watchOS])),
+            ],
+            // Mirror the "IEEE 754" target's shim gating so the C-shim
+            // integration tests compile out on Windows (see the note above).
+            swiftSettings: [
+                .define(
+                    "CIEEE754_SHIM",
+                    .when(platforms: [.macOS, .linux, .iOS, .tvOS, .watchOS])
+                )
             ]
         ),
     ],
