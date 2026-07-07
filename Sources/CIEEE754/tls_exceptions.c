@@ -3,6 +3,12 @@
 //
 // IEEE 754-2019 Section 7: Thread-Local Exception Flags
 
+// The CIEEE754 FPU shim is POSIX/Darwin-only (fenv.h, pthreads). It is not a
+// dependency of the "IEEE 754" target on Windows (see Package.swift + the
+// CIEEE754_SHIM define), so compile this translation unit empty there rather
+// than fail on the unavailable <pthread.h>/<fenv.h> surface.
+#if !defined(_WIN32)
+
 #include "include/ieee754_fpu.h"
 #include <pthread.h>
 #include <stdlib.h>
@@ -124,3 +130,5 @@ void ieee754_clear_all_exceptions(void) {
     ThreadExceptionState* state = get_thread_state();
     memset(state, 0, sizeof(ThreadExceptionState));
 }
+
+#endif  // !defined(_WIN32)

@@ -3,6 +3,12 @@
 //
 // IEEE 754-2019 Section 4.3: Rounding Direction Attributes
 
+// The CIEEE754 FPU shim is POSIX/Darwin-only (fenv.h, pthreads). It is not a
+// dependency of the "IEEE 754" target on Windows (see Package.swift + the
+// CIEEE754_SHIM define), so compile this translation unit empty there rather
+// than fail on the unavailable <pthread.h>/<fenv.h> surface.
+#if !defined(_WIN32)
+
 #include "include/ieee754_fpu.h"
 #include <fenv.h>
 
@@ -47,3 +53,5 @@ IEEE754RoundingMode ieee754_get_rounding_mode(void) {
     int fe_mode = fegetround();
     return fe_round_to_ieee754(fe_mode);
 }
+
+#endif  // !defined(_WIN32)
