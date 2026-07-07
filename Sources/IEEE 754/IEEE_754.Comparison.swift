@@ -4,8 +4,6 @@
 // IEEE 754-2019 Section 5.6: Comparison Predicates
 // Authoritative implementations of floating-point comparison operations
 
-
-
 #if canImport(CIEEE754)
     import CIEEE754
 #endif

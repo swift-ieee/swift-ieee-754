@@ -4,8 +4,6 @@
 // IEEE 754-2019: Binary16 (Half Precision) Format
 // Authoritative implementation of the binary16 interchange format
 
-
-
 extension IEEE_754 {
     /// Binary16 (Half Precision) Format
     ///

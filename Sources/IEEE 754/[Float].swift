@@ -5,7 +5,6 @@
 
 public import Binary_Primitives
 
-
 extension [Float] {
     /// Creates an array of Floats from a flat byte collection
     ///

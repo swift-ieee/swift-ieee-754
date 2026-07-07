@@ -82,17 +82,17 @@ extension Float.Exception {
 // MARK: - Float.Exception.State Internal Init
 
 #if canImport(CIEEE754)
-extension Float.Exception.State {
-    internal init(cState: IEEE754Exceptions) {
-        self.init(
-            invalid: cState.invalid != 0,
-            division: cState.divByZero != 0,
-            overflow: cState.overflow != 0,
-            underflow: cState.underflow != 0,
-            inexact: cState.inexact != 0
-        )
+    extension Float.Exception.State {
+        internal init(cState: IEEE754Exceptions) {
+            self.init(
+                invalid: cState.invalid != 0,
+                division: cState.divByZero != 0,
+                overflow: cState.overflow != 0,
+                underflow: cState.underflow != 0,
+                inexact: cState.inexact != 0
+            )
+        }
     }
-}
 #endif
 
 // MARK: - Float.Exception Methods

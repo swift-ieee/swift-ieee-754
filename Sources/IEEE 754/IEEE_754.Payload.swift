@@ -4,8 +4,6 @@
 // IEEE 754-2019 Section 6.2: NaN Payload Operations
 // Authoritative implementations for NaN payload manipulation
 
-
-
 // MARK: - IEEE 754 Payload Operations
 
 extension IEEE_754 {

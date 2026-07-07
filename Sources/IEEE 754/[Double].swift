@@ -5,7 +5,6 @@
 
 public import Binary_Primitives
 
-
 extension [Double] {
     /// Creates an array of Doubles from a flat byte collection
     ///

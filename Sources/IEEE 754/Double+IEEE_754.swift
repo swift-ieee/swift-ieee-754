@@ -5,7 +5,6 @@
 
 public import Binary_Primitives
 
-
 extension Double {
     /// Access to IEEE 754 binary64 constants and methods
     ///

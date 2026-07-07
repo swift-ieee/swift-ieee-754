@@ -5,7 +5,6 @@
 
 public import Binary_Primitives
 
-
 extension Float {
     /// Access to IEEE 754 binary32 constants and methods
     ///

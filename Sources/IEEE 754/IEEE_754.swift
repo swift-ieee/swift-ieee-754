@@ -60,6 +60,7 @@
 /// - **Decimal formats** (not implemented): Decimal32, Decimal64, Decimal128
 ///
 /// Swift's native floating-point types (Float, Double, Float16, Float80) are binary formats.
+///
 /// Decimal floating-point would require:
 /// - Custom decimal arithmetic types
 /// - Densely Packed Decimal (DPD) or Binary Integer Decimal (BID) encoding

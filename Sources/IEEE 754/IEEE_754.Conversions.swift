@@ -4,8 +4,6 @@
 // IEEE 754-2019 Section 5.4: Conversion Operations
 // Authoritative implementations of format conversion operations
 
-
-
 // MARK: - IEEE 754 Conversion Operations
 
 extension IEEE_754 {

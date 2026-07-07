@@ -4,8 +4,6 @@
 // IEEE 754-2019: Binary256 (Octuple Precision) Format
 // Format specification and constants (no native Swift type available)
 
-
-
 extension IEEE_754 {
     /// Binary256 (Octuple Precision) Format
     ///

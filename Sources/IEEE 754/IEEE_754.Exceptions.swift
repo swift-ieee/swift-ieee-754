@@ -4,8 +4,8 @@
 // IEEE 754-2019 Section 7: Exception Handling
 // Authoritative implementations for IEEE 754 exception flags
 
-public import Synchronization
 public import Dependency_Primitives
+public import Synchronization
 
 #if canImport(CIEEE754)
     import CIEEE754

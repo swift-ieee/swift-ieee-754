@@ -5,7 +5,6 @@
 
 public import Binary_Primitives
 
-
 extension IEEE_754 {
     /// IEEE 754 binary64 (double precision) format
     ///

@@ -4,8 +4,6 @@
 // IEEE 754-2019 Section 5.7: Classification Predicates
 // Authoritative implementations of floating-point classification operations
 
-
-
 // MARK: - IEEE 754 Classification Operations
 
 extension IEEE_754 {
