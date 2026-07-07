@@ -5,7 +5,7 @@
 //
 // Provides scoped APIs that guarantee cleanup and prevent test pollution
 
-#if canImport(CIEEE754)
+#if CIEEE754_SHIM
     import CIEEE754
 
     /// Scoped rounding mode execution

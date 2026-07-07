@@ -7,7 +7,7 @@
 public import Dependency_Primitives
 public import Synchronization
 
-#if canImport(CIEEE754)
+#if CIEEE754_SHIM
     import CIEEE754
 #endif
 
@@ -284,7 +284,7 @@ extension IEEE_754.Exceptions {
     public static func raise(_ flag: Flag) {
         state.set(flag)
 
-        #if canImport(CIEEE754)
+        #if CIEEE754_SHIM
             // Also raise in C thread-local storage for consistency
             let cFlag: IEEE754ExceptionFlag
             switch flag {
@@ -312,7 +312,7 @@ extension IEEE_754.Exceptions {
     /// }
     /// ```
     public static func test(_ flag: Flag) -> Bool {
-        #if canImport(CIEEE754)
+        #if CIEEE754_SHIM
             // Check C thread-local storage (preferred if available)
             let cFlag: IEEE754ExceptionFlag
             switch flag {
@@ -341,7 +341,7 @@ extension IEEE_754.Exceptions {
     public static func clear(_ flag: Flag) {
         state.clear(flag)
 
-        #if canImport(CIEEE754)
+        #if CIEEE754_SHIM
             // Also clear in C thread-local storage
             let cFlag: IEEE754ExceptionFlag
             switch flag {
@@ -366,7 +366,7 @@ extension IEEE_754.Exceptions {
     public static func clear() {
         state.clearAll()
 
-        #if canImport(CIEEE754)
+        #if CIEEE754_SHIM
             // Also clear C thread-local storage
             ieee754_clear_all_exceptions()
         #endif

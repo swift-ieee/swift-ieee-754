@@ -3,7 +3,7 @@
 //
 // IEEE 754-2019 Section 4.3: Rounding Direction Attributes
 
-#if canImport(CIEEE754)
+#if CIEEE754_SHIM
     import CIEEE754
 
     extension IEEE_754 {

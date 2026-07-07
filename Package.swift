@@ -48,6 +48,18 @@ let package = Package(
                 .product(name: "Decimal Primitives", package: "swift-decimal-primitives"),
                 .product(name: "Dependency Primitives", package: "swift-dependency-primitives"),
                 .target(name: "CIEEE754", condition: .when(platforms: [.macOS, .linux, .iOS, .tvOS, .watchOS]))
+            ],
+            // Gate the C-shim source paths on a define that mirrors the CIEEE754
+            // dependency condition exactly. `canImport(CIEEE754)` is unreliable
+            // here: the CIEEE754 target is built for the whole package graph, so
+            // canImport reports true on platforms (e.g. Windows) where CIEEE754
+            // is deliberately NOT a dependency of this target — the guarded
+            // `import CIEEE754` then fails with "no such module 'CIEEE754'".
+            swiftSettings: [
+                .define(
+                    "CIEEE754_SHIM",
+                    .when(platforms: [.macOS, .linux, .iOS, .tvOS, .watchOS])
+                )
             ]
         ),
         .testTarget(
