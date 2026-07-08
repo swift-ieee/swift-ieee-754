@@ -76,14 +76,6 @@ extension IEEE_754.MinMax {
         case number(Mode)
         /// Magnitude min/max (by absolute value)
         case magnitude(Mode, preferNumber: Bool)
-
-        /// Min or Max mode
-        public enum Mode: Sendable, Equatable {
-            /// Select minimum value
-            case minimum
-            /// Select maximum value
-            case maximum
-        }
     }
 
     /// Unified min/max operation for Double values
@@ -146,6 +138,16 @@ extension IEEE_754.MinMax {
         case .magnitude(.maximum, preferNumber: true):
             return maximumMagnitudeNumber(x, y)
         }
+    }
+}
+
+extension IEEE_754.MinMax.Operation {
+    /// Min or Max mode
+    public enum Mode: Sendable, Equatable {
+        /// Select minimum value
+        case minimum
+        /// Select maximum value
+        case maximum
     }
 }
 

@@ -44,51 +44,53 @@ extension IEEE_754 {
     ///
     /// ## See Also
     /// - IEEE 754-2019 Section 3.6, Table 3.5
-    public enum Binary128 {
-        /// Number of bytes in binary128 format (16)
-        public static let byteSize: Int = 16
+    public enum Binary128 {}
+}
 
-        /// Number of bits in binary128 format (128)
-        public static let bitSize: Int = 128
+extension IEEE_754.Binary128 {
+    /// Number of bytes in binary128 format (16)
+    public static let byteSize: Int = 16
 
-        /// Sign bit: 1 bit
-        public static let signBits: Int = 1
+    /// Number of bits in binary128 format (128)
+    public static let bitSize: Int = 128
 
-        /// Exponent bits: 15 bits
-        public static let exponentBits: Int = 15
+    /// Sign bit: 1 bit
+    public static let signBits: Int = 1
 
-        /// Significand bits: 112 bits (plus implicit leading 1)
-        public static let significandBits: Int = 112
+    /// Exponent bits: 15 bits
+    public static let exponentBits: Int = 15
 
-        /// Exponent bias: 16383
-        public static let exponentBias: Int = 16383
+    /// Significand bits: 112 bits (plus implicit leading 1)
+    public static let significandBits: Int = 112
 
-        /// Maximum exponent value (before bias): 32767
-        public static let maxExponent: Int = (1 << exponentBits) - 1
+    /// Exponent bias: 16383
+    public static let exponentBias: Int = 16383
 
-        /// Precision (including implicit bit) - IEEE 754-2019 Table 3.5
-        ///
-        /// The precision p is the number of significant bits in the significand,
-        /// including the implicit leading bit. For binary128, p = 113.
-        public static let precision: Int = 113
+    /// Maximum exponent value (before bias): 32767
+    public static let maxExponent: Int = (1 << exponentBits) - 1
 
-        /// Minimum exponent - IEEE 754-2019 Table 3.5
-        ///
-        /// The minimum exponent emin for binary128 is -16382. This is the smallest
-        /// exponent for normal numbers.
-        public static let emin: Int = -16382
+    /// Precision (including implicit bit) - IEEE 754-2019 Table 3.5
+    ///
+    /// The precision p is the number of significant bits in the significand,
+    /// including the implicit leading bit. For binary128, p = 113.
+    public static let precision: Int = 113
 
-        /// Maximum exponent - IEEE 754-2019 Table 3.5
-        ///
-        /// The maximum exponent emax for binary128 is 16383. This is the largest
-        /// exponent for normal numbers.
-        public static let emax: Int = 16383
+    /// Minimum exponent - IEEE 754-2019 Table 3.5
+    ///
+    /// The minimum exponent emin for binary128 is -16382. This is the smallest
+    /// exponent for normal numbers.
+    public static let emin: Int = -16382
 
-        /// Decimal precision - IEEE 754-2019 Table 3.5
-        ///
-        /// Binary128 provides approximately 34 decimal digits of precision.
-        public static let decimalPrecision: Int = 34
-    }
+    /// Maximum exponent - IEEE 754-2019 Table 3.5
+    ///
+    /// The maximum exponent emax for binary128 is 16383. This is the largest
+    /// exponent for normal numbers.
+    public static let emax: Int = 16383
+
+    /// Decimal precision - IEEE 754-2019 Table 3.5
+    ///
+    /// Binary128 provides approximately 34 decimal digits of precision.
+    public static let decimalPrecision: Int = 34
 }
 
 extension IEEE_754.Binary128 {

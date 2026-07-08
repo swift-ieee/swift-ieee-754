@@ -170,23 +170,10 @@ extension IEEE_754.Exceptions {
     @usableFromInline
     final class ExceptionState: @unchecked Sendable {
         @usableFromInline
-        struct Flags {
-            var invalid: Bool = false
-            var divisionByZero: Bool = false
-            var overflow: Bool = false
-            var underflow: Bool = false
-            var inexact: Bool = false
-        }
-
-        @usableFromInline
         let state: Mutex<Flags> = Mutex(Flags())
 
         @usableFromInline
         init() {}
-
-        /// Process-global exception state (backward compatible).
-        @usableFromInline
-        static let _global = ExceptionState()
     }
 
     /// Exception state resolved from dependency scope.
@@ -197,6 +184,21 @@ extension IEEE_754.Exceptions {
     static var state: ExceptionState {
         Dependency.Scope.current[ExceptionState.self]
     }
+}
+
+extension IEEE_754.Exceptions.ExceptionState {
+    @usableFromInline
+    struct Flags {
+        var invalid: Bool = false
+        var divisionByZero: Bool = false
+        var overflow: Bool = false
+        var underflow: Bool = false
+        var inexact: Bool = false
+    }
+
+    /// Process-global exception state (backward compatible).
+    @usableFromInline
+    static let _global = IEEE_754.Exceptions.ExceptionState()
 }
 
 // MARK: - ExceptionState Dependency.Key

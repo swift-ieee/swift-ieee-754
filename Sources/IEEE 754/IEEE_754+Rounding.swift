@@ -70,22 +70,6 @@ extension IEEE_754.Rounding {
         case towardZero
         /// Round to nearest integral value
         case toNearest(TieBreaking)
-
-        /// Sign for directional rounding
-        public enum Sign: Sendable, Equatable {
-            /// Toward positive infinity (ceil)
-            case positive
-            /// Toward negative infinity (floor)
-            case negative
-        }
-
-        /// Tie-breaking rule for round-to-nearest
-        public enum TieBreaking: Sendable, Equatable {
-            /// Round ties to even (default IEEE 754 mode)
-            case toEven
-            /// Round ties away from zero
-            case awayFromZero
-        }
     }
 
     /// Apply rounding direction to a Double value
@@ -134,6 +118,24 @@ extension IEEE_754.Rounding {
         case .toNearest(.awayFromZero):
             return value.rounded(.toNearestOrAwayFromZero)
         }
+    }
+}
+
+extension IEEE_754.Rounding.Direction {
+    /// Sign for directional rounding
+    public enum Sign: Sendable, Equatable {
+        /// Toward positive infinity (ceil)
+        case positive
+        /// Toward negative infinity (floor)
+        case negative
+    }
+
+    /// Tie-breaking rule for round-to-nearest
+    public enum TieBreaking: Sendable, Equatable {
+        /// Round ties to even (default IEEE 754 mode)
+        case toEven
+        /// Round ties away from zero
+        case awayFromZero
     }
 }
 

@@ -447,26 +447,6 @@ extension IEEE_754.Classification {
         case positive(Finite)
         /// Negative value
         case negative(Finite)
-
-        /// Kind of NaN
-        public enum NaN: Sendable, Equatable {
-            /// Signaling NaN (raises exception on most operations)
-            case signaling
-            /// Quiet NaN (propagates through operations)
-            case quiet
-        }
-
-        /// Kind of finite or infinite value
-        public enum Finite: Sendable, Equatable {
-            /// Infinity (±∞)
-            case infinity
-            /// Normal number (normalized with implicit leading 1)
-            case normal
-            /// Subnormal number (denormalized)
-            case subnormal
-            /// Zero (±0)
-            case zero
-        }
     }
 
     /// Returns the class of a Double value - IEEE 754 `class`
@@ -534,5 +514,27 @@ extension IEEE_754.Classification {
         }
 
         return value.sign == .minus ? .negative(kind) : .positive(kind)
+    }
+}
+
+extension IEEE_754.Classification.NumberClass {
+    /// Kind of NaN
+    public enum NaN: Sendable, Equatable {
+        /// Signaling NaN (raises exception on most operations)
+        case signaling
+        /// Quiet NaN (propagates through operations)
+        case quiet
+    }
+
+    /// Kind of finite or infinite value
+    public enum Finite: Sendable, Equatable {
+        /// Infinity (±∞)
+        case infinity
+        /// Normal number (normalized with implicit leading 1)
+        case normal
+        /// Subnormal number (denormalized)
+        case subnormal
+        /// Zero (±0)
+        case zero
     }
 }

@@ -56,30 +56,6 @@ extension IEEE_754.NextOperations {
     public enum Direction: Sendable, Equatable {
         /// Move toward a specific target
         case toward(Target)
-
-        /// Target for next operation
-        public enum Target: Sendable, Equatable {
-            /// Toward positive infinity (nextUp)
-            case positiveInfinity
-            /// Toward negative infinity (nextDown)
-            case negativeInfinity
-            /// Toward a specific value (nextAfter)
-            case value(Double)
-
-            /// Equality comparison for Target
-            public static func == (lhs: Target, rhs: Target) -> Bool {
-                switch (lhs, rhs) {
-                case (.positiveInfinity, .positiveInfinity):
-                    return true
-                case (.negativeInfinity, .negativeInfinity):
-                    return true
-                case (.value(let l), .value(let r)):
-                    return l.bitPattern == r.bitPattern  // Bitwise equality for NaN handling
-                default:
-                    return false
-                }
-            }
-        }
     }
 
     /// Unified next operation for Double values
@@ -217,6 +193,34 @@ extension IEEE_754.NextOperations {
 
         // Move in the appropriate direction
         return value < target ? value.nextUp : value.nextDown
+    }
+}
+
+extension IEEE_754.NextOperations.Direction {
+    /// Target for next operation
+    public enum Target: Sendable, Equatable {
+        /// Toward positive infinity (nextUp)
+        case positiveInfinity
+        /// Toward negative infinity (nextDown)
+        case negativeInfinity
+        /// Toward a specific value (nextAfter)
+        case value(Double)
+    }
+}
+
+extension IEEE_754.NextOperations.Direction.Target {
+    /// Equality comparison for Target
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case (.positiveInfinity, .positiveInfinity):
+            return true
+        case (.negativeInfinity, .negativeInfinity):
+            return true
+        case (.value(let l), .value(let r)):
+            return l.bitPattern == r.bitPattern  // Bitwise equality for NaN handling
+        default:
+            return false
+        }
     }
 }
 

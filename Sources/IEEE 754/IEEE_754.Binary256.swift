@@ -44,51 +44,53 @@ extension IEEE_754 {
     ///
     /// ## See Also
     /// - IEEE 754-2019 Section 3.6, Table 3.5
-    public enum Binary256 {
-        /// Number of bytes in binary256 format (32)
-        public static let byteSize: Int = 32
+    public enum Binary256 {}
+}
 
-        /// Number of bits in binary256 format (256)
-        public static let bitSize: Int = 256
+extension IEEE_754.Binary256 {
+    /// Number of bytes in binary256 format (32)
+    public static let byteSize: Int = 32
 
-        /// Sign bit: 1 bit
-        public static let signBits: Int = 1
+    /// Number of bits in binary256 format (256)
+    public static let bitSize: Int = 256
 
-        /// Exponent bits: 19 bits
-        public static let exponentBits: Int = 19
+    /// Sign bit: 1 bit
+    public static let signBits: Int = 1
 
-        /// Significand bits: 236 bits (plus implicit leading 1)
-        public static let significandBits: Int = 236
+    /// Exponent bits: 19 bits
+    public static let exponentBits: Int = 19
 
-        /// Exponent bias: 262143
-        public static let exponentBias: Int = 262143
+    /// Significand bits: 236 bits (plus implicit leading 1)
+    public static let significandBits: Int = 236
 
-        /// Maximum exponent value (before bias): 524287
-        public static let maxExponent: Int = (1 << exponentBits) - 1
+    /// Exponent bias: 262143
+    public static let exponentBias: Int = 262143
 
-        /// Precision (including implicit bit) - IEEE 754-2019 Table 3.5
-        ///
-        /// The precision p is the number of significant bits in the significand,
-        /// including the implicit leading bit. For binary256, p = 237.
-        public static let precision: Int = 237
+    /// Maximum exponent value (before bias): 524287
+    public static let maxExponent: Int = (1 << exponentBits) - 1
 
-        /// Minimum exponent - IEEE 754-2019 Table 3.5
-        ///
-        /// The minimum exponent emin for binary256 is -262142. This is the smallest
-        /// exponent for normal numbers.
-        public static let emin: Int = -262142
+    /// Precision (including implicit bit) - IEEE 754-2019 Table 3.5
+    ///
+    /// The precision p is the number of significant bits in the significand,
+    /// including the implicit leading bit. For binary256, p = 237.
+    public static let precision: Int = 237
 
-        /// Maximum exponent - IEEE 754-2019 Table 3.5
-        ///
-        /// The maximum exponent emax for binary256 is 262143. This is the largest
-        /// exponent for normal numbers.
-        public static let emax: Int = 262143
+    /// Minimum exponent - IEEE 754-2019 Table 3.5
+    ///
+    /// The minimum exponent emin for binary256 is -262142. This is the smallest
+    /// exponent for normal numbers.
+    public static let emin: Int = -262142
 
-        /// Decimal precision - IEEE 754-2019 Table 3.5
-        ///
-        /// Binary256 provides approximately 71 decimal digits of precision.
-        public static let decimalPrecision: Int = 71
-    }
+    /// Maximum exponent - IEEE 754-2019 Table 3.5
+    ///
+    /// The maximum exponent emax for binary256 is 262143. This is the largest
+    /// exponent for normal numbers.
+    public static let emax: Int = 262143
+
+    /// Decimal precision - IEEE 754-2019 Table 3.5
+    ///
+    /// Binary256 provides approximately 71 decimal digits of precision.
+    public static let decimalPrecision: Int = 71
 }
 
 extension IEEE_754.Binary256 {
