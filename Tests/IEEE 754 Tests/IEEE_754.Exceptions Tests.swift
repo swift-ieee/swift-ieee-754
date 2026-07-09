@@ -11,42 +11,42 @@ import Testing
 
 @Suite("IEEE_754.Exceptions - Flag Operations", .serialized)
 struct ExceptionFlagTests {
-    @Test func raiseAndTestInvalid() {
+    @Test func `Raise And Test Invalid`() {
         IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.invalid)
         #expect(IEEE_754.Exceptions.test(.invalid))
         #expect(!IEEE_754.Exceptions.test(.overflow))
     }
 
-    @Test func raiseAndTestDivisionByZero() {
+    @Test func `Raise And Test Division By Zero`() {
         IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.divisionByZero)
         #expect(IEEE_754.Exceptions.test(.divisionByZero))
         #expect(!IEEE_754.Exceptions.test(.invalid))
     }
 
-    @Test func raiseAndTestOverflow() {
+    @Test func `Raise And Test Overflow`() {
         IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.overflow)
         #expect(IEEE_754.Exceptions.test(.overflow))
         #expect(!IEEE_754.Exceptions.test(.underflow))
     }
 
-    @Test func raiseAndTestUnderflow() {
+    @Test func `Raise And Test Underflow`() {
         IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.underflow)
         #expect(IEEE_754.Exceptions.test(.underflow))
         #expect(!IEEE_754.Exceptions.test(.overflow))
     }
 
-    @Test func raiseAndTestInexact() {
+    @Test func `Raise And Test Inexact`() {
         IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.inexact)
         #expect(IEEE_754.Exceptions.test(.inexact))
         #expect(!IEEE_754.Exceptions.test(.invalid))
     }
 
-    @Test func clearSpecificFlag() {
+    @Test func `Clear Specific Flag`() {
         IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.invalid)
         IEEE_754.Exceptions.raise(.overflow)
@@ -58,7 +58,7 @@ struct ExceptionFlagTests {
         #expect(IEEE_754.Exceptions.test(.overflow))
     }
 
-    @Test func clearAllFlags() {
+    @Test func `Clear All Flags`() {
         IEEE_754.Exceptions.raise(.invalid)
         IEEE_754.Exceptions.raise(.divisionByZero)
         IEEE_754.Exceptions.raise(.overflow)
@@ -74,7 +74,7 @@ struct ExceptionFlagTests {
         #expect(!IEEE_754.Exceptions.test(.inexact))
     }
 
-    @Test func multipleFlags() {
+    @Test func `Multiple Flags`() {
         IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.invalid)
         IEEE_754.Exceptions.raise(.overflow)
@@ -87,31 +87,31 @@ struct ExceptionFlagTests {
         #expect(!IEEE_754.Exceptions.test(.divisionByZero))
     }
 
-    @Test func anyRaisedWhenNoFlags() {
+    @Test func `Any Raised When No Flags`() {
         IEEE_754.Exceptions.clear()
         #expect(!IEEE_754.Exceptions.raised.any)
     }
 
-    @Test func anyRaisedWhenOneFlagSet() {
+    @Test func `Any Raised When One Flag Set`() {
         IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.overflow)
         #expect(IEEE_754.Exceptions.raised.any)
     }
 
-    @Test func anyRaisedWhenMultipleFlags() {
+    @Test func `Any Raised When Multiple Flags`() {
         IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.invalid)
         IEEE_754.Exceptions.raise(.inexact)
         #expect(IEEE_754.Exceptions.raised.any)
     }
 
-    @Test func getRaisedFlagsWhenNone() {
+    @Test func `Get Raised Flags When None`() {
         IEEE_754.Exceptions.clear()
         let raised = IEEE_754.Exceptions.raised.flags
         #expect(raised.isEmpty)
     }
 
-    @Test func getRaisedFlagsWhenOne() {
+    @Test func `Get Raised Flags When One`() {
         IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.overflow)
         let raised = IEEE_754.Exceptions.raised.flags
@@ -119,7 +119,7 @@ struct ExceptionFlagTests {
         #expect(raised.contains(.overflow))
     }
 
-    @Test func getRaisedFlagsWhenMultiple() {
+    @Test func `Get Raised Flags When Multiple`() {
         IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.invalid)
         IEEE_754.Exceptions.raise(.overflow)
@@ -131,7 +131,7 @@ struct ExceptionFlagTests {
         #expect(raised.contains(.inexact))
     }
 
-    @Test func getRaisedFlagsWhenAll() {
+    @Test func `Get Raised Flags When All`() {
         IEEE_754.Exceptions.clear()
         for flag in IEEE_754.Exceptions.Flag.allCases {
             IEEE_754.Exceptions.raise(flag)
@@ -145,35 +145,35 @@ struct ExceptionFlagTests {
 
 @Suite("IEEE_754.Exceptions - Compatibility Properties", .serialized)
 struct ExceptionCompatibilityTests {
-    @Test func invalidOperationProperty() {
+    @Test func `Invalid Operation Property`() {
         IEEE_754.Exceptions.clear()
         #expect(!IEEE_754.Exceptions.invalidOperation)
         IEEE_754.Exceptions.raise(.invalid)
         #expect(IEEE_754.Exceptions.invalidOperation)
     }
 
-    @Test func divisionByZeroProperty() {
+    @Test func `Division By Zero Property`() {
         IEEE_754.Exceptions.clear()
         #expect(!IEEE_754.Exceptions.divisionByZero)
         IEEE_754.Exceptions.raise(.divisionByZero)
         #expect(IEEE_754.Exceptions.divisionByZero)
     }
 
-    @Test func overflowProperty() {
+    @Test func `Overflow Property`() {
         IEEE_754.Exceptions.clear()
         #expect(!IEEE_754.Exceptions.overflow)
         IEEE_754.Exceptions.raise(.overflow)
         #expect(IEEE_754.Exceptions.overflow)
     }
 
-    @Test func underflowProperty() {
+    @Test func `Underflow Property`() {
         IEEE_754.Exceptions.clear()
         #expect(!IEEE_754.Exceptions.underflow)
         IEEE_754.Exceptions.raise(.underflow)
         #expect(IEEE_754.Exceptions.underflow)
     }
 
-    @Test func inexactProperty() {
+    @Test func `Inexact Property`() {
         IEEE_754.Exceptions.clear()
         #expect(!IEEE_754.Exceptions.inexact)
         IEEE_754.Exceptions.raise(.inexact)
@@ -185,7 +185,7 @@ struct ExceptionCompatibilityTests {
 
 @Suite("IEEE_754.Exceptions - Flag Enum")
 struct ExceptionFlagEnumTests {
-    @Test func flagDescription() {
+    @Test func `Flag Description`() {
         #expect(IEEE_754.Exceptions.Flag.invalid.description == "invalid")
         #expect(IEEE_754.Exceptions.Flag.divisionByZero.description == "divisionByZero")
         #expect(IEEE_754.Exceptions.Flag.overflow.description == "overflow")
@@ -193,16 +193,16 @@ struct ExceptionFlagEnumTests {
         #expect(IEEE_754.Exceptions.Flag.inexact.description == "inexact")
     }
 
-    @Test func flagEquality() {
+    @Test func `Flag Equality`() {
         #expect(IEEE_754.Exceptions.Flag.invalid == .invalid)
         #expect(IEEE_754.Exceptions.Flag.invalid != .overflow)
     }
 
-    @Test func allCasesCount() {
+    @Test func `All Cases Count`() {
         #expect(IEEE_754.Exceptions.Flag.allCases.count == 5)
     }
 
-    @Test func allCasesContainsAll() {
+    @Test func `All Cases Contains All`() {
         let allCases = IEEE_754.Exceptions.Flag.allCases
         #expect(allCases.contains(.invalid))
         #expect(allCases.contains(.divisionByZero))
@@ -216,7 +216,7 @@ struct ExceptionFlagEnumTests {
 
 @Suite("IEEE_754.Exceptions - Idempotency", .serialized)
 struct ExceptionIdempotencyTests {
-    @Test func raisingTwiceHasNoEffect() {
+    @Test func `Raising Twice Has No Effect`() {
         IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.invalid)
         #expect(IEEE_754.Exceptions.test(.invalid))
@@ -225,7 +225,7 @@ struct ExceptionIdempotencyTests {
         #expect(IEEE_754.Exceptions.test(.invalid))
     }
 
-    @Test func clearingTwiceHasNoEffect() {
+    @Test func `Clearing Twice Has No Effect`() {
         IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.overflow)
         IEEE_754.Exceptions.clear(.overflow)
@@ -235,7 +235,7 @@ struct ExceptionIdempotencyTests {
         #expect(!IEEE_754.Exceptions.test(.overflow))
     }
 
-    @Test func clearAllOnEmptyStateHasNoEffect() {
+    @Test func `Clear All On Empty State Has No Effect`() {
         IEEE_754.Exceptions.clear()
         #expect(!IEEE_754.Exceptions.raised.any)
         IEEE_754.Exceptions.clear()
@@ -247,7 +247,7 @@ struct ExceptionIdempotencyTests {
 
 @Suite("IEEE_754.Exceptions - Flag Independence", .serialized)
 struct ExceptionIndependenceTests {
-    @Test func flagsAreIndependent() {
+    @Test func `Flags Are Independent`() {
         IEEE_754.Exceptions.clear()
 
         IEEE_754.Exceptions.raise(.invalid)
@@ -265,7 +265,7 @@ struct ExceptionIndependenceTests {
         #expect(!IEEE_754.Exceptions.test(.inexact))
     }
 
-    @Test func clearingOneFlagDoesNotAffectOthers() {
+    @Test func `Clearing One Flag Does Not Affect Others`() {
         IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.invalid)
         IEEE_754.Exceptions.raise(.overflow)
@@ -283,12 +283,12 @@ struct ExceptionIndependenceTests {
 
 @Suite("IEEE_754.Exceptions - Thread Independence", .serialized)
 struct ExceptionThreadTests {
-    @Test func initialStateIsClean() {
+    @Test func `Initial State Is Clean`() {
         IEEE_754.Exceptions.clear()
         #expect(!IEEE_754.Exceptions.raised.any)
     }
 
-    @Test func stateCanBeSetAndQueried() {
+    @Test func `State Can Be Set And Queried`() {
         IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.invalid)
         #expect(IEEE_754.Exceptions.test(.invalid))

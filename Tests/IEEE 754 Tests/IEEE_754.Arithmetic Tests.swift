@@ -11,34 +11,34 @@ import Testing
 
 @Suite("IEEE_754.Arithmetic - Addition")
 struct ArithmeticAdditionTests {
-    @Test func basicAddition() {
+    @Test func `Basic Addition`() {
         let result = IEEE_754.Arithmetic.addition(3.14, 2.86)
         #expect(result == 6.0)
     }
 
-    @Test func negativeAddition() {
+    @Test func `Negative Addition`() {
         let result = IEEE_754.Arithmetic.addition(-5.0, 3.0)
         #expect(result == -2.0)
     }
 
-    @Test func zeroAddition() {
+    @Test func `Zero Addition`() {
         #expect(IEEE_754.Arithmetic.addition(0.0, 0.0) == 0.0)
         #expect(IEEE_754.Arithmetic.addition(5.0, 0.0) == 5.0)
         #expect(IEEE_754.Arithmetic.addition(-0.0, 0.0) == 0.0)
     }
 
-    @Test func infinityAddition() {
+    @Test func `Infinity Addition`() {
         #expect(IEEE_754.Arithmetic.addition(Double.infinity, 5.0) == Double.infinity)
         #expect(IEEE_754.Arithmetic.addition(-Double.infinity, 5.0) == -Double.infinity)
         #expect(IEEE_754.Arithmetic.addition(Double.infinity, Double.infinity) == Double.infinity)
     }
 
-    @Test func nanAddition() {
+    @Test func `Nan Addition`() {
         let result = IEEE_754.Arithmetic.addition(Double.infinity, -Double.infinity)
         #expect(result.isNaN)
     }
 
-    @Test func floatAddition() {
+    @Test func `Float Addition`() {
         let result = IEEE_754.Arithmetic.addition(Float(1.5), Float(2.5))
         #expect(result == 4.0)
     }
@@ -46,22 +46,22 @@ struct ArithmeticAdditionTests {
 
 @Suite("IEEE_754.Arithmetic - Subtraction")
 struct ArithmeticSubtractionTests {
-    @Test func basicSubtraction() {
+    @Test func `Basic Subtraction`() {
         let result = IEEE_754.Arithmetic.subtraction(10.0, 3.0)
         #expect(result == 7.0)
     }
 
-    @Test func negativeSubtraction() {
+    @Test func `Negative Subtraction`() {
         let result = IEEE_754.Arithmetic.subtraction(-5.0, -3.0)
         #expect(result == -2.0)
     }
 
-    @Test func zeroSubtraction() {
+    @Test func `Zero Subtraction`() {
         #expect(IEEE_754.Arithmetic.subtraction(5.0, 5.0) == 0.0)
         #expect(IEEE_754.Arithmetic.subtraction(0.0, 0.0) == 0.0)
     }
 
-    @Test func infinitySubtraction() {
+    @Test func `Infinity Subtraction`() {
         #expect(IEEE_754.Arithmetic.subtraction(Double.infinity, 5.0) == Double.infinity)
         let result = IEEE_754.Arithmetic.subtraction(Double.infinity, Double.infinity)
         #expect(result.isNaN)
@@ -70,22 +70,22 @@ struct ArithmeticSubtractionTests {
 
 @Suite("IEEE_754.Arithmetic - Multiplication")
 struct ArithmeticMultiplicationTests {
-    @Test func basicMultiplication() {
+    @Test func `Basic Multiplication`() {
         let result = IEEE_754.Arithmetic.multiplication(3.0, 4.0)
         #expect(result == 12.0)
     }
 
-    @Test func negativeMultiplication() {
+    @Test func `Negative Multiplication`() {
         #expect(IEEE_754.Arithmetic.multiplication(-3.0, 4.0) == -12.0)
         #expect(IEEE_754.Arithmetic.multiplication(-3.0, -4.0) == 12.0)
     }
 
-    @Test func zeroMultiplication() {
+    @Test func `Zero Multiplication`() {
         #expect(IEEE_754.Arithmetic.multiplication(0.0, 5.0) == 0.0)
         #expect(IEEE_754.Arithmetic.multiplication(5.0, 0.0) == 0.0)
     }
 
-    @Test func infinityMultiplication() {
+    @Test func `Infinity Multiplication`() {
         #expect(IEEE_754.Arithmetic.multiplication(Double.infinity, 2.0) == Double.infinity)
         #expect(IEEE_754.Arithmetic.multiplication(Double.infinity, -2.0) == -Double.infinity)
 
@@ -93,7 +93,7 @@ struct ArithmeticMultiplicationTests {
         #expect(result.isNaN)
     }
 
-    @Test func subnormalMultiplication() {
+    @Test func `Subnormal Multiplication`() {
         let tiny = Double.leastNonzeroMagnitude
         let result = IEEE_754.Arithmetic.multiplication(tiny, 0.5)
         #expect(result == 0.0 || result == tiny * 0.5)
@@ -102,18 +102,18 @@ struct ArithmeticMultiplicationTests {
 
 @Suite("IEEE_754.Arithmetic - Division")
 struct ArithmeticDivisionTests {
-    @Test func basicDivision() {
+    @Test func `Basic Division`() {
         let result = IEEE_754.Arithmetic.division(10.0, 2.0)
         #expect(result == 5.0)
     }
 
-    @Test func negativeDivision() {
+    @Test func `Negative Division`() {
         #expect(IEEE_754.Arithmetic.division(-10.0, 2.0) == -5.0)
         #expect(IEEE_754.Arithmetic.division(10.0, -2.0) == -5.0)
         #expect(IEEE_754.Arithmetic.division(-10.0, -2.0) == 5.0)
     }
 
-    @Test func divisionByZero() {
+    @Test func `Division By Zero`() {
         #expect(IEEE_754.Arithmetic.division(5.0, 0.0) == Double.infinity)
         #expect(IEEE_754.Arithmetic.division(-5.0, 0.0) == -Double.infinity)
 
@@ -121,14 +121,14 @@ struct ArithmeticDivisionTests {
         #expect(result.isNaN)
     }
 
-    @Test func infinityDivision() {
+    @Test func `Infinity Division`() {
         #expect(IEEE_754.Arithmetic.division(5.0, Double.infinity) == 0.0)
 
         let result = IEEE_754.Arithmetic.division(Double.infinity, Double.infinity)
         #expect(result.isNaN)
     }
 
-    @Test func exactDivision() {
+    @Test func `Exact Division`() {
         #expect(IEEE_754.Arithmetic.division(1.0, 2.0) == 0.5)
         #expect(IEEE_754.Arithmetic.division(1.0, 4.0) == 0.25)
     }
@@ -136,24 +136,24 @@ struct ArithmeticDivisionTests {
 
 @Suite("IEEE_754.Arithmetic - Remainder")
 struct ArithmeticRemainderTests {
-    @Test func basicRemainder() {
+    @Test func `Basic Remainder`() {
         let result = IEEE_754.Arithmetic.remainder(7.0, 3.0)
         #expect(result == 1.0)
     }
 
-    @Test func exactRemainder() {
+    @Test func `Exact Remainder`() {
         let result = IEEE_754.Arithmetic.remainder(10.0, 5.0)
         #expect(result == 0.0)
     }
 
-    @Test func negativeRemainder() {
+    @Test func `Negative Remainder`() {
         let result1 = IEEE_754.Arithmetic.remainder(-7.0, 3.0)
         let result2 = IEEE_754.Arithmetic.remainder(7.0, -3.0)
         #expect(result1 == -1.0)
         #expect(result2 == 1.0)
     }
 
-    @Test func fractionalRemainder() {
+    @Test func `Fractional Remainder`() {
         // IEEE 754 remainder: 7.5 / 2.0 → quotient rounds to 4 (nearest even)
         // remainder = 7.5 - (4 × 2.0) = -0.5
         let result = IEEE_754.Arithmetic.remainder(7.5, 2.0)
@@ -165,7 +165,7 @@ struct ArithmeticRemainderTests {
 
 @Suite("IEEE_754.Arithmetic - Square Root")
 struct ArithmeticSquareRootTests {
-    @Test func perfectSquares() {
+    @Test func `Perfect Squares`() {
         #expect(IEEE_754.Arithmetic.squareRoot(4.0) == 2.0)
         #expect(IEEE_754.Arithmetic.squareRoot(9.0) == 3.0)
         #expect(IEEE_754.Arithmetic.squareRoot(16.0) == 4.0)
@@ -173,27 +173,27 @@ struct ArithmeticSquareRootTests {
         #expect(IEEE_754.Arithmetic.squareRoot(0.0) == 0.0)
     }
 
-    @Test func imperfectSquares() {
+    @Test func `Imperfect Squares`() {
         let sqrt2 = IEEE_754.Arithmetic.squareRoot(2.0)
         #expect(abs(sqrt2 - 1.4142135623730951) < 1e-15)
     }
 
-    @Test func negativeSquareRoot() {
+    @Test func `Negative Square Root`() {
         let result = IEEE_754.Arithmetic.squareRoot(-1.0)
         #expect(result.isNaN)
     }
 
-    @Test func infinitySquareRoot() {
+    @Test func `Infinity Square Root`() {
         #expect(IEEE_754.Arithmetic.squareRoot(Double.infinity) == Double.infinity)
     }
 
-    @Test func subnormalSquareRoot() {
+    @Test func `Subnormal Square Root`() {
         let tiny = Double.leastNonzeroMagnitude
         let result = IEEE_754.Arithmetic.squareRoot(tiny)
         #expect(result > 0)
     }
 
-    @Test func floatSquareRoot() {
+    @Test func `Float Square Root`() {
         let result = IEEE_754.Arithmetic.squareRoot(Float(4.0))
         #expect(result == 2.0)
     }
@@ -201,25 +201,25 @@ struct ArithmeticSquareRootTests {
 
 @Suite("IEEE_754.Arithmetic - Fused Multiply-Add")
 struct ArithmeticFMATests {
-    @Test func basicFMA() {
+    @Test func `Basic FMA`() {
         // (2 * 3) + 1 = 7
         let result = IEEE_754.Arithmetic.fusedMultiplyAdd(a: 2.0, b: 3.0, c: 1.0)
         #expect(result == 7.0)
     }
 
-    @Test func zeroFMA() {
+    @Test func `Zero FMA`() {
         // (0 * 5) + 3 = 3
         let result = IEEE_754.Arithmetic.fusedMultiplyAdd(a: 0.0, b: 5.0, c: 3.0)
         #expect(result == 3.0)
     }
 
-    @Test func negativeFMA() {
+    @Test func `Negative FMA`() {
         // (-2 * 3) + 10 = 4
         let result = IEEE_754.Arithmetic.fusedMultiplyAdd(a: -2.0, b: 3.0, c: 10.0)
         #expect(result == 4.0)
     }
 
-    @Test func fmaAccuracy() {
+    @Test func `Fma Accuracy`() {
         // FMA should be more accurate than separate multiply and add
         // Test case where intermediate overflow would occur
         let huge = Double.greatestFiniteMagnitude / 2.0
@@ -227,12 +227,12 @@ struct ArithmeticFMATests {
         #expect(result.isFinite || result == huge)
     }
 
-    @Test func fmaWithInfinity() {
+    @Test func `Fma With Infinity`() {
         let result = IEEE_754.Arithmetic.fusedMultiplyAdd(a: Double.infinity, b: 2.0, c: 3.0)
         #expect(result == Double.infinity)
     }
 
-    @Test func floatFMA() {
+    @Test func `Float FMA`() {
         let result = IEEE_754.Arithmetic.fusedMultiplyAdd(a: Float(2.0), b: Float(3.0), c: Float(1.0))
         #expect(result == 7.0)
     }
@@ -242,32 +242,32 @@ struct ArithmeticFMATests {
 
 @Suite("IEEE_754.Arithmetic - Absolute Value")
 struct ArithmeticAbsoluteValueTests {
-    @Test func positiveAbs() {
+    @Test func `Positive Abs`() {
         #expect(IEEE_754.Arithmetic.absoluteValue(5.0) == 5.0)
         #expect(IEEE_754.Arithmetic.absoluteValue(3.14) == 3.14)
     }
 
-    @Test func negativeAbs() {
+    @Test func `Negative Abs`() {
         #expect(IEEE_754.Arithmetic.absoluteValue(-5.0) == 5.0)
         #expect(IEEE_754.Arithmetic.absoluteValue(-3.14) == 3.14)
     }
 
-    @Test func zeroAbs() {
+    @Test func `Zero Abs`() {
         #expect(IEEE_754.Arithmetic.absoluteValue(0.0) == 0.0)
         #expect(IEEE_754.Arithmetic.absoluteValue(-0.0) == 0.0)
     }
 
-    @Test func infinityAbs() {
+    @Test func `Infinity Abs`() {
         #expect(IEEE_754.Arithmetic.absoluteValue(Double.infinity) == Double.infinity)
         #expect(IEEE_754.Arithmetic.absoluteValue(-Double.infinity) == Double.infinity)
     }
 
-    @Test func nanAbs() {
+    @Test func `Nan Abs`() {
         let result = IEEE_754.Arithmetic.absoluteValue(Double.nan)
         #expect(result.isNaN)
     }
 
-    @Test func subnormalAbs() {
+    @Test func `Subnormal Abs`() {
         let tiny = -Double.leastNonzeroMagnitude
         #expect(IEEE_754.Arithmetic.absoluteValue(tiny) == Double.leastNonzeroMagnitude)
     }
@@ -275,32 +275,32 @@ struct ArithmeticAbsoluteValueTests {
 
 @Suite("IEEE_754.Arithmetic - Negate")
 struct ArithmeticNegateTests {
-    @Test func positiveNegate() {
+    @Test func `Positive Negate`() {
         #expect(IEEE_754.Arithmetic.negate(5.0) == -5.0)
         #expect(IEEE_754.Arithmetic.negate(3.14) == -3.14)
     }
 
-    @Test func negativeNegate() {
+    @Test func `Negative Negate`() {
         #expect(IEEE_754.Arithmetic.negate(-5.0) == 5.0)
         #expect(IEEE_754.Arithmetic.negate(-3.14) == 3.14)
     }
 
-    @Test func zeroNegate() {
+    @Test func `Zero Negate`() {
         #expect(IEEE_754.Arithmetic.negate(0.0) == -0.0)
         #expect(IEEE_754.Arithmetic.negate(-0.0) == 0.0)
     }
 
-    @Test func infinityNegate() {
+    @Test func `Infinity Negate`() {
         #expect(IEEE_754.Arithmetic.negate(Double.infinity) == -Double.infinity)
         #expect(IEEE_754.Arithmetic.negate(-Double.infinity) == Double.infinity)
     }
 
-    @Test func nanNegate() {
+    @Test func `Nan Negate`() {
         let result = IEEE_754.Arithmetic.negate(Double.nan)
         #expect(result.isNaN)
     }
 
-    @Test func doubleNegation() {
+    @Test func `Double Negation`() {
         #expect(IEEE_754.Arithmetic.negate(IEEE_754.Arithmetic.negate(3.14)) == 3.14)
     }
 }
@@ -309,7 +309,7 @@ struct ArithmeticNegateTests {
 
 @Suite("IEEE_754.Arithmetic - Edge Cases")
 struct ArithmeticEdgeCasesTests {
-    @Test func maxFiniteOperations() {
+    @Test func `Max Finite Operations`() {
         let max = Double.greatestFiniteMagnitude
 
         // Addition overflow
@@ -321,7 +321,7 @@ struct ArithmeticEdgeCasesTests {
         #expect(product == Double.infinity)
     }
 
-    @Test func minFiniteOperations() {
+    @Test func `Min Finite Operations`() {
         let min = Double.leastNormalMagnitude
 
         // Division producing subnormal
@@ -333,7 +333,7 @@ struct ArithmeticEdgeCasesTests {
         #expect(product < min)
     }
 
-    @Test func subnormalArithmetic() {
+    @Test func `Subnormal Arithmetic`() {
         let subnormal = Double.leastNonzeroMagnitude
 
         let sum = IEEE_754.Arithmetic.addition(subnormal, subnormal)
@@ -343,7 +343,7 @@ struct ArithmeticEdgeCasesTests {
         #expect(product >= 0)  // May underflow to 0
     }
 
-    @Test func mixedSignZeros() {
+    @Test func `Mixed Sign Zeros`() {
         // IEEE 754 signed zero behavior
         let posZero = 0.0
         let negZero = -0.0
@@ -357,7 +357,7 @@ struct ArithmeticEdgeCasesTests {
 
 @Suite("IEEE_754.Arithmetic - Consistency with Operators")
 struct ArithmeticConsistencyTests {
-    @Test func additionConsistency() {
+    @Test func `Addition Consistency`() {
         let values: [(Double, Double)] = [(3.0, 2.0), (-5.0, 3.0), (0.0, 0.0), (1e100, 1e-100)]
 
         for (a, b) in values {
@@ -367,7 +367,7 @@ struct ArithmeticConsistencyTests {
         }
     }
 
-    @Test func multiplicationConsistency() {
+    @Test func `Multiplication Consistency`() {
         let values: [(Double, Double)] = [(3.0, 2.0), (-5.0, 3.0), (2.0, 0.5), (1e50, 1e-50)]
 
         for (a, b) in values {
@@ -377,7 +377,7 @@ struct ArithmeticConsistencyTests {
         }
     }
 
-    @Test func squareRootConsistency() {
+    @Test func `Square Root Consistency`() {
         let values = [4.0, 9.0, 2.0, 0.5, 1e100, 1e-100]
 
         for value in values {

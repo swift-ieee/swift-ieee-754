@@ -24,11 +24,11 @@ struct DoubleIsSignMinusTests {
         (Double.leastNonzeroMagnitude, false),
         (-Double.leastNonzeroMagnitude, true),
     ])
-    func isSignMinus(value: Double, expected: Bool) {
+    func `Is Sign Minus`(value: Double, expected: Bool) {
         #expect(IEEE_754.Classification.isSignMinus(value) == expected, "isSignMinus(\(value)) should be \(expected)")
     }
 
-    @Test func nanSignBits() {
+    @Test func `Nan Sign Bits`() {
         let positiveNaN = Double.nan
         let negativeNaN = -Double.nan
         #expect(!IEEE_754.Classification.isSignMinus(positiveNaN), "Positive NaN should not have sign bit set")
@@ -39,7 +39,7 @@ struct DoubleIsSignMinusTests {
 @Suite("IEEE_754.Classification - Double isNormal")
 struct DoubleIsNormalTests {
     @Test(arguments: [1.0, -1.0, 3.14, -2.71, 1000.0, -0.001])
-    func normalValues(value: Double) {
+    func `Normal Values`(value: Double) {
         #expect(IEEE_754.Classification.isNormal(value), "\(value) should be normal")
     }
 
@@ -64,7 +64,7 @@ struct DoubleIsNormalTests {
         #expect(!IEEE_754.Classification.isNormal(-subnormal), "Negative subnormal should not be normal")
     }
 
-    @Test func minNormal() {
+    @Test func `Min Normal`() {
         let minNorm = Double.leastNormalMagnitude
         #expect(IEEE_754.Classification.isNormal(minNorm), "leastNormalMagnitude should be normal")
         #expect(IEEE_754.Classification.isNormal(-minNorm), "Negative leastNormalMagnitude should be normal")
@@ -74,7 +74,7 @@ struct DoubleIsNormalTests {
 @Suite("IEEE_754.Classification - Double isFinite")
 struct DoubleIsFiniteTests {
     @Test(arguments: [0.0, -0.0, 1.0, -1.0, 3.14, -2.71, 1e308, -1e308])
-    func finiteValues(value: Double) {
+    func `Finite Values`(value: Double) {
         #expect(IEEE_754.Classification.isFinite(value), "\(value) should be finite")
     }
 
@@ -88,7 +88,7 @@ struct DoubleIsFiniteTests {
         #expect(!IEEE_754.Classification.isFinite(value), "NaN should not be finite")
     }
 
-    @Test func extremeFiniteValues() {
+    @Test func `Extreme Finite Values`() {
         let maxFinite = Double.greatestFiniteMagnitude
         #expect(IEEE_754.Classification.isFinite(maxFinite), "greatestFiniteMagnitude should be finite")
         #expect(IEEE_754.Classification.isFinite(-maxFinite), "Negative greatestFiniteMagnitude should be finite")
@@ -108,25 +108,25 @@ struct DoubleIsZeroTests {
     }
 
     @Test(arguments: [1.0, -1.0, 0.1, -0.1, Double.leastNonzeroMagnitude, -Double.leastNonzeroMagnitude])
-    func nonZeros(value: Double) {
+    func `Non Zeros`(value: Double) {
         #expect(!IEEE_754.Classification.isZero(value), "\(value) should not be zero")
     }
 
     @Test(arguments: [Double.infinity, -Double.infinity, Double.nan])
-    func specialValues(value: Double) {
+    func `Special Values`(value: Double) {
         #expect(!IEEE_754.Classification.isZero(value), "\(value) should not be zero")
     }
 }
 
 @Suite("IEEE_754.Classification - Double isSubnormal")
 struct DoubleIsSubnormalTests {
-    @Test func minSubnormal() {
+    @Test func `Min Subnormal`() {
         let minSubnorm = Double.leastNonzeroMagnitude
         #expect(IEEE_754.Classification.isSubnormal(minSubnorm), "leastNonzeroMagnitude should be subnormal")
         #expect(IEEE_754.Classification.isSubnormal(-minSubnorm), "Negative leastNonzeroMagnitude should be subnormal")
     }
 
-    @Test func maxSubnormal() {
+    @Test func `Max Subnormal`() {
         let maxSubnorm = Double.leastNormalMagnitude.nextDown
         #expect(
             IEEE_754.Classification.isSubnormal(maxSubnorm), "Value just below leastNormalMagnitude should be subnormal"
@@ -139,12 +139,12 @@ struct DoubleIsSubnormalTests {
     }
 
     @Test(arguments: [1.0, -1.0, 3.14])
-    func normalValues(value: Double) {
+    func `Normal Values`(value: Double) {
         #expect(!IEEE_754.Classification.isSubnormal(value), "\(value) should not be subnormal")
     }
 
     @Test(arguments: [Double.infinity, -Double.infinity, Double.nan])
-    func specialValues(value: Double) {
+    func `Special Values`(value: Double) {
         #expect(!IEEE_754.Classification.isSubnormal(value), "\(value) should not be subnormal")
     }
 }
@@ -157,7 +157,7 @@ struct DoubleIsInfiniteTests {
     }
 
     @Test(arguments: [0.0, -0.0, 1.0, -1.0, 3.14, -2.71])
-    func finiteValues(value: Double) {
+    func `Finite Values`(value: Double) {
         #expect(!IEEE_754.Classification.isInfinite(value), "\(value) should not be infinite")
     }
 
@@ -181,11 +181,11 @@ struct DoubleIsNaNTests {
     }
 
     @Test(arguments: [0.0, -0.0, 1.0, -1.0, Double.infinity, -Double.infinity])
-    func nonNaNs(value: Double) {
+    func `Non Na Ns`(value: Double) {
         #expect(!IEEE_754.Classification.isNaN(value), "\(value) should not be NaN")
     }
 
-    @Test func nanOperations() {
+    @Test func `Nan Operations`() {
         let result = 0.0 / 0.0
         #expect(IEEE_754.Classification.isNaN(result), "0/0 should produce NaN")
     }
@@ -193,18 +193,18 @@ struct DoubleIsNaNTests {
 
 @Suite("IEEE_754.Classification - Double isSignaling")
 struct DoubleIsSignalingTests {
-    @Test func signalingNaN() {
+    @Test func `Signaling NaN`() {
         let snan = Double.signalingNaN
         #expect(IEEE_754.Classification.isSignaling(snan), "signalingNaN should be signaling")
     }
 
-    @Test func quietNaN() {
+    @Test func `Quiet NaN`() {
         let qnan = Double.nan
         #expect(!IEEE_754.Classification.isSignaling(qnan), "quiet NaN should not be signaling")
     }
 
     @Test(arguments: [0.0, 1.0, -1.0, Double.infinity, -Double.infinity])
-    func nonNaNs(value: Double) {
+    func `Non Na Ns`(value: Double) {
         #expect(!IEEE_754.Classification.isSignaling(value), "\(value) should not be signaling")
     }
 }
@@ -212,7 +212,7 @@ struct DoubleIsSignalingTests {
 @Suite("IEEE_754.Classification - Double isCanonical")
 struct DoubleIsCanonicalTests {
     @Test(arguments: [0.0, -0.0, 1.0, -1.0, 3.14, Double.infinity, -Double.infinity, Double.nan, Double.signalingNaN])
-    func allValuesCanonical(value: Double) {
+    func `All Values Canonical`(value: Double) {
         #expect(IEEE_754.Classification.isCanonical(value), "All binary format values should be canonical")
     }
 }
@@ -220,54 +220,54 @@ struct DoubleIsCanonicalTests {
 @Suite("IEEE_754.Classification - Double radix")
 struct DoubleRadixTests {
     @Test(arguments: [0.0, 1.0, -1.0, 3.14, Double.infinity, Double.nan])
-    func radixIsTwo(value: Double) {
+    func `Radix Is Two`(value: Double) {
         #expect(IEEE_754.Classification.radix(value) == 2, "Radix should always be 2 for binary formats")
     }
 }
 
 @Suite("IEEE_754.Classification - Double numberClass")
 struct DoubleNumberClassTests {
-    @Test func signalingNaN() {
+    @Test func `Signaling NaN`() {
         let snan = Double.signalingNaN
         #expect(IEEE_754.Classification.numberClass(snan) == .nan(.signaling))
     }
 
-    @Test func quietNaN() {
+    @Test func `Quiet NaN`() {
         let qnan = Double.nan
         #expect(IEEE_754.Classification.numberClass(qnan) == .nan(.quiet))
     }
 
-    @Test func negativeInfinity() {
+    @Test func `Negative Infinity`() {
         #expect(IEEE_754.Classification.numberClass(-Double.infinity) == .negative(.infinity))
     }
 
-    @Test func negativeNormal() {
+    @Test func `Negative Normal`() {
         #expect(IEEE_754.Classification.numberClass(-3.14) == .negative(.normal))
     }
 
-    @Test func negativeSubnormal() {
+    @Test func `Negative Subnormal`() {
         let negSubnorm = -Double.leastNonzeroMagnitude
         #expect(IEEE_754.Classification.numberClass(negSubnorm) == .negative(.subnormal))
     }
 
-    @Test func negativeZero() {
+    @Test func `Negative Zero`() {
         #expect(IEEE_754.Classification.numberClass(-0.0) == .negative(.zero))
     }
 
-    @Test func positiveZero() {
+    @Test func `Positive Zero`() {
         #expect(IEEE_754.Classification.numberClass(0.0) == .positive(.zero))
     }
 
-    @Test func positiveSubnormal() {
+    @Test func `Positive Subnormal`() {
         let posSubnorm = Double.leastNonzeroMagnitude
         #expect(IEEE_754.Classification.numberClass(posSubnorm) == .positive(.subnormal))
     }
 
-    @Test func positiveNormal() {
+    @Test func `Positive Normal`() {
         #expect(IEEE_754.Classification.numberClass(3.14) == .positive(.normal))
     }
 
-    @Test func positiveInfinity() {
+    @Test func `Positive Infinity`() {
         #expect(IEEE_754.Classification.numberClass(Double.infinity) == .positive(.infinity))
     }
 
@@ -279,7 +279,7 @@ struct DoubleNumberClassTests {
         (100.0, .positive(.normal)),
         (Double.infinity, .positive(.infinity)),
     ])
-    func numberClassCases(value: Double, expected: IEEE_754.Classification.NumberClass) {
+    func `Number Class Cases`(value: Double, expected: IEEE_754.Classification.NumberClass) {
         #expect(IEEE_754.Classification.numberClass(value) == expected)
     }
 }
@@ -296,7 +296,7 @@ struct FloatIsSignMinusTests {
         (Float.infinity, false),
         (-Float.infinity, true),
     ])
-    func isSignMinus(value: Float, expected: Bool) {
+    func `Is Sign Minus`(value: Float, expected: Bool) {
         #expect(IEEE_754.Classification.isSignMinus(value) == expected)
     }
 }
@@ -304,12 +304,12 @@ struct FloatIsSignMinusTests {
 @Suite("IEEE_754.Classification - Float isNormal")
 struct FloatIsNormalTests {
     @Test(arguments: [Float(1.0), Float(-1.0), Float(3.14)])
-    func normalValues(value: Float) {
+    func `Normal Values`(value: Float) {
         #expect(IEEE_754.Classification.isNormal(value))
     }
 
     @Test(arguments: [Float(0.0), Float.infinity, Float.nan])
-    func nonNormalValues(value: Float) {
+    func `Non Normal Values`(value: Float) {
         #expect(!IEEE_754.Classification.isNormal(value))
     }
 
@@ -322,12 +322,12 @@ struct FloatIsNormalTests {
 @Suite("IEEE_754.Classification - Float isFinite")
 struct FloatIsFiniteTests {
     @Test(arguments: [Float(0.0), Float(1.0), Float(-1.0), Float(3.14)])
-    func finiteValues(value: Float) {
+    func `Finite Values`(value: Float) {
         #expect(IEEE_754.Classification.isFinite(value))
     }
 
     @Test(arguments: [Float.infinity, -Float.infinity, Float.nan])
-    func nonFiniteValues(value: Float) {
+    func `Non Finite Values`(value: Float) {
         #expect(!IEEE_754.Classification.isFinite(value))
     }
 }
@@ -342,15 +342,15 @@ struct FloatNumberClassTests {
         (-Float.infinity, .negative(.infinity)),
         (Float.infinity, .positive(.infinity)),
     ])
-    func numberClassCases(value: Float, expected: IEEE_754.Classification.NumberClass) {
+    func `Number Class Cases`(value: Float, expected: IEEE_754.Classification.NumberClass) {
         #expect(IEEE_754.Classification.numberClass(value) == expected)
     }
 
-    @Test func quietNaN() {
+    @Test func `Quiet NaN`() {
         #expect(IEEE_754.Classification.numberClass(Float.nan) == .nan(.quiet))
     }
 
-    @Test func signalingNaN() {
+    @Test func `Signaling NaN`() {
         #expect(IEEE_754.Classification.numberClass(Float.signalingNaN) == .nan(.signaling))
     }
 

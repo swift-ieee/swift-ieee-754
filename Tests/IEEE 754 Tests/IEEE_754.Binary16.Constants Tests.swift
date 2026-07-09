@@ -9,31 +9,31 @@ import Testing
 
 @Suite("IEEE_754.Binary16 Constants - Format Parameters")
 struct Binary16FormatParametersTests {
-    @Test func byteSize() {
+    @Test func `Byte Size`() {
         #expect(IEEE_754.Binary16.byteSize == 2, "Binary16 should be 2 bytes")
     }
 
-    @Test func bitSize() {
+    @Test func `Bit Size`() {
         #expect(IEEE_754.Binary16.bitSize == 16, "Binary16 should be 16 bits")
     }
 
-    @Test func signBits() {
+    @Test func `Sign Bits`() {
         #expect(IEEE_754.Binary16.signBits == 1, "Binary16 has 1 sign bit")
     }
 
-    @Test func exponentBits() {
+    @Test func `Exponent Bits`() {
         #expect(IEEE_754.Binary16.exponentBits == 5, "Binary16 has 5 exponent bits")
     }
 
-    @Test func significandBits() {
+    @Test func `Significand Bits`() {
         #expect(IEEE_754.Binary16.significandBits == 10, "Binary16 has 10 significand bits")
     }
 
-    @Test func exponentBias() {
+    @Test func `Exponent Bias`() {
         #expect(IEEE_754.Binary16.exponentBias == 15, "Binary16 exponent bias is 15")
     }
 
-    @Test func maxExponent() {
+    @Test func `Max Exponent`() {
         #expect(IEEE_754.Binary16.maxExponent == 31, "Binary16 max exponent is 31")
     }
 
@@ -52,13 +52,13 @@ struct Binary16FormatParametersTests {
 
 @Suite("IEEE_754.Binary16 Constants - Consistency Tests")
 struct Binary16ConsistencyTests {
-    @Test func formatSizeConsistency() {
+    @Test func `Format Size Consistency`() {
         let byteSize = IEEE_754.Binary16.byteSize
         let bitSize = IEEE_754.Binary16.bitSize
         #expect(byteSize * 8 == bitSize, "byteSize * 8 should equal bitSize")
     }
 
-    @Test func bitFieldConsistency() {
+    @Test func `Bit Field Consistency`() {
         let signBits = IEEE_754.Binary16.signBits
         let exponentBits = IEEE_754.Binary16.exponentBits
         let significandBits = IEEE_754.Binary16.significandBits
@@ -66,13 +66,13 @@ struct Binary16ConsistencyTests {
         #expect(totalBits == IEEE_754.Binary16.bitSize, "Sum of bit fields should equal total bits")
     }
 
-    @Test func precisionConsistency() {
+    @Test func `Precision Consistency`() {
         let precision = IEEE_754.Binary16.precision
         let significandBits = IEEE_754.Binary16.significandBits
         #expect(precision == significandBits + 1, "Precision should be significandBits + 1")
     }
 
-    @Test func exponentRangeConsistency() {
+    @Test func `Exponent Range Consistency`() {
         let emin = IEEE_754.Binary16.emin
         let emax = IEEE_754.Binary16.emax
         let bias = IEEE_754.Binary16.exponentBias
@@ -94,25 +94,25 @@ struct Binary16ConsistencyTests {
             }()))
     @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
     struct Binary16ValueTests {
-        @Test func epsilonValue() {
+        @Test func `Epsilon Value`() {
             let epsilon = IEEE_754.Binary16.epsilon
             #expect(epsilon == 0x1.0p-10, "Binary16 epsilon should be 2^-10")
         }
 
-        @Test func minNormal() {
+        @Test func `Min Normal`() {
             let minNorm = IEEE_754.Binary16.minNormal
             #expect(minNorm == Float16.leastNormalMagnitude, "minNormal should equal Float16.leastNormalMagnitude")
             #expect(minNorm.isNormal, "minNormal should be a normal number")
         }
 
-        @Test func minSubnormal() {
+        @Test func `Min Subnormal`() {
             let minSubnorm = IEEE_754.Binary16.minSubnormal
             #expect(
                 minSubnorm == Float16.leastNonzeroMagnitude, "minSubnormal should equal Float16.leastNonzeroMagnitude")
             #expect(minSubnorm.isSubnormal, "minSubnormal should be subnormal")
         }
 
-        @Test func maxNormal() {
+        @Test func `Max Normal`() {
             let maxNorm = IEEE_754.Binary16.maxNormal
             #expect(
                 maxNorm == Float16.greatestFiniteMagnitude, "maxNormal should equal Float16.greatestFiniteMagnitude")
@@ -120,39 +120,39 @@ struct Binary16ConsistencyTests {
             #expect(maxNorm.isFinite, "maxNormal should be finite")
         }
 
-        @Test func positiveZero() {
+        @Test func `Positive Zero`() {
             let pz = IEEE_754.Binary16.SpecialValues.positiveZero
             #expect(pz == 0.0, "positiveZero should equal 0.0")
             #expect(pz.isZero, "positiveZero should be zero")
             #expect(pz.sign == .plus, "positiveZero should have positive sign")
         }
 
-        @Test func negativeZero() {
+        @Test func `Negative Zero`() {
             let nz = IEEE_754.Binary16.SpecialValues.negativeZero
             #expect(nz == 0.0, "negativeZero should equal 0.0")
             #expect(nz.isZero, "negativeZero should be zero")
             #expect(nz.sign == .minus, "negativeZero should have negative sign")
         }
 
-        @Test func positiveInfinity() {
+        @Test func `Positive Infinity`() {
             let pinf = IEEE_754.Binary16.SpecialValues.positiveInfinity
             #expect(pinf == Float16.infinity, "positiveInfinity should equal Float16.infinity")
             #expect(pinf.isInfinite, "positiveInfinity should be infinite")
         }
 
-        @Test func negativeInfinity() {
+        @Test func `Negative Infinity`() {
             let ninf = IEEE_754.Binary16.SpecialValues.negativeInfinity
             #expect(ninf == -Float16.infinity, "negativeInfinity should equal -Float16.infinity")
             #expect(ninf.isInfinite, "negativeInfinity should be infinite")
         }
 
-        @Test func quietNaN() {
+        @Test func `Quiet NaN`() {
             let qnan = IEEE_754.Binary16.SpecialValues.quietNaN
             #expect(qnan.isNaN, "quietNaN should be NaN")
             #expect(!qnan.isSignalingNaN, "quietNaN should not be signaling")
         }
 
-        @Test func signalingNaN() {
+        @Test func `Signaling NaN`() {
             let snan = IEEE_754.Binary16.SpecialValues.signalingNaN
             #expect(snan.isNaN, "signalingNaN should be NaN")
             #expect(snan.isSignalingNaN, "signalingNaN should be signaling")
