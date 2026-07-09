@@ -7,12 +7,14 @@ import Testing
 
 @testable import IEEE_754
 
-@Suite("IEEE 754 Rounding Operations")
-struct RoundingTests {}
+extension IEEE_754.Rounding {
+    @Suite("IEEE 754 Rounding Operations")
+    struct Test {}
+}
 
 // MARK: - Double Floor Tests
 
-extension RoundingTests {
+extension IEEE_754.Rounding.Test {
     @Test(
         arguments: [
             (3.7, 3.0),
@@ -43,7 +45,7 @@ extension RoundingTests {
 
 // MARK: - Double Ceil Tests
 
-extension RoundingTests {
+extension IEEE_754.Rounding.Test {
     @Test(
         arguments: [
             (3.2, 4.0),
@@ -74,7 +76,7 @@ extension RoundingTests {
 
 // MARK: - Double Round Tests
 
-extension RoundingTests {
+extension IEEE_754.Rounding.Test {
     @Test(
         arguments: [
             (3.4, 3.0),
@@ -107,7 +109,7 @@ extension RoundingTests {
 
 // MARK: - Double Trunc Tests
 
-extension RoundingTests {
+extension IEEE_754.Rounding.Test {
     @Test(
         arguments: [
             (3.7, 3.0),
@@ -138,7 +140,7 @@ extension RoundingTests {
 
 // MARK: - Float Floor Tests
 
-extension RoundingTests {
+extension IEEE_754.Rounding.Test {
     @Test(
         arguments: [
             (Float(3.7), Float(3.0)),
@@ -162,7 +164,7 @@ extension RoundingTests {
 
 // MARK: - Float Ceil Tests
 
-extension RoundingTests {
+extension IEEE_754.Rounding.Test {
     @Test(
         arguments: [
             (Float(3.2), Float(4.0)),
@@ -186,7 +188,7 @@ extension RoundingTests {
 
 // MARK: - Float Round Tests
 
-extension RoundingTests {
+extension IEEE_754.Rounding.Test {
     @Test(
         arguments: [
             (Float(3.4), Float(3.0)),
@@ -211,7 +213,7 @@ extension RoundingTests {
 
 // MARK: - Float Trunc Tests
 
-extension RoundingTests {
+extension IEEE_754.Rounding.Test {
     @Test(
         arguments: [
             (Float(3.7), Float(3.0)),
@@ -235,7 +237,7 @@ extension RoundingTests {
 
 // MARK: - Double RoundAwayFromZero Tests
 
-extension RoundingTests {
+extension IEEE_754.Rounding.Test {
     @Test(
         arguments: [
             (3.4, 3.0),
@@ -291,7 +293,7 @@ extension RoundingTests {
 
 // MARK: - Float RoundAwayFromZero Tests
 
-extension RoundingTests {
+extension IEEE_754.Rounding.Test {
     @Test(
         arguments: [
             (Float(3.4), Float(3.0)),
@@ -317,7 +319,7 @@ extension RoundingTests {
 
 // MARK: - Edge Cases
 
-extension RoundingTests {
+extension IEEE_754.Rounding.Test {
     @Test
     func `large values are handled correctly`() {
         let large = 1_000_000_000.7
@@ -356,7 +358,7 @@ extension RoundingTests {
 
 // MARK: - IEEE 754 Conformance
 
-extension RoundingTests {
+extension IEEE_754.Rounding.Test {
     @Test
     func `floor preserves sign of zero`() {
         let positiveZero = IEEE_754.Rounding.floor(0.0)
@@ -400,7 +402,7 @@ extension RoundingTests {
 
 // MARK: - Hierarchical Direction API Tests
 
-extension RoundingTests {
+extension IEEE_754.Rounding.Test {
     @Test
     func `apply with Direction enum - towardInfinity(.negative) is floor`() {
         #expect(IEEE_754.Rounding.apply(3.7, direction: .towardInfinity(.negative)) == 3.0)

@@ -343,86 +343,90 @@ extension `Performance Tests` {
 
 // MARK: - Concurrent Access Consistency Tests (kept separate, not performance)
 
-@Suite("IEEE 754 - Concurrent Access Consistency")
-struct ConcurrentAccessTests {
-    @Test func `concurrent serialization of same value`() async {
-        let value: Double = 3.141592653589793
-        let expectedBytes = value.bytes()
+extension Double.Test {
+    @Suite("IEEE 754 - Concurrent Access Consistency")
+    struct ConcurrentAccess {
+        @Test func `concurrent serialization of same value`() async {
+            let value: Double = 3.141592653589793
+            let expectedBytes = value.bytes()
 
-        await withTaskGroup(of: [UInt8].self) { group in
-            for _ in 0..<100 {
-                group.addTask {
-                    value.bytes()
+            await withTaskGroup(of: [UInt8].self) { group in
+                for _ in 0..<100 {
+                    group.addTask {
+                        value.bytes()
+                    }
                 }
-            }
 
-            var allMatch = true
-            for await bytes in group {
-                if bytes != expectedBytes {
-                    allMatch = false
+                var allMatch = true
+                for await bytes in group {
+                    if bytes != expectedBytes {
+                        allMatch = false
+                    }
                 }
-            }
 
-            #expect(allMatch, "All concurrent serializations should produce identical bytes")
+                #expect(allMatch, "All concurrent serializations should produce identical bytes")
+            }
         }
-    }
 
-    @Test func `concurrent deserialization of same bytes`() async {
-        let bytes: [UInt8] = [0x18, 0x2D, 0x44, 0x54, 0xFB, 0x21, 0x09, 0x40]
-        let expectedValue = Double(bytes: bytes)
+        @Test func `concurrent deserialization of same bytes`() async {
+            let bytes: [UInt8] = [0x18, 0x2D, 0x44, 0x54, 0xFB, 0x21, 0x09, 0x40]
+            let expectedValue = Double(bytes: bytes)
 
-        await withTaskGroup(of: Double?.self) { group in
-            for _ in 0..<100 {
-                group.addTask {
-                    Double(bytes: bytes)
+            await withTaskGroup(of: Double?.self) { group in
+                for _ in 0..<100 {
+                    group.addTask {
+                        Double(bytes: bytes)
+                    }
                 }
-            }
 
-            var allMatch = true
-            for await value in group {
-                if value != expectedValue {
-                    allMatch = false
+                var allMatch = true
+                for await value in group {
+                    if value != expectedValue {
+                        allMatch = false
+                    }
                 }
-            }
 
-            #expect(allMatch, "All concurrent deserializations should produce identical values")
+                #expect(allMatch, "All concurrent deserializations should produce identical values")
+            }
         }
     }
 }
 
 // MARK: - Determinism Tests (kept separate, not performance)
 
-@Suite("IEEE 754 - Deterministic Behavior")
-struct DeterminismTests {
-    @Test func `repeated serialization produces identical results`() {
-        let value: Double = 2.718281828459045
+extension Double.Test {
+    @Suite("IEEE 754 - Deterministic Behavior")
+    struct Determinism {
+        @Test func `repeated serialization produces identical results`() {
+            let value: Double = 2.718281828459045
 
-        let firstBytes = value.bytes()
+            let firstBytes = value.bytes()
 
-        for _ in 0..<100 {
-            let bytes = value.bytes()
-            #expect(bytes == firstBytes, "Repeated serialization should be deterministic")
+            for _ in 0..<100 {
+                let bytes = value.bytes()
+                #expect(bytes == firstBytes, "Repeated serialization should be deterministic")
+            }
         }
-    }
 
-    @Test func `repeated deserialization produces identical results`() {
-        let bytes: [UInt8] = [0x18, 0x2D, 0x44, 0x54, 0xFB, 0x21, 0x09, 0x40]
+        @Test func `repeated deserialization produces identical results`() {
+            let bytes: [UInt8] = [0x18, 0x2D, 0x44, 0x54, 0xFB, 0x21, 0x09, 0x40]
 
-        let firstValue = Double(bytes: bytes)
+            let firstValue = Double(bytes: bytes)
 
-        for _ in 0..<100 {
-            let value = Double(bytes: bytes)
-            #expect(value == firstValue, "Repeated deserialization should be deterministic")
+            for _ in 0..<100 {
+                let value = Double(bytes: bytes)
+                #expect(value == firstValue, "Repeated deserialization should be deterministic")
+            }
         }
-    }
 
-    @Test func `same value from different sources produces same bytes`() {
-        let pi1 = Double.pi
-        let pi2 = 3.141592653589793
+        @Test func `same value from different sources produces same bytes`() {
+            let pi1 = Double.pi
+            let pi2 = 3.141592653589793
 
-        let bytes1 = pi1.bytes()
-        let bytes2 = pi2.bytes()
+            let bytes1 = pi1.bytes()
+            let bytes2 = pi2.bytes()
 
-        #expect(bytes1 == bytes2, "Same double value should produce identical bytes")
+            #expect(bytes1 == bytes2, "Same double value should produce identical bytes")
+        }
     }
 }

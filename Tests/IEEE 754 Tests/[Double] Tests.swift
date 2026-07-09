@@ -7,8 +7,8 @@ import Testing
 
 @testable import IEEE_754
 
-@Suite("Array<Double> - Deserialization")
-struct DoubleArrayTests {
+@Suite
+struct `[Double] Tests` {
 
     @Test
     func `Single Double from 8 bytes`() {

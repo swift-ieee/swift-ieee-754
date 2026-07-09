@@ -9,51 +9,53 @@ import Testing
 
 // MARK: - Rounding Control Tests
 
-@Suite("Swift API - Rounding Control")
-struct SwiftRoundingControlTests {
-    @Test func `get Rounding Mode`() {
-        let mode = IEEE_754.RoundingControl.get()
-        // Should be one of the four valid modes
-        switch mode {
-        case .toNearest, .downward, .upward, .towardZero:
-            break  // Valid
-        }
-    }
-
-    @Test func `set Rounding Mode`() throws {
-        // Save original mode
-        let originalMode = IEEE_754.RoundingControl.get()
-        defer {
-            // Always restore original mode, even if test fails
-            try? IEEE_754.RoundingControl.set(originalMode)
-        }
-
-        try IEEE_754.RoundingControl.set(.upward)
-        let mode = IEEE_754.RoundingControl.get()
-        #expect(mode == .upward)
-    }
-
-    @Test func `with Mode Scoping`() throws {
-        // Save original mode
-        let originalMode = IEEE_754.RoundingControl.get()
-        defer {
-            // Always restore original mode, even if test fails
-            try? IEEE_754.RoundingControl.set(originalMode)
-        }
-
-        // Set a specific mode first
-        try IEEE_754.RoundingControl.set(.toNearest)
-
-        let result = try IEEE_754.RoundingControl.withMode(.towardZero) {
+extension IEEE_754.RoundingControl {
+    @Suite("Swift API - Rounding Control")
+    struct Test {
+        @Test func `get Rounding Mode`() {
             let mode = IEEE_754.RoundingControl.get()
-            #expect(mode == .towardZero)
-            return 10.0 / 3.0
+            // Should be one of the four valid modes
+            switch mode {
+            case .toNearest, .downward, .upward, .towardZero:
+                break  // Valid
+            }
         }
 
-        // Mode should be restored
-        let restoredMode = IEEE_754.RoundingControl.get()
-        #expect(restoredMode == .toNearest)
-        #expect(result > 0)
+        @Test func `set Rounding Mode`() throws {
+            // Save original mode
+            let originalMode = IEEE_754.RoundingControl.get()
+            defer {
+                // Always restore original mode, even if test fails
+                try? IEEE_754.RoundingControl.set(originalMode)
+            }
+
+            try IEEE_754.RoundingControl.set(.upward)
+            let mode = IEEE_754.RoundingControl.get()
+            #expect(mode == .upward)
+        }
+
+        @Test func `with Mode Scoping`() throws {
+            // Save original mode
+            let originalMode = IEEE_754.RoundingControl.get()
+            defer {
+                // Always restore original mode, even if test fails
+                try? IEEE_754.RoundingControl.set(originalMode)
+            }
+
+            // Set a specific mode first
+            try IEEE_754.RoundingControl.set(.toNearest)
+
+            let result = try IEEE_754.RoundingControl.withMode(.towardZero) {
+                let mode = IEEE_754.RoundingControl.get()
+                #expect(mode == .towardZero)
+                return 10.0 / 3.0
+            }
+
+            // Mode should be restored
+            let restoredMode = IEEE_754.RoundingControl.get()
+            #expect(restoredMode == .toNearest)
+            #expect(result > 0)
+        }
     }
 }
 
@@ -102,53 +104,55 @@ struct SwiftExceptionHandlingTests {
 
 // MARK: - Signaling Comparison Tests
 
-@Suite("Swift API - Signaling Comparisons")
-struct SwiftSignalingComparisonTests {
-    @Test func `signaling Equal Normal`() {
-        IEEE_754.Exceptions.clear()
+extension IEEE_754.Comparison.Signaling {
+    @Suite("Swift API - Signaling Comparisons")
+    struct Test {
+        @Test func `signaling Equal Normal`() {
+            IEEE_754.Exceptions.clear()
 
-        let result = IEEE_754.Comparison.Signaling.equal(3.14, 3.14)
-        #expect(result == true)
-        #expect(!IEEE_754.Exceptions.invalidOperation)
-    }
+            let result = IEEE_754.Comparison.Signaling.equal(3.14, 3.14)
+            #expect(result == true)
+            #expect(!IEEE_754.Exceptions.invalidOperation)
+        }
 
-    @Test func `signaling Equal NaN`() {
-        IEEE_754.Exceptions.clear()
+        @Test func `signaling Equal NaN`() {
+            IEEE_754.Exceptions.clear()
 
-        let result = IEEE_754.Comparison.Signaling.equal(Double.nan, 3.14)
-        #expect(result == false)
-        #expect(IEEE_754.Exceptions.invalidOperation)
-    }
+            let result = IEEE_754.Comparison.Signaling.equal(Double.nan, 3.14)
+            #expect(result == false)
+            #expect(IEEE_754.Exceptions.invalidOperation)
+        }
 
-    @Test func `signaling Less Normal`() {
-        IEEE_754.Exceptions.clear()
+        @Test func `signaling Less Normal`() {
+            IEEE_754.Exceptions.clear()
 
-        #expect(IEEE_754.Comparison.Signaling.less(2.0, 3.0) == true)
-        #expect(IEEE_754.Comparison.Signaling.less(3.0, 2.0) == false)
-        #expect(!IEEE_754.Exceptions.invalidOperation)
-    }
+            #expect(IEEE_754.Comparison.Signaling.less(2.0, 3.0) == true)
+            #expect(IEEE_754.Comparison.Signaling.less(3.0, 2.0) == false)
+            #expect(!IEEE_754.Exceptions.invalidOperation)
+        }
 
-    @Test func `signaling Less NaN`() {
-        IEEE_754.Exceptions.clear()
+        @Test func `signaling Less NaN`() {
+            IEEE_754.Exceptions.clear()
 
-        let result = IEEE_754.Comparison.Signaling.less(Double.nan, 3.14)
-        #expect(result == false)
-        #expect(IEEE_754.Exceptions.invalidOperation)
-    }
+            let result = IEEE_754.Comparison.Signaling.less(Double.nan, 3.14)
+            #expect(result == false)
+            #expect(IEEE_754.Exceptions.invalidOperation)
+        }
 
-    @Test func `signaling Greater Float`() {
-        IEEE_754.Exceptions.clear()
+        @Test func `signaling Greater Float`() {
+            IEEE_754.Exceptions.clear()
 
-        #expect(IEEE_754.Comparison.Signaling.greater(Float(3.0), Float(2.0)) == true)
-        #expect(IEEE_754.Comparison.Signaling.greater(Float(2.0), Float(3.0)) == false)
-    }
+            #expect(IEEE_754.Comparison.Signaling.greater(Float(3.0), Float(2.0)) == true)
+            #expect(IEEE_754.Comparison.Signaling.greater(Float(2.0), Float(3.0)) == false)
+        }
 
-    @Test func `signaling Not Equal NaN`() {
-        IEEE_754.Exceptions.clear()
+        @Test func `signaling Not Equal NaN`() {
+            IEEE_754.Exceptions.clear()
 
-        let result = IEEE_754.Comparison.Signaling.notEqual(Double.nan, 3.14)
-        #expect(result == true)  // NaN is not equal to anything
-        #expect(IEEE_754.Exceptions.invalidOperation)
+            let result = IEEE_754.Comparison.Signaling.notEqual(Double.nan, 3.14)
+            #expect(result == true)  // NaN is not equal to anything
+            #expect(IEEE_754.Exceptions.invalidOperation)
+        }
     }
 }
 

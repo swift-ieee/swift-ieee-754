@@ -7,8 +7,8 @@ import Testing
 
 @testable import IEEE_754
 
-@Suite("[UInt8]+IEEE_754 - Canonical Double serialization")
-struct ArrayDoubleSerializationTests {
+@Suite
+struct `[UInt8] Tests` {
     @Test(arguments: [3.14159265358979323846, 2.71828, 1.41421, 0.0, 1.0, -1.0])
     func `unlabeled init with Double`(value: Double) {
         let bytes = [UInt8](value)
@@ -33,8 +33,8 @@ struct ArrayDoubleSerializationTests {
     }
 }
 
-@Suite("[UInt8]+IEEE_754 - Canonical Float serialization")
-struct ArrayFloatSerializationTests {
+@Suite
+struct `[UInt8] Float Serialization Tests` {
     @Test(arguments: [Float(3.14159), Float(2.71828), Float(1.41421), Float(0.0), Float(1.0), Float(-1.0)])
     func `unlabeled init with Float`(value: Float) {
         let bytes = [UInt8](value)
