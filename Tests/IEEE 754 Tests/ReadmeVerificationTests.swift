@@ -11,8 +11,8 @@ import Testing
 @Suite("README Verification")
 struct ReadmeVerificationTests {
 
-    @Test("Quick Start example (lines 46-56)")
-    func quickStartExample() throws {
+    @Test
+    func `Quick Start example (lines 46-56)`() throws {
         // Double to bytes
         let bytes = (3.14159).bytes()
         #expect(bytes.count == 8)
@@ -23,8 +23,8 @@ struct ReadmeVerificationTests {
         #expect(value! == 3.14159)
     }
 
-    @Test("Basic Serialization example (lines 63-71)")
-    func basicSerializationExample() throws {
+    @Test
+    func `Basic Serialization example (lines 63-71)`() throws {
         // Double serialization
         let value: Double = 3.141592653589793
         let bytes = value.bytes()
@@ -34,8 +34,8 @@ struct ReadmeVerificationTests {
         #expect(restored == value)
     }
 
-    @Test("Endianness Control example (lines 76-84)")
-    func endiannessControlExample() throws {
+    @Test
+    func `Endianness Control example (lines 76-84)`() throws {
         let value: Double = 3.14159
 
         // Little-endian (default)
@@ -50,8 +50,8 @@ struct ReadmeVerificationTests {
         #expect(littleEndian != bigEndian)
     }
 
-    @Test("Float Operations example (lines 89-96)")
-    func floatOperationsExample() throws {
+    @Test
+    func `Float Operations example (lines 89-96)`() throws {
         // Float serialization (binary32)
         let float: Float = 3.14159
         let bytes = float.bytes()
@@ -62,8 +62,8 @@ struct ReadmeVerificationTests {
         #expect(restored == float)
     }
 
-    @Test("Authoritative API example (lines 103-110)")
-    func authoritativeAPIExample() throws {
+    @Test
+    func `Authoritative API example (lines 103-110)`() throws {
         // Binary64 (Double)
         let bytes = IEEE_754.Binary64.bytes(from: 3.14159)
         let value = IEEE_754.Binary64.value(from: bytes)
@@ -75,8 +75,8 @@ struct ReadmeVerificationTests {
         #expect(floatValue == Float(3.14))
     }
 
-    @Test("Array Extensions example (lines 115-118)")
-    func arrayExtensionsExample() throws {
+    @Test
+    func `Array Extensions example (lines 115-118)`() throws {
         // Convenience initializers
         let doubleBytes: [UInt8] = [UInt8](3.14159)
         let floatBytes: [UInt8] = [UInt8](Float(3.14))
@@ -85,8 +85,8 @@ struct ReadmeVerificationTests {
         #expect(floatBytes.count == 4)
     }
 
-    @Test("Special Values example (lines 123-136)")
-    func specialValuesExample() throws {
+    @Test
+    func `Special Values example (lines 123-136)`() throws {
         // Infinity
         let inf = Double.infinity.bytes()
         let negInf = (-Double.infinity).bytes()

@@ -10,8 +10,8 @@ import Testing
 @Suite("Array<Float> - Deserialization")
 struct FloatArrayTests {
 
-    @Test("Single Float from 4 bytes")
-    func singleFloat() {
+    @Test
+    func `Single Float from 4 bytes`() {
         let bytes: [UInt8] = [0xD0, 0x0F, 0x49, 0x40]
         let floats = [Float](bytes: bytes)
         #expect(floats != nil)
@@ -19,8 +19,8 @@ struct FloatArrayTests {
         #expect(floats?[0] == 3.14159)
     }
 
-    @Test("Multiple Floats from bytes")
-    func multipleFloats() {
+    @Test
+    func `Multiple Floats from bytes`() {
         let bytes: [UInt8] = [
             0xD0, 0x0F, 0x49, 0x40,  // 3.14159
             0x00, 0x00, 0x80, 0x3F,  // 1.0
@@ -34,16 +34,16 @@ struct FloatArrayTests {
         #expect(floats?[2] == 2.0)
     }
 
-    @Test("Empty bytes returns empty array")
-    func emptyBytes() {
+    @Test
+    func `Empty bytes returns empty array`() {
         let bytes: [UInt8] = []
         let floats = [Float](bytes: bytes)
         #expect(floats != nil)
         #expect(floats?.isEmpty == true)
     }
 
-    @Test("Invalid byte count returns nil")
-    func invalidByteCount() {
+    @Test
+    func `Invalid byte count returns nil`() {
         // 3 bytes - not a multiple of 4
         let bytes: [UInt8] = [0x01, 0x02, 0x03]
         let floats = [Float](bytes: bytes)
@@ -57,8 +57,8 @@ struct FloatArrayTests {
         #expect(floats == nil)
     }
 
-    @Test("Big-endian deserialization")
-    func bigEndian() {
+    @Test
+    func `Big-endian deserialization`() {
         let bytes: [UInt8] = [
             0x40, 0x49, 0x0F, 0xD0,  // 3.14159 (big-endian)
             0x3F, 0x80, 0x00, 0x00,  // 1.0 (big-endian)
@@ -70,8 +70,8 @@ struct FloatArrayTests {
         #expect(floats?[1] == 1.0)
     }
 
-    @Test("Special values - infinity and NaN")
-    func specialValues() {
+    @Test
+    func `Special values - infinity and NaN`() {
         let infBytes = Float.infinity.bytes()
         let negInfBytes = (-Float.infinity).bytes()
         let nanBytes = Float.nan.bytes()
@@ -86,8 +86,8 @@ struct FloatArrayTests {
         #expect(floats?[2].isNaN == true)
     }
 
-    @Test("Special values - signed zero")
-    func signedZero() {
+    @Test
+    func `Special values - signed zero`() {
         let posZeroBytes = (0.0 as Float).bytes()
         let negZeroBytes = (-0.0 as Float).bytes()
 
@@ -104,8 +104,8 @@ struct FloatArrayTests {
         #expect(floats?[1].sign == .minus)
     }
 
-    @Test("Large array of Floats")
-    func largeArray() {
+    @Test
+    func `Large array of Floats`() {
         let count = 1000
         let originalFloats = (0..<count).map { Float($0) }
 
@@ -120,8 +120,8 @@ struct FloatArrayTests {
         #expect(deserializedFloats == originalFloats)
     }
 
-    @Test("Round-trip through array serialization")
-    func roundTrip() {
+    @Test
+    func `Round-trip through array serialization`() {
         let original: [Float] = [3.14159, 2.71828, 1.41421, 1.61803]
 
         var bytes: [UInt8] = []
@@ -134,8 +134,8 @@ struct FloatArrayTests {
         #expect(roundtripped == original)
     }
 
-    @Test("Mixed positive and negative values")
-    func mixedValues() {
+    @Test
+    func `Mixed positive and negative values`() {
         let original: [Float] = [-100.5, 0.0, 100.5, -0.0, Float.infinity, -Float.infinity]
 
         var bytes: [UInt8] = []
@@ -157,8 +157,8 @@ struct FloatArrayTests {
         }
     }
 
-    @Test("Subnormal values preserved")
-    func subnormalValues() {
+    @Test
+    func `Subnormal values preserved`() {
         let values: [Float] = [
             .leastNonzeroMagnitude,
             -.leastNonzeroMagnitude,
@@ -180,8 +180,8 @@ struct FloatArrayTests {
         #expect(deserialized?[3] == -.leastNormalMagnitude)
     }
 
-    @Test("Extreme values preserved")
-    func extremeValues() {
+    @Test
+    func `Extreme values preserved`() {
         let values: [Float] = [
             .greatestFiniteMagnitude,
             -.greatestFiniteMagnitude,
@@ -203,8 +203,8 @@ struct FloatArrayTests {
         #expect(deserialized?[3] == -Float.pi)
     }
 
-    @Test("Mixed endianness arrays are independent")
-    func mixedEndianness() {
+    @Test
+    func `Mixed endianness arrays are independent`() {
         let values: [Float] = [1.0, 2.0, 3.0]
 
         var littleEndianBytes: [UInt8] = []
@@ -229,8 +229,8 @@ struct FloatArrayTests {
         #expect(wrongBig != values)
     }
 
-    @Test("Array from collection types")
-    func collectionTypes() {
+    @Test
+    func `Array from collection types`() {
         let bytes: [UInt8] = [0xD0, 0x0F, 0x49, 0x40]
 
         // Test with different collection types
@@ -247,8 +247,8 @@ struct FloatArrayTests {
         #expect(fromContiguousArray?[0] == 3.14159)
     }
 
-    @Test("Powers of 2 arrays")
-    func powersOfTwo() {
+    @Test
+    func `Powers of 2 arrays`() {
         let values: [Float] = [1.0, 2.0, 4.0, 8.0, 16.0, 32.0, 64.0, 128.0]
 
         var bytes: [UInt8] = []

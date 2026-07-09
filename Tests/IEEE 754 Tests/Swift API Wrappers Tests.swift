@@ -11,7 +11,7 @@ import Testing
 
 @Suite("Swift API - Rounding Control")
 struct SwiftRoundingControlTests {
-    @Test func getRoundingMode() {
+    @Test func `get Rounding Mode`() {
         let mode = IEEE_754.RoundingControl.get()
         // Should be one of the four valid modes
         switch mode {
@@ -20,7 +20,7 @@ struct SwiftRoundingControlTests {
         }
     }
 
-    @Test func setRoundingMode() throws {
+    @Test func `set Rounding Mode`() throws {
         // Save original mode
         let originalMode = IEEE_754.RoundingControl.get()
         defer {
@@ -33,7 +33,7 @@ struct SwiftRoundingControlTests {
         #expect(mode == .upward)
     }
 
-    @Test func withModeScoping() throws {
+    @Test func `with Mode Scoping`() throws {
         // Save original mode
         let originalMode = IEEE_754.RoundingControl.get()
         defer {
@@ -61,7 +61,7 @@ struct SwiftRoundingControlTests {
 
 @Suite("Swift API - Exception Handling")
 struct SwiftExceptionHandlingTests {
-    @Test func clearAllExceptions() {
+    @Test func `clear All Exceptions`() {
         IEEE_754.Exceptions.clear()
         #expect(!IEEE_754.Exceptions.invalidOperation)
         #expect(!IEEE_754.Exceptions.divisionByZero)
@@ -70,7 +70,7 @@ struct SwiftExceptionHandlingTests {
         #expect(!IEEE_754.Exceptions.inexact)
     }
 
-    @Test func raiseAndTestException() {
+    @Test func `raise And Test Exception`() {
         IEEE_754.Exceptions.clear()
         IEEE_754.Exceptions.raise(.invalid)
 
@@ -78,7 +78,7 @@ struct SwiftExceptionHandlingTests {
         #expect(!IEEE_754.Exceptions.overflow)
     }
 
-    @Test func fpuExceptionDetection() {
+    @Test func `fpu Exception Detection`() {
         Float.exception.clear()
 
         // Perform operation that might set FPU exceptions
@@ -91,7 +91,7 @@ struct SwiftExceptionHandlingTests {
         #expect(fpuState.division == false || fpuState.division == true)
     }
 
-    @Test func fpuStateEquatable() {
+    @Test func `fpu State Equatable`() {
         Float.exception.clear()
         let state1 = Float.exception.test()
         let state2 = Float.exception.test()
@@ -104,7 +104,7 @@ struct SwiftExceptionHandlingTests {
 
 @Suite("Swift API - Signaling Comparisons")
 struct SwiftSignalingComparisonTests {
-    @Test func signalingEqualNormal() {
+    @Test func `signaling Equal Normal`() {
         IEEE_754.Exceptions.clear()
 
         let result = IEEE_754.Comparison.Signaling.equal(3.14, 3.14)
@@ -112,7 +112,7 @@ struct SwiftSignalingComparisonTests {
         #expect(!IEEE_754.Exceptions.invalidOperation)
     }
 
-    @Test func signalingEqualNaN() {
+    @Test func `signaling Equal NaN`() {
         IEEE_754.Exceptions.clear()
 
         let result = IEEE_754.Comparison.Signaling.equal(Double.nan, 3.14)
@@ -120,7 +120,7 @@ struct SwiftSignalingComparisonTests {
         #expect(IEEE_754.Exceptions.invalidOperation)
     }
 
-    @Test func signalingLessNormal() {
+    @Test func `signaling Less Normal`() {
         IEEE_754.Exceptions.clear()
 
         #expect(IEEE_754.Comparison.Signaling.less(2.0, 3.0) == true)
@@ -128,7 +128,7 @@ struct SwiftSignalingComparisonTests {
         #expect(!IEEE_754.Exceptions.invalidOperation)
     }
 
-    @Test func signalingLessNaN() {
+    @Test func `signaling Less NaN`() {
         IEEE_754.Exceptions.clear()
 
         let result = IEEE_754.Comparison.Signaling.less(Double.nan, 3.14)
@@ -136,14 +136,14 @@ struct SwiftSignalingComparisonTests {
         #expect(IEEE_754.Exceptions.invalidOperation)
     }
 
-    @Test func signalingGreaterFloat() {
+    @Test func `signaling Greater Float`() {
         IEEE_754.Exceptions.clear()
 
         #expect(IEEE_754.Comparison.Signaling.greater(Float(3.0), Float(2.0)) == true)
         #expect(IEEE_754.Comparison.Signaling.greater(Float(2.0), Float(3.0)) == false)
     }
 
-    @Test func signalingNotEqualNaN() {
+    @Test func `signaling Not Equal NaN`() {
         IEEE_754.Exceptions.clear()
 
         let result = IEEE_754.Comparison.Signaling.notEqual(Double.nan, 3.14)
@@ -156,7 +156,7 @@ struct SwiftSignalingComparisonTests {
 
 @Suite("Swift API - Integration Scenarios")
 struct SwiftAPIIntegrationTests {
-    @Test func roundingAndExceptions() throws {
+    @Test func `rounding And Exceptions`() throws {
         IEEE_754.Exceptions.clear()
 
         try IEEE_754.RoundingControl.withMode(.upward) {
@@ -172,7 +172,7 @@ struct SwiftAPIIntegrationTests {
         #expect(!IEEE_754.Exceptions.invalidOperation)
     }
 
-    @Test func signalingComparisonSetsException() {
+    @Test func `signaling Comparison Sets Exception`() {
         IEEE_754.Exceptions.clear()
 
         // This should set the invalid exception
@@ -185,7 +185,7 @@ struct SwiftAPIIntegrationTests {
         IEEE_754.Exceptions.clear()
     }
 
-    @Test func fpuAndThreadLocalExceptions() {
+    @Test func `fpu And Thread Local Exceptions`() {
         IEEE_754.Exceptions.clear()
         Float.exception.clear()
 

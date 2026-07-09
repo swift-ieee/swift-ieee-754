@@ -14,7 +14,6 @@ struct RoundingTests {}
 
 extension RoundingTests {
     @Test(
-        "floor rounds toward negative infinity",
         arguments: [
             (3.7, 3.0),
             (3.0, 3.0),
@@ -27,13 +26,13 @@ extension RoundingTests {
             (0.1, 0.0),
             (-0.1, -1.0),
         ])
-    func doubleFloor(value: Double, expected: Double) {
+    func `floor rounds toward negative infinity`(value: Double, expected: Double) {
         #expect(IEEE_754.Rounding.floor(value) == expected)
         #expect(value.ieee754.floor == expected)
     }
 
-    @Test("floor handles special values")
-    func floorSpecialValues() {
+    @Test
+    func `floor handles special values`() {
         #expect(IEEE_754.Rounding.floor(Double.infinity) == Double.infinity)
         #expect(IEEE_754.Rounding.floor(-Double.infinity) == -Double.infinity)
         #expect(IEEE_754.Rounding.floor(Double.nan).isNaN)
@@ -46,7 +45,6 @@ extension RoundingTests {
 
 extension RoundingTests {
     @Test(
-        "ceil rounds toward positive infinity",
         arguments: [
             (3.2, 4.0),
             (3.0, 3.0),
@@ -59,13 +57,13 @@ extension RoundingTests {
             (0.1, 1.0),
             (-0.1, -0.0),
         ])
-    func doubleCeil(value: Double, expected: Double) {
+    func `ceil rounds toward positive infinity`(value: Double, expected: Double) {
         #expect(IEEE_754.Rounding.ceil(value) == expected)
         #expect(value.ieee754.ceil == expected)
     }
 
-    @Test("ceil handles special values")
-    func ceilSpecialValues() {
+    @Test
+    func `ceil handles special values`() {
         #expect(IEEE_754.Rounding.ceil(Double.infinity) == Double.infinity)
         #expect(IEEE_754.Rounding.ceil(-Double.infinity) == -Double.infinity)
         #expect(IEEE_754.Rounding.ceil(Double.nan).isNaN)
@@ -78,7 +76,6 @@ extension RoundingTests {
 
 extension RoundingTests {
     @Test(
-        "round rounds to nearest (ties to even)",
         arguments: [
             (3.4, 3.0),
             (3.5, 4.0),  // Ties to even: 4 is even
@@ -93,13 +90,13 @@ extension RoundingTests {
             (0.5, 0.0),  // Ties to even: 0 is even
             (-0.5, -0.0),  // Ties to even: 0 is even
         ])
-    func doubleRound(value: Double, expected: Double) {
+    func `round rounds to nearest (ties to even)`(value: Double, expected: Double) {
         #expect(IEEE_754.Rounding.round(value) == expected)
         #expect(value.ieee754.round == expected)
     }
 
-    @Test("round handles special values")
-    func roundSpecialValues() {
+    @Test
+    func `round handles special values`() {
         #expect(IEEE_754.Rounding.round(Double.infinity) == Double.infinity)
         #expect(IEEE_754.Rounding.round(-Double.infinity) == -Double.infinity)
         #expect(IEEE_754.Rounding.round(Double.nan).isNaN)
@@ -112,7 +109,6 @@ extension RoundingTests {
 
 extension RoundingTests {
     @Test(
-        "trunc rounds toward zero",
         arguments: [
             (3.7, 3.0),
             (3.2, 3.0),
@@ -125,13 +121,13 @@ extension RoundingTests {
             (0.9, 0.0),
             (-0.9, -0.0),
         ])
-    func doubleTrunc(value: Double, expected: Double) {
+    func `trunc rounds toward zero`(value: Double, expected: Double) {
         #expect(IEEE_754.Rounding.trunc(value) == expected)
         #expect(value.ieee754.trunc == expected)
     }
 
-    @Test("trunc handles special values")
-    func truncSpecialValues() {
+    @Test
+    func `trunc handles special values`() {
         #expect(IEEE_754.Rounding.trunc(Double.infinity) == Double.infinity)
         #expect(IEEE_754.Rounding.trunc(-Double.infinity) == -Double.infinity)
         #expect(IEEE_754.Rounding.trunc(Double.nan).isNaN)
@@ -144,7 +140,6 @@ extension RoundingTests {
 
 extension RoundingTests {
     @Test(
-        "float floor rounds toward negative infinity",
         arguments: [
             (Float(3.7), Float(3.0)),
             (Float(3.0), Float(3.0)),
@@ -152,13 +147,13 @@ extension RoundingTests {
             (Float(-3.7), Float(-4.0)),
             (Float(0.0), Float(0.0)),
         ])
-    func floatFloor(value: Float, expected: Float) {
+    func `float floor rounds toward negative infinity`(value: Float, expected: Float) {
         #expect(IEEE_754.Rounding.floor(value) == expected)
         #expect(value.ieee754.floor == expected)
     }
 
-    @Test("float floor handles special values")
-    func floatFloorSpecialValues() {
+    @Test
+    func `float floor handles special values`() {
         #expect(IEEE_754.Rounding.floor(Float.infinity) == Float.infinity)
         #expect(IEEE_754.Rounding.floor(-Float.infinity) == -Float.infinity)
         #expect(IEEE_754.Rounding.floor(Float.nan).isNaN)
@@ -169,7 +164,6 @@ extension RoundingTests {
 
 extension RoundingTests {
     @Test(
-        "float ceil rounds toward positive infinity",
         arguments: [
             (Float(3.2), Float(4.0)),
             (Float(3.0), Float(3.0)),
@@ -177,13 +171,13 @@ extension RoundingTests {
             (Float(-3.2), Float(-3.0)),
             (Float(0.0), Float(0.0)),
         ])
-    func floatCeil(value: Float, expected: Float) {
+    func `float ceil rounds toward positive infinity`(value: Float, expected: Float) {
         #expect(IEEE_754.Rounding.ceil(value) == expected)
         #expect(value.ieee754.ceil == expected)
     }
 
-    @Test("float ceil handles special values")
-    func floatCeilSpecialValues() {
+    @Test
+    func `float ceil handles special values`() {
         #expect(IEEE_754.Rounding.ceil(Float.infinity) == Float.infinity)
         #expect(IEEE_754.Rounding.ceil(-Float.infinity) == -Float.infinity)
         #expect(IEEE_754.Rounding.ceil(Float.nan).isNaN)
@@ -194,7 +188,6 @@ extension RoundingTests {
 
 extension RoundingTests {
     @Test(
-        "float round rounds to nearest (ties to even)",
         arguments: [
             (Float(3.4), Float(3.0)),
             (Float(3.5), Float(4.0)),
@@ -203,13 +196,13 @@ extension RoundingTests {
             (Float(-3.5), Float(-4.0)),
             (Float(0.5), Float(0.0)),
         ])
-    func floatRound(value: Float, expected: Float) {
+    func `float round rounds to nearest (ties to even)`(value: Float, expected: Float) {
         #expect(IEEE_754.Rounding.round(value) == expected)
         #expect(value.ieee754.round == expected)
     }
 
-    @Test("float round handles special values")
-    func floatRoundSpecialValues() {
+    @Test
+    func `float round handles special values`() {
         #expect(IEEE_754.Rounding.round(Float.infinity) == Float.infinity)
         #expect(IEEE_754.Rounding.round(-Float.infinity) == -Float.infinity)
         #expect(IEEE_754.Rounding.round(Float.nan).isNaN)
@@ -220,7 +213,6 @@ extension RoundingTests {
 
 extension RoundingTests {
     @Test(
-        "float trunc rounds toward zero",
         arguments: [
             (Float(3.7), Float(3.0)),
             (Float(3.2), Float(3.0)),
@@ -228,13 +220,13 @@ extension RoundingTests {
             (Float(-3.7), Float(-3.0)),
             (Float(0.0), Float(0.0)),
         ])
-    func floatTrunc(value: Float, expected: Float) {
+    func `float trunc rounds toward zero`(value: Float, expected: Float) {
         #expect(IEEE_754.Rounding.trunc(value) == expected)
         #expect(value.ieee754.trunc == expected)
     }
 
-    @Test("float trunc handles special values")
-    func floatTruncSpecialValues() {
+    @Test
+    func `float trunc handles special values`() {
         #expect(IEEE_754.Rounding.trunc(Float.infinity) == Float.infinity)
         #expect(IEEE_754.Rounding.trunc(-Float.infinity) == -Float.infinity)
         #expect(IEEE_754.Rounding.trunc(Float.nan).isNaN)
@@ -245,7 +237,6 @@ extension RoundingTests {
 
 extension RoundingTests {
     @Test(
-        "roundAwayFromZero rounds to nearest (ties away from zero)",
         arguments: [
             (3.4, 3.0),
             (3.5, 4.0),  // Ties away from zero: 3.5 → 4.0
@@ -262,13 +253,13 @@ extension RoundingTests {
             (2.5, 3.0),  // Ties away from zero: 2.5 → 3.0
             (1.5, 2.0),  // Ties away from zero: 1.5 → 2.0
         ])
-    func doubleRoundAwayFromZero(value: Double, expected: Double) {
+    func `roundAwayFromZero rounds to nearest (ties away from zero)`(value: Double, expected: Double) {
         #expect(IEEE_754.Rounding.roundAwayFromZero(value) == expected)
         #expect(value.ieee754.roundAwayFromZero == expected)
     }
 
-    @Test("roundAwayFromZero handles special values")
-    func roundAwayFromZeroSpecialValues() {
+    @Test
+    func `roundAwayFromZero handles special values`() {
         #expect(IEEE_754.Rounding.roundAwayFromZero(Double.infinity) == Double.infinity)
         #expect(IEEE_754.Rounding.roundAwayFromZero(-Double.infinity) == -Double.infinity)
         #expect(IEEE_754.Rounding.roundAwayFromZero(Double.nan).isNaN)
@@ -276,8 +267,8 @@ extension RoundingTests {
         #expect(IEEE_754.Rounding.roundAwayFromZero(-0.0) == -0.0)
     }
 
-    @Test("roundAwayFromZero differs from round on ties")
-    func roundAwayFromZeroDiffersFromRound() {
+    @Test
+    func `roundAwayFromZero differs from round on ties`() {
         // These demonstrate the difference between ties-to-even and ties-away-from-zero
         let tieValues = [0.5, 1.5, 2.5, 3.5, 4.5, -0.5, -1.5, -2.5, -3.5, -4.5]
         for value in tieValues {
@@ -302,7 +293,6 @@ extension RoundingTests {
 
 extension RoundingTests {
     @Test(
-        "float roundAwayFromZero rounds to nearest (ties away from zero)",
         arguments: [
             (Float(3.4), Float(3.0)),
             (Float(3.5), Float(4.0)),  // Ties away from zero
@@ -312,13 +302,13 @@ extension RoundingTests {
             (Float(0.5), Float(1.0)),  // Ties away from zero
             (Float(-0.5), Float(-1.0)),  // Ties away from zero
         ])
-    func floatRoundAwayFromZero(value: Float, expected: Float) {
+    func `float roundAwayFromZero rounds to nearest (ties away from zero)`(value: Float, expected: Float) {
         #expect(IEEE_754.Rounding.roundAwayFromZero(value) == expected)
         #expect(value.ieee754.roundAwayFromZero == expected)
     }
 
-    @Test("float roundAwayFromZero handles special values")
-    func floatRoundAwayFromZeroSpecialValues() {
+    @Test
+    func `float roundAwayFromZero handles special values`() {
         #expect(IEEE_754.Rounding.roundAwayFromZero(Float.infinity) == Float.infinity)
         #expect(IEEE_754.Rounding.roundAwayFromZero(-Float.infinity) == -Float.infinity)
         #expect(IEEE_754.Rounding.roundAwayFromZero(Float.nan).isNaN)
@@ -328,16 +318,16 @@ extension RoundingTests {
 // MARK: - Edge Cases
 
 extension RoundingTests {
-    @Test("large values are handled correctly")
-    func largeValues() {
+    @Test
+    func `large values are handled correctly`() {
         let large = 1_000_000_000.7
         #expect(IEEE_754.Rounding.floor(large) == 1_000_000_000.0)
         #expect(IEEE_754.Rounding.ceil(large) == 1_000_000_001.0)
         #expect(IEEE_754.Rounding.trunc(large) == 1_000_000_000.0)
     }
 
-    @Test("very small values are handled correctly")
-    func verySmallValues() {
+    @Test
+    func `very small values are handled correctly`() {
         let small = 0.0000001
         #expect(IEEE_754.Rounding.floor(small) == 0.0)
         #expect(IEEE_754.Rounding.ceil(small) == 1.0)
@@ -345,8 +335,8 @@ extension RoundingTests {
         #expect(IEEE_754.Rounding.trunc(small) == 0.0)
     }
 
-    @Test("subnormal values are handled correctly")
-    func subnormalValues() {
+    @Test
+    func `subnormal values are handled correctly`() {
         let subnormal = Double.leastNonzeroMagnitude
         #expect(IEEE_754.Rounding.floor(subnormal) == 0.0)
         #expect(IEEE_754.Rounding.ceil(subnormal) == 1.0)
@@ -354,8 +344,8 @@ extension RoundingTests {
         #expect(IEEE_754.Rounding.trunc(subnormal) == 0.0)
     }
 
-    @Test("maximum finite values are handled correctly")
-    func maximumValues() {
+    @Test
+    func `maximum finite values are handled correctly`() {
         let max = Double.greatestFiniteMagnitude
         #expect(IEEE_754.Rounding.floor(max) == max)
         #expect(IEEE_754.Rounding.ceil(max) == max)
@@ -367,8 +357,8 @@ extension RoundingTests {
 // MARK: - IEEE 754 Conformance
 
 extension RoundingTests {
-    @Test("floor preserves sign of zero")
-    func floorSignOfZero() {
+    @Test
+    func `floor preserves sign of zero`() {
         let positiveZero = IEEE_754.Rounding.floor(0.0)
         let negativeZero = IEEE_754.Rounding.floor(-0.0)
         #expect(positiveZero == 0.0)
@@ -377,8 +367,8 @@ extension RoundingTests {
         #expect(negativeZero.sign == .minus)
     }
 
-    @Test("ceil preserves sign of zero")
-    func ceilSignOfZero() {
+    @Test
+    func `ceil preserves sign of zero`() {
         let positiveZero = IEEE_754.Rounding.ceil(0.0)
         let negativeZero = IEEE_754.Rounding.ceil(-0.0)
         #expect(positiveZero == 0.0)
@@ -387,8 +377,8 @@ extension RoundingTests {
         #expect(negativeZero.sign == .minus)
     }
 
-    @Test("round preserves sign of zero")
-    func roundSignOfZero() {
+    @Test
+    func `round preserves sign of zero`() {
         let positiveZero = IEEE_754.Rounding.round(0.0)
         let negativeZero = IEEE_754.Rounding.round(-0.0)
         #expect(positiveZero == 0.0)
@@ -397,8 +387,8 @@ extension RoundingTests {
         #expect(negativeZero.sign == .minus)
     }
 
-    @Test("trunc preserves sign of zero")
-    func truncSignOfZero() {
+    @Test
+    func `trunc preserves sign of zero`() {
         let positiveZero = IEEE_754.Rounding.trunc(0.0)
         let negativeZero = IEEE_754.Rounding.trunc(-0.0)
         #expect(positiveZero == 0.0)
@@ -411,43 +401,43 @@ extension RoundingTests {
 // MARK: - Hierarchical Direction API Tests
 
 extension RoundingTests {
-    @Test("apply with Direction enum - towardInfinity(.negative) is floor")
-    func applyDirectionFloor() {
+    @Test
+    func `apply with Direction enum - towardInfinity(.negative) is floor`() {
         #expect(IEEE_754.Rounding.apply(3.7, direction: .towardInfinity(.negative)) == 3.0)
         #expect(IEEE_754.Rounding.apply(-3.7, direction: .towardInfinity(.negative)) == -4.0)
         #expect(IEEE_754.Rounding.apply(Float(3.7), direction: .towardInfinity(.negative)) == 3.0)
     }
 
-    @Test("apply with Direction enum - towardInfinity(.positive) is ceil")
-    func applyDirectionCeil() {
+    @Test
+    func `apply with Direction enum - towardInfinity(.positive) is ceil`() {
         #expect(IEEE_754.Rounding.apply(3.2, direction: .towardInfinity(.positive)) == 4.0)
         #expect(IEEE_754.Rounding.apply(-3.2, direction: .towardInfinity(.positive)) == -3.0)
         #expect(IEEE_754.Rounding.apply(Float(3.2), direction: .towardInfinity(.positive)) == 4.0)
     }
 
-    @Test("apply with Direction enum - towardZero is trunc")
-    func applyDirectionTrunc() {
+    @Test
+    func `apply with Direction enum - towardZero is trunc`() {
         #expect(IEEE_754.Rounding.apply(3.7, direction: .towardZero) == 3.0)
         #expect(IEEE_754.Rounding.apply(-3.7, direction: .towardZero) == -3.0)
         #expect(IEEE_754.Rounding.apply(Float(3.7), direction: .towardZero) == 3.0)
     }
 
-    @Test("apply with Direction enum - toNearest(.toEven) is round")
-    func applyDirectionRoundToEven() {
+    @Test
+    func `apply with Direction enum - toNearest(.toEven) is round`() {
         #expect(IEEE_754.Rounding.apply(3.5, direction: .toNearest(.toEven)) == 4.0)
         #expect(IEEE_754.Rounding.apply(4.5, direction: .toNearest(.toEven)) == 4.0)
         #expect(IEEE_754.Rounding.apply(Float(3.5), direction: .toNearest(.toEven)) == 4.0)
     }
 
-    @Test("apply with Direction enum - toNearest(.awayFromZero) is roundAwayFromZero")
-    func applyDirectionRoundAwayFromZero() {
+    @Test
+    func `apply with Direction enum - toNearest(.awayFromZero) is roundAwayFromZero`() {
         #expect(IEEE_754.Rounding.apply(3.5, direction: .toNearest(.awayFromZero)) == 4.0)
         #expect(IEEE_754.Rounding.apply(4.5, direction: .toNearest(.awayFromZero)) == 5.0)
         #expect(IEEE_754.Rounding.apply(Float(3.5), direction: .toNearest(.awayFromZero)) == 4.0)
     }
 
-    @Test("Direction enum pattern matching works correctly")
-    func directionPatternMatching() {
+    @Test
+    func `Direction enum pattern matching works correctly`() {
         let directions: [IEEE_754.Rounding.Direction] = [
             .towardInfinity(.negative),
             .towardInfinity(.positive),
