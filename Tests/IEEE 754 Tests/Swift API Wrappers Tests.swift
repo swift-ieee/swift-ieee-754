@@ -60,53 +60,72 @@ extension IEEE_754.RoundingControl {
 }
 
 // MARK: - Exception Handling Tests
+//
+// F-004 follow-up: `.serialized` on a suite only serializes that suite's OWN
+// subtree — it does not provide mutual exclusion against other, unrelated
+// top-level suites. These three suites all read/write `IEEE_754.Exceptions`'
+// single shared process-global store (see its "Store Model" documentation),
+// which the F-004 fix made the sole target of both manual `raise` calls AND
+// (via the Comparison.Signaling bridge) NaN-triggered signaling comparisons —
+// widening how many call sites now write that shared store concurrently.
+// They are nested here, under the already-`.serialized` `IEEE_754.Exceptions.Test`
+// (whose `.serialized` trait propagates to its whole subtree), specifically
+// to close that cross-suite race rather than merely reducing it.
 
-@Suite("Swift API - Exception Handling")
-struct SwiftExceptionHandlingTests {
-    @Test func `clear All Exceptions`() {
-        IEEE_754.Exceptions.clear()
-        #expect(!IEEE_754.Exceptions.invalidOperation)
-        #expect(!IEEE_754.Exceptions.divisionByZero)
-        #expect(!IEEE_754.Exceptions.overflow)
-        #expect(!IEEE_754.Exceptions.underflow)
-        #expect(!IEEE_754.Exceptions.inexact)
-    }
+extension IEEE_754.Exceptions.Test {
+    @Suite("Swift API - Exception Handling")
+    struct SwiftAPIWrapper {
+        @Test func `clear All Exceptions`() {
+            IEEE_754.Exceptions.clear()
+            #expect(!IEEE_754.Exceptions.invalidOperation)
+            #expect(!IEEE_754.Exceptions.divisionByZero)
+            #expect(!IEEE_754.Exceptions.overflow)
+            #expect(!IEEE_754.Exceptions.underflow)
+            #expect(!IEEE_754.Exceptions.inexact)
+        }
 
-    @Test func `raise And Test Exception`() {
-        IEEE_754.Exceptions.clear()
-        IEEE_754.Exceptions.raise(.invalid)
+        @Test func `raise And Test Exception`() {
+            IEEE_754.Exceptions.clear()
+            IEEE_754.Exceptions.raise(.invalid)
 
-        #expect(IEEE_754.Exceptions.invalidOperation)
-        #expect(!IEEE_754.Exceptions.overflow)
-    }
+            #expect(IEEE_754.Exceptions.invalidOperation)
+            #expect(!IEEE_754.Exceptions.overflow)
+        }
 
-    @Test func `fpu Exception Detection`() {
-        Float.exception.clear()
+        @Test func `fpu Exception Detection`() {
+            Float.exception.clear()
 
-        // Perform operation that might set FPU exceptions
-        _ = 1.0 / 3.0  // May set inexact
+            // Perform operation that might set FPU exceptions
+            _ = 1.0 / 3.0  // May set inexact
 
-        let fpuState = Float.exception.test()
+            let fpuState = Float.exception.test()
 
-        // Verify structure is readable
-        #expect(fpuState.invalid == false || fpuState.invalid == true)
-        #expect(fpuState.division == false || fpuState.division == true)
-    }
+            // Verify structure is readable
+            #expect(fpuState.invalid == false || fpuState.invalid == true)
+            #expect(fpuState.division == false || fpuState.division == true)
+        }
 
-    @Test func `fpu State Equatable`() {
-        Float.exception.clear()
-        let state1 = Float.exception.test()
-        let state2 = Float.exception.test()
+        @Test func `fpu State Equatable`() {
+            Float.exception.clear()
+            let state1 = Float.exception.test()
+            let state2 = Float.exception.test()
 
-        #expect(state1 == state2)
+            #expect(state1 == state2)
+        }
     }
 }
 
 // MARK: - Signaling Comparison Tests
+//
+// Nested under `IEEE_754.Exceptions.Test` (see note above) rather than under
+// `IEEE_754.Comparison.Signaling` — a deliberate deviation from the usual
+// "extension of the affected source type" placement, made specifically to
+// close the cross-suite race on the shared `IEEE_754.Exceptions` store that
+// signaling comparisons write into as of the F-004 fix.
 
-extension IEEE_754.Comparison.Signaling {
+extension IEEE_754.Exceptions.Test {
     @Suite("Swift API - Signaling Comparisons")
-    struct Test {
+    struct SignalingComparisons {
         @Test func `signaling Equal Normal`() {
             IEEE_754.Exceptions.clear()
 
@@ -157,51 +176,56 @@ extension IEEE_754.Comparison.Signaling {
 }
 
 // MARK: - Integration Tests
+//
+// Nested under `IEEE_754.Exceptions.Test` (see note above) for the same
+// cross-suite-race reason.
 
-@Suite("Swift API - Integration Scenarios")
-struct SwiftAPIIntegrationTests {
-    @Test func `rounding And Exceptions`() throws {
-        IEEE_754.Exceptions.clear()
+extension IEEE_754.Exceptions.Test {
+    @Suite("Swift API - Integration Scenarios")
+    struct IntegrationScenarios {
+        @Test func `rounding And Exceptions`() throws {
+            IEEE_754.Exceptions.clear()
 
-        try IEEE_754.RoundingControl.withMode(.upward) {
-            let result = 1.0 / 3.0
-            #expect(result > 0)
+            try IEEE_754.RoundingControl.withMode(.upward) {
+                let result = 1.0 / 3.0
+                #expect(result > 0)
 
-            // Mode should be upward within closure
-            #expect(IEEE_754.RoundingControl.get() == .upward)
+                // Mode should be upward within closure
+                #expect(IEEE_754.RoundingControl.get() == .upward)
+            }
+
+            // Mode should be restored
+            // Exceptions should still be clear
+            #expect(!IEEE_754.Exceptions.invalidOperation)
         }
 
-        // Mode should be restored
-        // Exceptions should still be clear
-        #expect(!IEEE_754.Exceptions.invalidOperation)
-    }
+        @Test func `signaling Comparison Sets Exception`() {
+            IEEE_754.Exceptions.clear()
 
-    @Test func `signaling Comparison Sets Exception`() {
-        IEEE_754.Exceptions.clear()
+            // This should set the invalid exception
+            _ = IEEE_754.Comparison.Signaling.equal(Float.nan, Float.nan)
 
-        // This should set the invalid exception
-        _ = IEEE_754.Comparison.Signaling.equal(Float.nan, Float.nan)
+            // Verify exception was set
+            #expect(IEEE_754.Exceptions.invalidOperation)
 
-        // Verify exception was set
-        #expect(IEEE_754.Exceptions.invalidOperation)
+            // Clear for next test
+            IEEE_754.Exceptions.clear()
+        }
 
-        // Clear for next test
-        IEEE_754.Exceptions.clear()
-    }
+        @Test func `fpu And Thread Local Exceptions`() {
+            IEEE_754.Exceptions.clear()
+            Float.exception.clear()
 
-    @Test func `fpu And Thread Local Exceptions`() {
-        IEEE_754.Exceptions.clear()
-        Float.exception.clear()
+            // Raise thread-local exception
+            IEEE_754.Exceptions.raise(.overflow)
 
-        // Raise thread-local exception
-        IEEE_754.Exceptions.raise(.overflow)
+            // Check thread-local
+            #expect(IEEE_754.Exceptions.overflow)
 
-        // Check thread-local
-        #expect(IEEE_754.Exceptions.overflow)
-
-        // FPU state is independent
-        let fpuState = Float.exception.test()
-        // FPU overflow might or might not be set depending on operations
-        #expect(fpuState.overflow == false || fpuState.overflow == true)
+            // FPU state is independent
+            let fpuState = Float.exception.test()
+            // FPU overflow might or might not be set depending on operations
+            #expect(fpuState.overflow == false || fpuState.overflow == true)
+        }
     }
 }
