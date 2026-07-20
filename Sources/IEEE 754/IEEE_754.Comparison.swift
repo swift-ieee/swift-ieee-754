@@ -458,6 +458,18 @@ extension IEEE_754.Comparison {
         /// // IEEE_754.Exceptions.invalidOperation = true
         /// ```
         ///
+        /// ## Exception Store
+        ///
+        /// Each wrapper below detects the NaN operand itself and calls
+        /// `IEEE_754.Exceptions.raise(.invalid)` explicitly, so the flag lands
+        /// in `IEEE_754.Exceptions`' single canonical store (see its "Store
+        /// Model" documentation) and is visible through `test`/`invalidOperation`
+        /// with the same semantics as any other flag. The underlying C
+        /// function (`ieee754_signaling_*`) additionally raises its own,
+        /// separate C-shim thread-local and hardware FPU flags as a side
+        /// effect of its C-level implementation — those remain independent,
+        /// opt-in stores, not read by `IEEE_754.Exceptions`.
+        ///
         /// ## See Also
         ///
         /// - IEEE 754-2019 Section 5.6.1: Signaling comparison predicates
@@ -478,7 +490,8 @@ extension IEEE_754.Comparison {
         ///
         /// If either operand is NaN, raises invalid exception and returns false.
         public static func equal(_ lhs: Double, _ rhs: Double) -> Bool {
-            ieee754_signaling_equal(lhs, rhs) != 0
+            if lhs.isNaN || rhs.isNaN { IEEE_754.Exceptions.raise(.invalid) }
+            return ieee754_signaling_equal(lhs, rhs) != 0
         }
 
         /// Signaling less than comparison for Double
@@ -490,7 +503,8 @@ extension IEEE_754.Comparison {
         ///
         /// If either operand is NaN, raises invalid exception and returns false.
         public static func less(_ lhs: Double, _ rhs: Double) -> Bool {
-            ieee754_signaling_less(lhs, rhs) != 0
+            if lhs.isNaN || rhs.isNaN { IEEE_754.Exceptions.raise(.invalid) }
+            return ieee754_signaling_less(lhs, rhs) != 0
         }
 
         /// Signaling less than or equal comparison for Double
@@ -502,7 +516,8 @@ extension IEEE_754.Comparison {
         ///
         /// If either operand is NaN, raises invalid exception and returns false.
         public static func lessEqual(_ lhs: Double, _ rhs: Double) -> Bool {
-            ieee754_signaling_less_equal(lhs, rhs) != 0
+            if lhs.isNaN || rhs.isNaN { IEEE_754.Exceptions.raise(.invalid) }
+            return ieee754_signaling_less_equal(lhs, rhs) != 0
         }
 
         /// Signaling greater than comparison for Double
@@ -514,7 +529,8 @@ extension IEEE_754.Comparison {
         ///
         /// If either operand is NaN, raises invalid exception and returns false.
         public static func greater(_ lhs: Double, _ rhs: Double) -> Bool {
-            ieee754_signaling_greater(lhs, rhs) != 0
+            if lhs.isNaN || rhs.isNaN { IEEE_754.Exceptions.raise(.invalid) }
+            return ieee754_signaling_greater(lhs, rhs) != 0
         }
 
         /// Signaling greater than or equal comparison for Double
@@ -526,7 +542,8 @@ extension IEEE_754.Comparison {
         ///
         /// If either operand is NaN, raises invalid exception and returns false.
         public static func greaterEqual(_ lhs: Double, _ rhs: Double) -> Bool {
-            ieee754_signaling_greater_equal(lhs, rhs) != 0
+            if lhs.isNaN || rhs.isNaN { IEEE_754.Exceptions.raise(.invalid) }
+            return ieee754_signaling_greater_equal(lhs, rhs) != 0
         }
 
         /// Signaling not equal comparison for Double
@@ -539,7 +556,8 @@ extension IEEE_754.Comparison {
         /// If either operand is NaN, raises invalid exception and returns true
         /// (since NaN is not equal to anything, including itself).
         public static func notEqual(_ lhs: Double, _ rhs: Double) -> Bool {
-            ieee754_signaling_not_equal(lhs, rhs) != 0
+            if lhs.isNaN || rhs.isNaN { IEEE_754.Exceptions.raise(.invalid) }
+            return ieee754_signaling_not_equal(lhs, rhs) != 0
         }
 
         // MARK: - Float (binary32) Comparisons
@@ -553,7 +571,8 @@ extension IEEE_754.Comparison {
         ///
         /// If either operand is NaN, raises invalid exception and returns false.
         public static func equal(_ lhs: Float, _ rhs: Float) -> Bool {
-            ieee754_signaling_equal_f(lhs, rhs) != 0
+            if lhs.isNaN || rhs.isNaN { IEEE_754.Exceptions.raise(.invalid) }
+            return ieee754_signaling_equal_f(lhs, rhs) != 0
         }
 
         /// Signaling less than comparison for Float
@@ -565,7 +584,8 @@ extension IEEE_754.Comparison {
         ///
         /// If either operand is NaN, raises invalid exception and returns false.
         public static func less(_ lhs: Float, _ rhs: Float) -> Bool {
-            ieee754_signaling_less_f(lhs, rhs) != 0
+            if lhs.isNaN || rhs.isNaN { IEEE_754.Exceptions.raise(.invalid) }
+            return ieee754_signaling_less_f(lhs, rhs) != 0
         }
 
         /// Signaling less than or equal comparison for Float
@@ -577,7 +597,8 @@ extension IEEE_754.Comparison {
         ///
         /// If either operand is NaN, raises invalid exception and returns false.
         public static func lessEqual(_ lhs: Float, _ rhs: Float) -> Bool {
-            ieee754_signaling_less_equal_f(lhs, rhs) != 0
+            if lhs.isNaN || rhs.isNaN { IEEE_754.Exceptions.raise(.invalid) }
+            return ieee754_signaling_less_equal_f(lhs, rhs) != 0
         }
 
         /// Signaling greater than comparison for Float
@@ -589,7 +610,8 @@ extension IEEE_754.Comparison {
         ///
         /// If either operand is NaN, raises invalid exception and returns false.
         public static func greater(_ lhs: Float, _ rhs: Float) -> Bool {
-            ieee754_signaling_greater_f(lhs, rhs) != 0
+            if lhs.isNaN || rhs.isNaN { IEEE_754.Exceptions.raise(.invalid) }
+            return ieee754_signaling_greater_f(lhs, rhs) != 0
         }
 
         /// Signaling greater than or equal comparison for Float
@@ -601,7 +623,8 @@ extension IEEE_754.Comparison {
         ///
         /// If either operand is NaN, raises invalid exception and returns false.
         public static func greaterEqual(_ lhs: Float, _ rhs: Float) -> Bool {
-            ieee754_signaling_greater_equal_f(lhs, rhs) != 0
+            if lhs.isNaN || rhs.isNaN { IEEE_754.Exceptions.raise(.invalid) }
+            return ieee754_signaling_greater_equal_f(lhs, rhs) != 0
         }
 
         /// Signaling not equal comparison for Float
@@ -614,7 +637,8 @@ extension IEEE_754.Comparison {
         /// If either operand is NaN, raises invalid exception and returns true
         /// (since NaN is not equal to anything, including itself).
         public static func notEqual(_ lhs: Float, _ rhs: Float) -> Bool {
-            ieee754_signaling_not_equal_f(lhs, rhs) != 0
+            if lhs.isNaN || rhs.isNaN { IEEE_754.Exceptions.raise(.invalid) }
+            return ieee754_signaling_not_equal_f(lhs, rhs) != 0
         }
     }
 #endif
