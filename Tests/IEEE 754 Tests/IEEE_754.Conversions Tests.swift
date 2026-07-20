@@ -115,6 +115,46 @@ extension IEEE_754.Conversions.Test {
     }
 }
 
+// MARK: - Double to Int Boundary Regression (F-001)
+//
+// `Int.max` (2^63 - 1) is not exactly representable as `Double`;
+// `Double(Int.max)` rounds up to 2^63. A range guard of the shape
+// `value > Double(Int.max)` therefore lets `value == 2^63` itself through,
+// and converting that value to `Int` traps instead of returning nil as
+// documented. These pin the exact boundary (2^63), `nextDown(2^63)`, and the
+// (already-exact) negative boundary at `Int.min`.
+
+extension IEEE_754.Conversions.Test.DoubleToInt {
+    @Suite
+    struct `Edge Case` {
+        @Test func `Value Exactly Two To The Sixty Three Returns Nil Not Trap`() {
+            let twoToTheSixtyThree = 9_223_372_036_854_775_808.0  // 2^63, one past Int.max
+            #expect(IEEE_754.Conversions.doubleToInt(twoToTheSixtyThree) == nil)
+        }
+
+        @Test func `Value Just Below Two To The Sixty Three Converts`() {
+            let justBelowBoundary = Double(Int.max).nextDown
+            #expect(IEEE_754.Conversions.doubleToInt(justBelowBoundary) != nil)
+        }
+
+        @Test func `Negative Boundary At Int Min Converts Exactly`() {
+            // Int.min (-2^63) IS exactly representable as Double, so this
+            // boundary already worked pre-fix; kept here as a paired sanity
+            // check alongside the positive-side boundary tests.
+            #expect(IEEE_754.Conversions.doubleToInt(Double(Int.min)) == Int.min)
+        }
+
+        @Test func `Value Below Int Min Returns Nil`() {
+            // `Double(Int.min)` is exact (-2^63); near this magnitude the ULP
+            // is 2048, so an arbitrary small offset (e.g. -1024) can round
+            // back to -2^63 itself instead of a smaller value. `.nextDown`
+            // is the unambiguous next representable Double strictly below it.
+            let belowMin = Double(Int.min).nextDown
+            #expect(IEEE_754.Conversions.doubleToInt(belowMin) == nil)
+        }
+    }
+}
+
 extension IEEE_754.Conversions.Test {
     @Suite("IEEE_754.Conversions - Double to Int Truncating")
     struct DoubleToIntTruncating {
@@ -223,6 +263,28 @@ extension IEEE_754.Conversions.Test {
         @Test func `Special Values`() {
             #expect(IEEE_754.Conversions.doubleToUInt(Double.nan) == nil)
             #expect(IEEE_754.Conversions.doubleToUInt(Double.infinity) == nil)
+        }
+    }
+}
+
+// MARK: - Double to UInt Boundary Regression (F-001)
+//
+// Mirrors the `DoubleToInt` boundary regression above: `UInt.max`
+// (2^64 - 1) is not exactly representable as `Double`, so `Double(UInt.max)`
+// rounds up to 2^64, and a `value > Double(UInt.max)` guard let that exact
+// boundary value through to a trapping conversion instead of nil.
+
+extension IEEE_754.Conversions.Test.DoubleToUInt {
+    @Suite
+    struct `Edge Case` {
+        @Test func `Value Exactly Two To The Sixty Four Returns Nil Not Trap`() {
+            let twoToTheSixtyFour = 18_446_744_073_709_551_616.0  // 2^64, one past UInt.max
+            #expect(IEEE_754.Conversions.doubleToUInt(twoToTheSixtyFour) == nil)
+        }
+
+        @Test func `Value Just Below Two To The Sixty Four Converts`() {
+            let justBelowBoundary = Double(UInt.max).nextDown
+            #expect(IEEE_754.Conversions.doubleToUInt(justBelowBoundary) != nil)
         }
     }
 }

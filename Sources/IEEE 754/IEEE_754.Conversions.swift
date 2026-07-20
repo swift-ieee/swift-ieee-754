@@ -169,16 +169,15 @@ extension IEEE_754.Conversions {
             return nil
         }
 
-        // Check for out of range
-        let minInt = Double(Int.min)
-        let maxInt = Double(Int.max)
-        if value < minInt || value > maxInt {
-            return nil
-        }
-
-        // Round to nearest (ties to even) and convert
+        // Round to nearest (ties to even), then convert exactly. `Int.max`
+        // (2^63 - 1) is not exactly representable as `Double`, so
+        // `Double(Int.max)` rounds up to 2^63; a `value > Double(Int.max)`
+        // guard would let `value == 2^63` itself through and `Int(rounded)`
+        // would then trap instead of returning nil. `Int(exactly:)` performs
+        // the range check against the true `Int` bounds and returns nil on
+        // failure instead of trapping.
         let rounded = value.rounded(.toNearestOrEven)
-        return Int(rounded)
+        return Int(exactly: rounded)
     }
 
     /// Convert floating-point to integer with truncation
@@ -300,13 +299,13 @@ extension IEEE_754.Conversions {
             return nil
         }
 
-        let maxUInt = Double(UInt.max)
-        if value > maxUInt {
-            return nil
-        }
-
+        // See `doubleToInt` for why an exclusive `Double` upper-bound
+        // comparison against `Double(UInt.max)` is unsound at the boundary
+        // (2^64 is not exactly representable and rounds the same either
+        // way); `UInt(exactly:)` performs the range check exactly and
+        // returns nil instead of trapping.
         let rounded = value.rounded(.toNearestOrEven)
-        return UInt(rounded)
+        return UInt(exactly: rounded)
     }
 
     /// Convert unsigned integer to floating-point
