@@ -7,10 +7,6 @@
 public import Dependency_Primitives
 public import Synchronization
 
-#if CIEEE754_SHIM
-    import CIEEE754
-#endif
-
 // MARK: - IEEE 754 Exception Handling
 
 extension IEEE_754 {
@@ -60,11 +56,36 @@ extension IEEE_754 {
     /// Swift's standard floating-point operations do not raise IEEE 754 exceptions.
     /// This implementation provides:
     /// - Manual exception flag setting for user operations
-    /// - Thread-local exception state storage
+    /// - A single, portable exception-flag store shared by every thread and task
     /// - Query and clear operations
     ///
     /// To integrate with actual operations, wrap arithmetic operations with
     /// result checking and manual flag raising.
+    ///
+    /// ## Store Model
+    ///
+    /// `raise`/`test`/`clear` read and write **exactly one** store: the
+    /// `Synchronization.Mutex`-protected `ExceptionState` resolved through
+    /// `Dependency.Scope`. Outside an explicitly-established test scope this
+    /// resolves to a single process-global instance — the flags are **not**
+    /// thread-local; raising a flag on one thread or task is immediately
+    /// visible to every other thread and task that reads it. Inside an
+    /// explicit test scope (`Dependency.Scope` with `isTestContext == true`),
+    /// each scope gets its own isolated instance; that scope is inherited by
+    /// structured child `Task {}`s but is **not** inherited by a manually
+    /// spawned `Thread`/`pthread_create`.
+    ///
+    /// The optional C shim (`CIEEE754_SHIM`) additionally exposes genuinely
+    /// per-OS-thread exception flags (`ieee754_raise_exception` /
+    /// `ieee754_test_exception` / `ieee754_clear_exception`, backed by
+    /// `pthread_getspecific`) and hardware FPU flags
+    /// (`ieee754_test_fpu_exceptions`, backed by `<fenv.h>`). Neither is read
+    /// nor written by `raise`/`test`/`clear` above — they are separate,
+    /// opt-in stores for callers who specifically need OS-thread-local or
+    /// hardware-FPU semantics. Because they are keyed to the OS thread and
+    /// not the Swift task, they are unsound to rely on across a suspension
+    /// point: a `Task` may resume on a different OS thread after `await`,
+    /// silently reading a different thread's flags.
     ///
     /// ## See Also
     ///
@@ -163,7 +184,7 @@ extension IEEE_754.Exceptions.Flag: CustomStringConvertible {
     }
 }
 
-// MARK: - Thread-Local Exception State
+// MARK: - Exception State Store
 
 extension IEEE_754.Exceptions {
     /// Exception state container
@@ -282,22 +303,11 @@ extension IEEE_754.Exceptions {
     /// IEEE_754.Exceptions.raise(.invalid)
     /// ```
     ///
-    /// Note: This operation is thread-safe.
+    /// Note: This operation is thread-safe. It operates on exactly one store
+    /// (see "Store Model" on `IEEE_754.Exceptions`); it does not touch the
+    /// separate, opt-in C-shim thread-local or hardware FPU flags.
     public static func raise(_ flag: Flag) {
         state.set(flag)
-
-        #if CIEEE754_SHIM
-            // Also raise in C thread-local storage for consistency
-            let cFlag: IEEE754ExceptionFlag
-            switch flag {
-            case .invalid: cFlag = IEEE754_EXCEPTION_INVALID
-            case .divisionByZero: cFlag = IEEE754_EXCEPTION_DIVBYZERO
-            case .overflow: cFlag = IEEE754_EXCEPTION_OVERFLOW
-            case .underflow: cFlag = IEEE754_EXCEPTION_UNDERFLOW
-            case .inexact: cFlag = IEEE754_EXCEPTION_INEXACT
-            }
-            ieee754_raise_exception(cFlag)
-        #endif
     }
 
     /// Test if an exception flag is raised
@@ -314,20 +324,7 @@ extension IEEE_754.Exceptions {
     /// }
     /// ```
     public static func test(_ flag: Flag) -> Bool {
-        #if CIEEE754_SHIM
-            // Check C thread-local storage (preferred if available)
-            let cFlag: IEEE754ExceptionFlag
-            switch flag {
-            case .invalid: cFlag = IEEE754_EXCEPTION_INVALID
-            case .divisionByZero: cFlag = IEEE754_EXCEPTION_DIVBYZERO
-            case .overflow: cFlag = IEEE754_EXCEPTION_OVERFLOW
-            case .underflow: cFlag = IEEE754_EXCEPTION_UNDERFLOW
-            case .inexact: cFlag = IEEE754_EXCEPTION_INEXACT
-            }
-            return ieee754_test_exception(cFlag) != 0 || state.get(flag)
-        #else
-            return state.get(flag)
-        #endif
+        state.get(flag)
     }
 
     /// Clear an exception flag
@@ -342,19 +339,6 @@ extension IEEE_754.Exceptions {
     /// ```
     public static func clear(_ flag: Flag) {
         state.clear(flag)
-
-        #if CIEEE754_SHIM
-            // Also clear in C thread-local storage
-            let cFlag: IEEE754ExceptionFlag
-            switch flag {
-            case .invalid: cFlag = IEEE754_EXCEPTION_INVALID
-            case .divisionByZero: cFlag = IEEE754_EXCEPTION_DIVBYZERO
-            case .overflow: cFlag = IEEE754_EXCEPTION_OVERFLOW
-            case .underflow: cFlag = IEEE754_EXCEPTION_UNDERFLOW
-            case .inexact: cFlag = IEEE754_EXCEPTION_INEXACT
-            }
-            ieee754_clear_exception(cFlag)
-        #endif
     }
 
     /// Clear all exception flags
@@ -367,11 +351,6 @@ extension IEEE_754.Exceptions {
     /// ```
     public static func clear() {
         state.clearAll()
-
-        #if CIEEE754_SHIM
-            // Also clear C thread-local storage
-            ieee754_clear_all_exceptions()
-        #endif
     }
 
 }

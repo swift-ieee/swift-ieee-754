@@ -306,5 +306,87 @@ extension IEEE_754.Exceptions.Test {
             IEEE_754.Exceptions.clear()
             #expect(!IEEE_754.Exceptions.test(.invalid))
         }
+
+        @Test func `Raised Flag Is Visible Across Sibling Tasks Without An Explicit Scope`() async {
+            IEEE_754.Exceptions.clear()
+
+            await withTaskGroup(of: Void.self) { group in
+                group.addTask {
+                    IEEE_754.Exceptions.raise(.divisionByZero)
+                }
+            }
+
+            // Outside an explicit test scope, `state` resolves to the single
+            // process-global instance for every thread and task alike — a
+            // flag raised inside a sibling child task must be visible here.
+            #expect(IEEE_754.Exceptions.test(.divisionByZero))
+
+            IEEE_754.Exceptions.clear()
+        }
     }
 }
+
+// MARK: - Single-Store Discipline Tests (F-004)
+//
+// `raise`/`test`/`clear` must operate on exactly one store — the Swift
+// Mutex-protected `ExceptionState` — and must not read from or write to the
+// separate, opt-in C-shim thread-local store (`ieee754_raise_exception` /
+// `ieee754_test_exception` / `ieee754_clear_exception`). Before the fix,
+// `raise`/`test`/`clear` silently mirrored into that C thread-local store
+// too, so a flag set through one path leaked into (or was masked by) the
+// other. These tests fail against the pre-fix source and pass post-fix.
+
+#if CIEEE754_SHIM
+    import CIEEE754
+
+    extension IEEE_754.Exceptions.Test {
+        @Suite("IEEE_754.Exceptions - Single Store Discipline", .serialized)
+        struct SingleStoreDiscipline {
+            @Test func `Raise Does Not Leak Into C Shim Thread Local Store`() {
+                ieee754_clear_all_exceptions()
+                IEEE_754.Exceptions.clear()
+
+                IEEE_754.Exceptions.raise(.overflow)
+
+                #expect(IEEE_754.Exceptions.test(.overflow))
+                #expect(
+                    ieee754_test_exception(IEEE754_EXCEPTION_OVERFLOW) == 0,
+                    "raise(_:) must write exactly one store; the C-shim thread-local store must stay untouched."
+                )
+
+                ieee754_clear_all_exceptions()
+            }
+
+            @Test func `C Shim Thread Local Raise Is Not Visible Through Swift Test`() {
+                ieee754_clear_all_exceptions()
+                IEEE_754.Exceptions.clear()
+
+                ieee754_raise_exception(IEEE754_EXCEPTION_INVALID)
+
+                #expect(
+                    !IEEE_754.Exceptions.test(.invalid),
+                    "test(_:) must read exactly one store; it must not observe the separate C-shim thread-local store."
+                )
+
+                ieee754_clear_all_exceptions()
+            }
+
+            @Test func `Clear Does Not Touch C Shim Thread Local Store`() {
+                ieee754_clear_all_exceptions()
+                IEEE_754.Exceptions.clear()
+
+                ieee754_raise_exception(IEEE754_EXCEPTION_UNDERFLOW)
+                IEEE_754.Exceptions.raise(.underflow)
+                IEEE_754.Exceptions.clear(.underflow)
+
+                #expect(!IEEE_754.Exceptions.test(.underflow))
+                #expect(
+                    ieee754_test_exception(IEEE754_EXCEPTION_UNDERFLOW) == 1,
+                    "clear(_:) must clear exactly the Swift-side store; the C-shim thread-local store is separate and opt-in."
+                )
+
+                ieee754_clear_all_exceptions()
+            }
+        }
+    }
+#endif
