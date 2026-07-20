@@ -199,13 +199,12 @@ extension IEEE_754.Conversions {
             return nil
         }
 
-        let minInt = Double(Int.min)
-        let maxInt = Double(Int.max)
-        if value < minInt || value > maxInt {
-            return nil
-        }
-
-        return Int(value)  // Swift's Int() truncates
+        // See `doubleToInt` for why an exclusive `Double` bounds comparison
+        // against `Double(Int.min)`/`Double(Int.max)` is unsound at the
+        // boundary; `Int(exactly:)` performs the range check against the
+        // true `Int` bounds and returns nil on failure instead of trapping.
+        let truncated = value.rounded(.towardZero)
+        return Int(exactly: truncated)
     }
 
     /// Convert integer to floating-point - IEEE 754 `convertFromInt`
@@ -239,14 +238,12 @@ extension IEEE_754.Conversions {
             return nil
         }
 
-        let minInt = Float(Int.min)
-        let maxInt = Float(Int.max)
-        if value < minInt || value > maxInt {
-            return nil
-        }
-
+        // See `doubleToInt` for why an exclusive `Float` bounds comparison
+        // against `Float(Int.min)`/`Float(Int.max)` is unsound at the
+        // boundary; `Int(exactly:)` performs the range check against the
+        // true `Int` bounds and returns nil on failure instead of trapping.
         let rounded = value.rounded(.toNearestOrEven)
-        return Int(rounded)
+        return Int(exactly: rounded)
     }
 
     /// Convert floating-point to integer with truncation - Float version
@@ -261,13 +258,12 @@ extension IEEE_754.Conversions {
             return nil
         }
 
-        let minInt = Float(Int.min)
-        let maxInt = Float(Int.max)
-        if value < minInt || value > maxInt {
-            return nil
-        }
-
-        return Int(value)
+        // See `doubleToInt` for why an exclusive `Float` bounds comparison
+        // against `Float(Int.min)`/`Float(Int.max)` is unsound at the
+        // boundary; `Int(exactly:)` performs the range check against the
+        // true `Int` bounds and returns nil on failure instead of trapping.
+        let truncated = value.rounded(.towardZero)
+        return Int(exactly: truncated)
     }
 
     /// Convert integer to floating-point - Float version
@@ -331,13 +327,12 @@ extension IEEE_754.Conversions {
             return nil
         }
 
-        let maxUInt = Float(UInt.max)
-        if value > maxUInt {
-            return nil
-        }
-
+        // See `doubleToUInt` for why an exclusive `Float` upper-bound
+        // comparison against `Float(UInt.max)` is unsound at the boundary;
+        // `UInt(exactly:)` performs the range check exactly and returns nil
+        // instead of trapping.
         let rounded = value.rounded(.toNearestOrEven)
-        return UInt(rounded)
+        return UInt(exactly: rounded)
     }
 
     /// Convert unsigned integer to floating-point - Float version
