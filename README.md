@@ -1,7 +1,7 @@
 # IEEE 754
 
-[![CI](https://github.com/swift-ieee/swift-ieee-754/workflows/CI/badge.svg)](https://github.com/swift-ieee/swift-ieee-754/actions/workflows/ci.yml)
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
+[![CI](https://github.com/swift-ieee/swift-ieee-754/workflows/CI/badge.svg)](https://github.com/swift-ieee/swift-ieee-754/actions/workflows/ci.yml)
 
 Swift implementation of IEEE 754-2019 binary floating-point standard for canonical serialization of Float and Double types.
 
