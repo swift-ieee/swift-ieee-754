@@ -19,7 +19,7 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-molecules/swift-binary.git",
+            url: "https://github.com/swift-atoms/swift-binary.git",
             branch: "main"
         ),
         .package(
@@ -27,11 +27,11 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-decimal.git",
+            url: "https://github.com/swift-atoms/swift-decimal.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-dependency.git",
+            url: "https://github.com/swift-atoms/swift-dependency.git",
             branch: "main"
         ),
     ],
