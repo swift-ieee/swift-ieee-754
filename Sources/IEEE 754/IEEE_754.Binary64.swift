@@ -64,7 +64,7 @@ extension IEEE_754.Binary64 {
         endianness: Binary.Endianness = .little
     ) -> [UInt8] {
         let bitPattern = value.bitPattern
-        return [UInt8](bitPattern, endianness: endianness)
+        return [Byte](bitPattern, endianness: endianness).map(\.bitPattern)
     }
 
     @inlinable

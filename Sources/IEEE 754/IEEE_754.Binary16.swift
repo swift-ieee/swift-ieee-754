@@ -77,7 +77,7 @@ extension IEEE_754.Binary16 {
             endianness: Binary.Endianness = .little
         ) -> [UInt8] {
             let bitPattern = value.bitPattern
-            return [UInt8](bitPattern, endianness: endianness)
+            return [Byte](bitPattern, endianness: endianness).map(\.bitPattern)
         }
 
         @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)

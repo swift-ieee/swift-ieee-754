@@ -2,7 +2,7 @@ public import Binary
 
 extension [Float] {
 
-    public init?<C: Collection>(bytes: C, endianness: Binary.Endianness = .little)
+    public init?<C: Swift.Collection>(bytes: C, endianness: Binary.Endianness = .little)
     where C.Element == UInt8 {
         let elementSize = MemoryLayout<Element>.size
         guard bytes.count % elementSize == 0 else { return nil }
