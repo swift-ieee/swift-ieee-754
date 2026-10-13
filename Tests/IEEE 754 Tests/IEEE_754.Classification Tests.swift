@@ -2,8 +2,6 @@ import Testing
 
 @testable import IEEE_754
 
-extension IEEE_754.Classification.NumberClass: @unchecked Sendable {}
-
 extension IEEE_754.Classification {
     @Suite("IEEE_754.Classification - Double isSignMinus")
     struct Test {

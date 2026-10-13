@@ -160,8 +160,8 @@ extension IEEE_754.MinMax {
             return .nan
         }
 
-        let xMag = Swift.abs(x)
-        let yMag = Swift.abs(y)
+        let xMag = Swift::abs(x)
+        let yMag = Swift::abs(y)
 
         if xMag < yMag {
             return x
@@ -180,8 +180,8 @@ extension IEEE_754.MinMax {
             return .nan
         }
 
-        let xMag = Swift.abs(x)
-        let yMag = Swift.abs(y)
+        let xMag = Swift::abs(x)
+        let yMag = Swift::abs(y)
 
         if xMag > yMag {
             return x
@@ -289,8 +289,8 @@ extension IEEE_754.MinMax {
         if x.isNaN || y.isNaN {
             return .nan
         }
-        let xMag = Swift.abs(x)
-        let yMag = Swift.abs(y)
+        let xMag = Swift::abs(x)
+        let yMag = Swift::abs(y)
         if xMag < yMag {
             return x
         } else if yMag < xMag {
@@ -305,8 +305,8 @@ extension IEEE_754.MinMax {
         if x.isNaN || y.isNaN {
             return .nan
         }
-        let xMag = Swift.abs(x)
-        let yMag = Swift.abs(y)
+        let xMag = Swift::abs(x)
+        let yMag = Swift::abs(y)
         if xMag > yMag {
             return x
         } else if yMag > xMag {

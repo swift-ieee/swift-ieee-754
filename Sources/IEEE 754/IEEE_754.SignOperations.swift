@@ -12,7 +12,7 @@ extension IEEE_754.SignOperations {
 
     @inlinable
     public static func abs(_ value: Double) -> Double {
-        Swift.abs(value)
+        Swift::abs(value)
     }
 
     @inlinable
@@ -30,7 +30,7 @@ extension IEEE_754.SignOperations {
 
     @inlinable
     public static func abs(_ value: Float) -> Float {
-        Swift.abs(value)
+        Swift::abs(value)
     }
 
     @inlinable

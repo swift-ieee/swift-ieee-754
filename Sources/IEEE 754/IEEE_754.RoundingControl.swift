@@ -30,7 +30,7 @@
             }
         }
 
-        public enum Error: Swift.Error {
+        public enum Error: Swift::Error {
 
             case setFailed
         }
@@ -47,7 +47,7 @@
             }
         }
 
-        public static func withMode<T, E: Swift.Error>(
+        public static func withMode<T, E: Swift::Error>(
             _ mode: Mode,
             _ body: () throws(E) -> T
         ) throws(E) -> T {

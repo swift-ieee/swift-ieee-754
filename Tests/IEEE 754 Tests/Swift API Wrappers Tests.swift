@@ -38,7 +38,7 @@ import Testing
 
                 try IEEE_754.RoundingControl.set(.toNearest)
 
-                let result = try IEEE_754.RoundingControl.withMode(.towardZero) {
+                let result = IEEE_754.RoundingControl.withMode(.towardZero) {
                     let mode = IEEE_754.RoundingControl.get()
                     #expect(mode == .towardZero)
                     return 10.0 / 3.0
@@ -154,7 +154,7 @@ extension IEEE_754.Exceptions.Test {
             @Test func `rounding And Exceptions`() throws {
                 IEEE_754.Exceptions.clear()
 
-                try IEEE_754.RoundingControl.withMode(.upward) {
+                IEEE_754.RoundingControl.withMode(.upward) {
                     let result = 1.0 / 3.0
                     #expect(result > 0)
 

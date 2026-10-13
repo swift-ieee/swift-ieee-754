@@ -1,7 +1,7 @@
 #if IEEE_754_SHIMS
     import IEEE_754_Shims
 
-    func withRoundingMode<T, E: Swift.Error>(
+    func withRoundingMode<T, E: Swift::Error>(
         _ mode: IEEE754RoundingMode,
         _ body: () throws(E) -> T
     ) throws(E) -> T {
@@ -12,7 +12,7 @@
         return try body()
     }
 
-    func withClearedExceptions<T, E: Swift.Error>(_ body: () throws(E) -> T) throws(E) -> T {
+    func withClearedExceptions<T, E: Swift::Error>(_ body: () throws(E) -> T) throws(E) -> T {
         let originalExceptions = ieee754_get_exceptions()
         defer {
 
@@ -38,7 +38,7 @@
         return try body()
     }
 
-    func withRoundingModeAndClearedExceptions<T, E: Swift.Error>(
+    func withRoundingModeAndClearedExceptions<T, E: Swift::Error>(
         _ mode: IEEE754RoundingMode,
         _ body: () throws(E) -> T
     ) throws(E) -> T {

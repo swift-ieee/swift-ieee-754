@@ -202,7 +202,7 @@ extension Double.Test {
 
         @Test func `signaling NaN becomes quiet NaN`() {
 
-            var bytes: [UInt8] = [0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x7F]
+            let bytes: [UInt8] = [0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x7F]
             let value = Double(bytes: bytes)
 
             #expect(value?.isNaN == true, "Signaling NaN should be recognized as NaN")
