@@ -43,7 +43,7 @@ extension Double.Test {
                 (-100, 7.888609052210118e-31),
                 (-500, 3.054936363499605e-151),
                 (-1022, 2.2250738585072014e-308),
-                (-1074, 4.9406564584124654e-324),
+                (-1074, Double.leastNonzeroMagnitude),
             ]
 
             for (exponent, value) in powers {
@@ -104,7 +104,7 @@ extension Float.Test {
                 (-10, 0.0009765625),
                 (-23, 1.1920929e-7),
                 (-126, 1.1754944e-38),
-                (-149, 1.4012985e-45),
+                (-149, Float.leastNonzeroMagnitude),
             ]
 
             for (exponent, value) in powers {
