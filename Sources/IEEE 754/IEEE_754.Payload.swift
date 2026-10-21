@@ -38,28 +38,22 @@ extension IEEE_754.Payload {
     public static func decode(_ value: Double) -> NaNType? {
         guard value.isNaN else { return nil }
 
-        if let payload = extract(from: value) {
-            if value.isSignalingNaN {
-                return .signaling(payload: payload)
-            } else {
-                return .quiet(payload: payload)
-            }
+        guard let payload = extract(from: value) else { return nil }
+        guard !value.isSignalingNaN else {
+            return .signaling(payload: payload)
         }
-        return nil
+        return .quiet(payload: payload)
     }
 
     @inlinable
     public static func decode(_ value: Float) -> NaNType? {
         guard value.isNaN else { return nil }
 
-        if let payload = extract(from: value) {
-            if value.isSignalingNaN {
-                return .signaling(payload: UInt64(payload))
-            } else {
-                return .quiet(payload: UInt64(payload))
-            }
+        guard let payload = extract(from: value) else { return nil }
+        guard !value.isSignalingNaN else {
+            return .signaling(payload: UInt64(payload))
         }
-        return nil
+        return .quiet(payload: UInt64(payload))
     }
 }
 
