@@ -2,7 +2,9 @@ import Testing
 
 @testable import IEEE_754
 
-extension IEEE_754.Comparison {
+enum `IEEE_754.Comparison Tests` {}
+
+extension `IEEE_754.Comparison Tests` {
     @Suite("IEEE_754.Comparison - Double isEqual")
     struct Test {
         @Test(arguments: [(3.14, 3.14, true), (3.14, 2.71, false), (0.0, -0.0, true)])
@@ -47,7 +49,7 @@ extension IEEE_754.Comparison {
     }
 }
 
-extension IEEE_754.Comparison.Test {
+extension `IEEE_754.Comparison Tests`.Test {
     @Suite("IEEE_754.Comparison - Double isNotEqual")
     struct DoubleIsNotEqual {
         @Test(arguments: [(3.14, 2.71, true), (3.14, 3.14, false)])
@@ -65,7 +67,7 @@ extension IEEE_754.Comparison.Test {
     }
 }
 
-extension IEEE_754.Comparison.Test {
+extension `IEEE_754.Comparison Tests`.Test {
     @Suite("IEEE_754.Comparison - Double isLess")
     struct DoubleIsLess {
         @Test(arguments: [
@@ -103,7 +105,7 @@ extension IEEE_754.Comparison.Test {
     }
 }
 
-extension IEEE_754.Comparison.Test {
+extension `IEEE_754.Comparison Tests`.Test {
     @Suite("IEEE_754.Comparison - Double isLessEqual")
     struct DoubleIsLessEqual {
         @Test(arguments: [
@@ -122,7 +124,7 @@ extension IEEE_754.Comparison.Test {
     }
 }
 
-extension IEEE_754.Comparison.Test {
+extension `IEEE_754.Comparison Tests`.Test {
     @Suite("IEEE_754.Comparison - Double isGreater")
     struct DoubleIsGreater {
         @Test(arguments: [
@@ -147,7 +149,7 @@ extension IEEE_754.Comparison.Test {
     }
 }
 
-extension IEEE_754.Comparison.Test {
+extension `IEEE_754.Comparison Tests`.Test {
     @Suite("IEEE_754.Comparison - Double isGreaterEqual")
     struct DoubleIsGreaterEqual {
         @Test(arguments: [
@@ -161,7 +163,7 @@ extension IEEE_754.Comparison.Test {
     }
 }
 
-extension IEEE_754.Comparison.Test {
+extension `IEEE_754.Comparison Tests`.Test {
     @Suite("IEEE_754.Comparison - Double totalOrder")
     struct DoubleTotalOrder {
         @Test func `Signed Zero Ordering`() {
@@ -220,7 +222,7 @@ extension IEEE_754.Comparison.Test {
     }
 }
 
-extension IEEE_754.Comparison.Test {
+extension `IEEE_754.Comparison Tests`.Test {
     @Suite("IEEE_754.Comparison - Double totalOrderMag")
     struct DoubleTotalOrderMag {
         @Test func `Magnitude Ordering`() {
@@ -241,7 +243,7 @@ extension IEEE_754.Comparison.Test {
     }
 }
 
-extension IEEE_754.Comparison.Test {
+extension `IEEE_754.Comparison Tests`.Test {
     @Suite("IEEE_754.Comparison - Float isEqual")
     struct FloatIsEqual {
         @Test(arguments: [
@@ -263,7 +265,7 @@ extension IEEE_754.Comparison.Test {
     }
 }
 
-extension IEEE_754.Comparison.Test {
+extension `IEEE_754.Comparison Tests`.Test {
     @Suite("IEEE_754.Comparison - Float isNotEqual")
     struct FloatIsNotEqual {
         @Test(arguments: [
@@ -276,7 +278,7 @@ extension IEEE_754.Comparison.Test {
     }
 }
 
-extension IEEE_754.Comparison.Test {
+extension `IEEE_754.Comparison Tests`.Test {
     @Suite("IEEE_754.Comparison - Float isLess")
     struct FloatIsLess {
         @Test(arguments: [
@@ -301,7 +303,7 @@ extension IEEE_754.Comparison.Test {
     }
 }
 
-extension IEEE_754.Comparison.Test {
+extension `IEEE_754.Comparison Tests`.Test {
     @Suite("IEEE_754.Comparison - Float isLessEqual")
     struct FloatIsLessEqual {
         @Test(arguments: [
@@ -315,7 +317,7 @@ extension IEEE_754.Comparison.Test {
     }
 }
 
-extension IEEE_754.Comparison.Test {
+extension `IEEE_754.Comparison Tests`.Test {
     @Suite("IEEE_754.Comparison - Float isGreater")
     struct FloatIsGreater {
         @Test(arguments: [
@@ -329,7 +331,7 @@ extension IEEE_754.Comparison.Test {
     }
 }
 
-extension IEEE_754.Comparison.Test {
+extension `IEEE_754.Comparison Tests`.Test {
     @Suite("IEEE_754.Comparison - Float isGreaterEqual")
     struct FloatIsGreaterEqual {
         @Test(arguments: [
@@ -343,7 +345,7 @@ extension IEEE_754.Comparison.Test {
     }
 }
 
-extension IEEE_754.Comparison.Test {
+extension `IEEE_754.Comparison Tests`.Test {
     @Suite("IEEE_754.Comparison - Float totalOrder")
     struct FloatTotalOrder {
         @Test func `Signed Zero Ordering`() {
@@ -384,7 +386,7 @@ extension IEEE_754.Comparison.Test {
     }
 }
 
-extension IEEE_754.Comparison.Test {
+extension `IEEE_754.Comparison Tests`.Test {
     @Suite("IEEE_754.Comparison - Float totalOrderMag")
     struct FloatTotalOrderMag {
         @Test func `Magnitude Ordering`() {
@@ -401,7 +403,7 @@ extension IEEE_754.Comparison.Test {
     }
 }
 
-extension IEEE_754.Comparison.Test {
+extension `IEEE_754.Comparison Tests`.Test {
     @Suite("IEEE_754.Comparison - Hierarchical Predicate API")
     struct ComparisonPredicate {
         @Test

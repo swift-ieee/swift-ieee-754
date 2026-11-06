@@ -2,7 +2,9 @@ import Testing
 
 @testable import IEEE_754
 
-extension IEEE_754.Binary16 {
+enum `IEEE_754.Binary16 Tests` {}
+
+extension `IEEE_754.Binary16 Tests` {
     @Suite("IEEE_754.Binary16 Constants - Format Parameters")
     struct Test {
         @Test func `Byte Size`() {
@@ -47,7 +49,7 @@ extension IEEE_754.Binary16 {
     }
 }
 
-extension IEEE_754.Binary16.Test {
+extension `IEEE_754.Binary16 Tests`.Test {
     @Suite("IEEE_754.Binary16 Constants - Consistency Tests")
     struct Consistency {
         @Test func `Format Size Consistency`() {
@@ -85,7 +87,7 @@ extension IEEE_754.Binary16.Test {
 }
 
 #if canImport(FloatingPointTypes) && compiler(>=5.9)
-    extension IEEE_754.Binary16.Test {
+    extension `IEEE_754.Binary16 Tests`.Test {
         @Suite(
             "IEEE_754.Binary16 Constants - Value Tests",
             .enabled(

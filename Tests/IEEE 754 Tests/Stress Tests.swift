@@ -317,7 +317,7 @@ extension `Performance Tests` {
     }
 }
 
-extension Double.Test {
+extension `Double Tests`.Test {
     @Suite("IEEE 754 - Concurrent Access Consistency")
     struct ConcurrentAccess {
         @Test func `concurrent serialization of same value`() async {
@@ -366,7 +366,7 @@ extension Double.Test {
     }
 }
 
-extension Double.Test {
+extension `Double Tests`.Test {
     @Suite("IEEE 754 - Deterministic Behavior")
     struct Determinism {
         @Test func `repeated serialization produces identical results`() {

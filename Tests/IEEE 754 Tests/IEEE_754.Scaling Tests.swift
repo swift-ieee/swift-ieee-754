@@ -3,7 +3,9 @@ import Testing
 
 @testable import IEEE_754
 
-extension IEEE_754.Scaling {
+enum `IEEE_754.Scaling Tests` {}
+
+extension `IEEE_754.Scaling Tests` {
     @Suite("IEEE_754.Scaling - Double scaleB")
     struct Test {
         @Test(arguments: [
@@ -57,7 +59,7 @@ extension IEEE_754.Scaling {
     }
 }
 
-extension IEEE_754.Scaling.Test {
+extension `IEEE_754.Scaling Tests`.Test {
     @Suite("IEEE_754.Scaling - Double logB")
     struct DoubleLogB {
         @Test(arguments: [
@@ -109,7 +111,7 @@ extension IEEE_754.Scaling.Test {
     }
 }
 
-extension IEEE_754.Scaling.Test {
+extension `IEEE_754.Scaling Tests`.Test {
     @Suite("IEEE_754.Scaling - Double exponent")
     struct DoubleExponent {
         @Test(arguments: [
@@ -139,7 +141,7 @@ extension IEEE_754.Scaling.Test {
     }
 }
 
-extension IEEE_754.Scaling.Test {
+extension `IEEE_754.Scaling Tests`.Test {
     @Suite("IEEE_754.Scaling - Double significand")
     struct DoubleSignificand {
         @Test func `powers Of Two`() {
@@ -181,7 +183,7 @@ extension IEEE_754.Scaling.Test {
     }
 }
 
-extension IEEE_754.Scaling.Test {
+extension `IEEE_754.Scaling Tests`.Test {
     @Suite("IEEE_754.Scaling - Float scaleB")
     struct FloatScaleB {
         @Test(arguments: [
@@ -215,7 +217,7 @@ extension IEEE_754.Scaling.Test {
     }
 }
 
-extension IEEE_754.Scaling.Test {
+extension `IEEE_754.Scaling Tests`.Test {
     @Suite("IEEE_754.Scaling - Float logB")
     struct FloatLogB {
         @Test(arguments: [
@@ -239,7 +241,7 @@ extension IEEE_754.Scaling.Test {
     }
 }
 
-extension IEEE_754.Scaling.Test {
+extension `IEEE_754.Scaling Tests`.Test {
     @Suite("IEEE_754.Scaling - Float exponent")
     struct FloatExponent {
         @Test(arguments: [
@@ -268,7 +270,7 @@ extension IEEE_754.Scaling.Test {
     }
 }
 
-extension IEEE_754.Scaling.Test {
+extension `IEEE_754.Scaling Tests`.Test {
     @Suite("IEEE_754.Scaling - Float significand")
     struct FloatSignificand {
         @Test func `powers Of Two`() {
@@ -292,7 +294,7 @@ extension IEEE_754.Scaling.Test {
     }
 }
 
-extension IEEE_754.Scaling.Test {
+extension `IEEE_754.Scaling Tests`.Test {
     @Suite("IEEE_754.Scaling - Edge Cases")
     struct ScalingEdgeCases {
         @Test func `subnormal Scaling`() {

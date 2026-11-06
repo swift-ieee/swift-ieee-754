@@ -2,7 +2,9 @@ import Testing
 
 @testable import IEEE_754
 
-extension IEEE_754.Exceptions {
+enum `IEEE_754.Exceptions Tests` {}
+
+extension `IEEE_754.Exceptions Tests` {
     @Suite("IEEE_754.Exceptions - Flag Operations", .serialized)
     struct Test {
         @Test func `Raise And Test Invalid`() {
@@ -136,7 +138,7 @@ extension IEEE_754.Exceptions {
     }
 }
 
-extension IEEE_754.Exceptions.Test {
+extension `IEEE_754.Exceptions Tests`.Test {
     @Suite("IEEE_754.Exceptions - Compatibility Properties", .serialized)
     struct Compatibility {
         @Test func `Invalid Operation Property`() {
@@ -176,7 +178,7 @@ extension IEEE_754.Exceptions.Test {
     }
 }
 
-extension IEEE_754.Exceptions.Test {
+extension `IEEE_754.Exceptions Tests`.Test {
     @Suite("IEEE_754.Exceptions - Flag Enum")
     struct FlagEnum {
         @Test func `Flag Description`() {
@@ -207,7 +209,7 @@ extension IEEE_754.Exceptions.Test {
     }
 }
 
-extension IEEE_754.Exceptions.Test {
+extension `IEEE_754.Exceptions Tests`.Test {
     @Suite("IEEE_754.Exceptions - Idempotency", .serialized)
     struct Idempotency {
         @Test func `Raising Twice Has No Effect`() {
@@ -238,7 +240,7 @@ extension IEEE_754.Exceptions.Test {
     }
 }
 
-extension IEEE_754.Exceptions.Test {
+extension `IEEE_754.Exceptions Tests`.Test {
     @Suite("IEEE_754.Exceptions - Flag Independence", .serialized)
     struct Independence {
         @Test func `Flags Are Independent`() {
@@ -274,7 +276,7 @@ extension IEEE_754.Exceptions.Test {
     }
 }
 
-extension IEEE_754.Exceptions.Test {
+extension `IEEE_754.Exceptions Tests`.Test {
     @Suite("IEEE_754.Exceptions - Thread Independence", .serialized)
     struct Thread {
         @Test func `Initial State Is Clean`() {
@@ -309,7 +311,7 @@ extension IEEE_754.Exceptions.Test {
 #if IEEE_754_SHIMS
     import IEEE_754_Shims
 
-    extension IEEE_754.Exceptions.Test {
+    extension `IEEE_754.Exceptions Tests`.Test {
         @Suite("IEEE_754.Exceptions - Single Store Discipline", .serialized)
         struct SingleStoreDiscipline {
             @Test func `Raise Does Not Leak Into C Shim Thread Local Store`() {

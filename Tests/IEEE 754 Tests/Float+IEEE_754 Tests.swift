@@ -2,7 +2,9 @@ import Testing
 
 @testable import IEEE_754
 
-extension Float {
+enum `Float Tests` {}
+
+extension `Float Tests` {
     @Suite("Float+IEEE_754 - Direct bytes() method")
     struct Test {
         @Test(arguments: [
@@ -41,7 +43,7 @@ extension Float {
     }
 }
 
-extension Float.Test {
+extension `Float Tests`.Test {
     @Suite("Float+IEEE_754 - Namespace API")
     struct Namespace {
         @Test(arguments: [Float(3.14159), Float(2.71828), Float(1.41421)])
@@ -70,7 +72,7 @@ extension Float.Test {
     }
 }
 
-extension Float.Test {
+extension `Float Tests`.Test {
     @Suite("Float+IEEE_754 - Canonical init")
     struct CanonicalInit {
         @Test(arguments: [

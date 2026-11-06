@@ -2,7 +2,9 @@ import Testing
 
 @testable import IEEE_754
 
-extension IEEE_754.Arithmetic {
+enum `IEEE_754.Arithmetic Tests` {}
+
+extension `IEEE_754.Arithmetic Tests` {
     @Suite("IEEE_754.Arithmetic - Addition")
     struct Test {
         @Test func `Basic Addition`() {
@@ -41,7 +43,7 @@ extension IEEE_754.Arithmetic {
     }
 }
 
-extension IEEE_754.Arithmetic.Test {
+extension `IEEE_754.Arithmetic Tests`.Test {
     @Suite("IEEE_754.Arithmetic - Subtraction")
     struct Subtraction {
         @Test func `Basic Subtraction`() {
@@ -67,7 +69,7 @@ extension IEEE_754.Arithmetic.Test {
     }
 }
 
-extension IEEE_754.Arithmetic.Test {
+extension `IEEE_754.Arithmetic Tests`.Test {
     @Suite("IEEE_754.Arithmetic - Multiplication")
     struct Multiplication {
         @Test func `Basic Multiplication`() {
@@ -101,7 +103,7 @@ extension IEEE_754.Arithmetic.Test {
     }
 }
 
-extension IEEE_754.Arithmetic.Test {
+extension `IEEE_754.Arithmetic Tests`.Test {
     @Suite("IEEE_754.Arithmetic - Division")
     struct Division {
         @Test func `Basic Division`() {
@@ -137,7 +139,7 @@ extension IEEE_754.Arithmetic.Test {
     }
 }
 
-extension IEEE_754.Arithmetic.Test {
+extension `IEEE_754.Arithmetic Tests`.Test {
     @Suite("IEEE_754.Arithmetic - Remainder")
     struct Remainder {
         @Test func `Basic Remainder`() {
@@ -165,7 +167,7 @@ extension IEEE_754.Arithmetic.Test {
     }
 }
 
-extension IEEE_754.Arithmetic.Test {
+extension `IEEE_754.Arithmetic Tests`.Test {
     @Suite("IEEE_754.Arithmetic - Square Root")
     struct SquareRoot {
         @Test func `Perfect Squares`() {
@@ -203,7 +205,7 @@ extension IEEE_754.Arithmetic.Test {
     }
 }
 
-extension IEEE_754.Arithmetic.Test {
+extension `IEEE_754.Arithmetic Tests`.Test {
     @Suite("IEEE_754.Arithmetic - Fused Multiply-Add")
     struct FMA {
         @Test func `Basic FMA`() {
@@ -247,7 +249,7 @@ extension IEEE_754.Arithmetic.Test {
     }
 }
 
-extension IEEE_754.Arithmetic.Test {
+extension `IEEE_754.Arithmetic Tests`.Test {
     @Suite("IEEE_754.Arithmetic - Absolute Value")
     struct AbsoluteValue {
         @Test func `Positive Abs`() {
@@ -282,7 +284,7 @@ extension IEEE_754.Arithmetic.Test {
     }
 }
 
-extension IEEE_754.Arithmetic.Test {
+extension `IEEE_754.Arithmetic Tests`.Test {
     @Suite("IEEE_754.Arithmetic - Negate")
     struct Negate {
         @Test func `Positive Negate`() {
@@ -316,7 +318,7 @@ extension IEEE_754.Arithmetic.Test {
     }
 }
 
-extension IEEE_754.Arithmetic.Test {
+extension `IEEE_754.Arithmetic Tests`.Test {
     @Suite("IEEE_754.Arithmetic - Edge Cases")
     struct EdgeCases {
         @Test func `Max Finite Operations`() {
@@ -360,7 +362,7 @@ extension IEEE_754.Arithmetic.Test {
     }
 }
 
-extension IEEE_754.Arithmetic.Test {
+extension `IEEE_754.Arithmetic Tests`.Test {
     @Suite("IEEE_754.Arithmetic - Consistency with Operators")
     struct Consistency {
         @Test func `Addition Consistency`() {

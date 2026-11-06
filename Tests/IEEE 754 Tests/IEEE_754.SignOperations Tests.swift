@@ -2,7 +2,9 @@ import Testing
 
 @testable import IEEE_754
 
-extension IEEE_754.SignOperations {
+enum `IEEE_754.SignOperations Tests` {}
+
+extension `IEEE_754.SignOperations Tests` {
     @Suite("IEEE_754.SignOperations - Double negate")
     struct Test {
         @Test(arguments: [
@@ -51,7 +53,7 @@ extension IEEE_754.SignOperations {
     }
 }
 
-extension IEEE_754.SignOperations.Test {
+extension `IEEE_754.SignOperations Tests`.Test {
     @Suite("IEEE_754.SignOperations - Double abs")
     struct DoubleAbs {
         @Test(arguments: [
@@ -88,7 +90,7 @@ extension IEEE_754.SignOperations.Test {
     }
 }
 
-extension IEEE_754.SignOperations.Test {
+extension `IEEE_754.SignOperations Tests`.Test {
     @Suite("IEEE_754.SignOperations - Double copySign")
     struct DoubleCopySign {
         @Test(arguments: [
@@ -151,7 +153,7 @@ extension IEEE_754.SignOperations.Test {
     }
 }
 
-extension IEEE_754.SignOperations.Test {
+extension `IEEE_754.SignOperations Tests`.Test {
     @Suite("IEEE_754.SignOperations - Float negate")
     struct FloatNegate {
         @Test(arguments: [
@@ -183,7 +185,7 @@ extension IEEE_754.SignOperations.Test {
     }
 }
 
-extension IEEE_754.SignOperations.Test {
+extension `IEEE_754.SignOperations Tests`.Test {
     @Suite("IEEE_754.SignOperations - Float abs")
     struct FloatAbs {
         @Test(arguments: [
@@ -211,7 +213,7 @@ extension IEEE_754.SignOperations.Test {
     }
 }
 
-extension IEEE_754.SignOperations.Test {
+extension `IEEE_754.SignOperations Tests`.Test {
     @Suite("IEEE_754.SignOperations - Float copySign")
     struct FloatCopySign {
         @Test(arguments: [
@@ -260,7 +262,7 @@ extension IEEE_754.SignOperations.Test {
     }
 }
 
-extension IEEE_754.SignOperations.Test {
+extension `IEEE_754.SignOperations Tests`.Test {
     @Suite("IEEE_754.SignOperations - Subnormal Values")
     struct SubnormalSignOperations {
         @Test func `negate Subnormals`() {

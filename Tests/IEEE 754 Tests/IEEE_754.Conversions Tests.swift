@@ -2,7 +2,9 @@ import Testing
 
 @testable import IEEE_754
 
-extension IEEE_754.Conversions {
+enum `IEEE_754.Conversions Tests` {}
+
+extension `IEEE_754.Conversions Tests` {
     @Suite("IEEE_754.Conversions - Float to Double")
     struct Test {
         @Test(arguments: [
@@ -35,7 +37,7 @@ extension IEEE_754.Conversions {
     }
 }
 
-extension IEEE_754.Conversions.Test {
+extension `IEEE_754.Conversions Tests`.Test {
     @Suite("IEEE_754.Conversions - Double to Float")
     struct DoubleToFloat {
         @Test(arguments: [1.0, -1.0, 3.14, -2.71, 0.0, -0.0])
@@ -80,7 +82,7 @@ extension IEEE_754.Conversions.Test {
     }
 }
 
-extension IEEE_754.Conversions.Test {
+extension `IEEE_754.Conversions Tests`.Test {
     @Suite("IEEE_754.Conversions - Double to Int")
     struct DoubleToInt {
         @Test(arguments: [(3.14, 3), (3.5, 4), (4.5, 4), (-3.5, -4)])
@@ -123,7 +125,7 @@ extension IEEE_754.Conversions.Test {
     }
 }
 
-extension IEEE_754.Conversions.Test.DoubleToInt {
+extension `IEEE_754.Conversions Tests`.Test.DoubleToInt {
     @Suite
     struct `Edge Case` {
         @Test func `Value Exactly Two To The Sixty Three Returns Nil Not Trap`() {
@@ -149,7 +151,7 @@ extension IEEE_754.Conversions.Test.DoubleToInt {
     }
 }
 
-extension IEEE_754.Conversions.Test {
+extension `IEEE_754.Conversions Tests`.Test {
     @Suite("IEEE_754.Conversions - Double to Int Truncating")
     struct DoubleToIntTruncating {
         @Test(arguments: [(3.9, 3), (-3.9, -3), (3.1, 3), (-3.1, -3)])
@@ -171,7 +173,7 @@ extension IEEE_754.Conversions.Test {
     }
 }
 
-extension IEEE_754.Conversions.Test.DoubleToIntTruncating {
+extension `IEEE_754.Conversions Tests`.Test.DoubleToIntTruncating {
     @Suite
     struct `Edge Case` {
         @Test func `Value Exactly Two To The Sixty Three Returns Nil Not Trap`() {
@@ -195,7 +197,7 @@ extension IEEE_754.Conversions.Test.DoubleToIntTruncating {
     }
 }
 
-extension IEEE_754.Conversions.Test {
+extension `IEEE_754.Conversions Tests`.Test {
     @Suite("IEEE_754.Conversions - Int to Double")
     struct IntToDouble {
         @Test(arguments: [0, 1, -1, 42, -42, 1000, -1000])
@@ -218,7 +220,7 @@ extension IEEE_754.Conversions.Test {
     }
 }
 
-extension IEEE_754.Conversions.Test {
+extension `IEEE_754.Conversions Tests`.Test {
     @Suite("IEEE_754.Conversions - Float to Int")
     struct FloatToInt {
         @Test(arguments: [(Float(3.14), 3), (Float(3.5), 4), (Float(4.5), 4)])
@@ -234,7 +236,7 @@ extension IEEE_754.Conversions.Test {
     }
 }
 
-extension IEEE_754.Conversions.Test.FloatToInt {
+extension `IEEE_754.Conversions Tests`.Test.FloatToInt {
     @Suite
     struct `Edge Case` {
         @Test func `Value Exactly Two To The Sixty Three Returns Nil Not Trap`() {
@@ -258,7 +260,7 @@ extension IEEE_754.Conversions.Test.FloatToInt {
     }
 }
 
-extension IEEE_754.Conversions.Test {
+extension `IEEE_754.Conversions Tests`.Test {
     @Suite("IEEE_754.Conversions - Float to Int Truncating")
     struct FloatToIntTruncating {
         @Test(arguments: [(Float(3.9), 3), (Float(-3.9), -3)])
@@ -269,7 +271,7 @@ extension IEEE_754.Conversions.Test {
     }
 }
 
-extension IEEE_754.Conversions.Test.FloatToIntTruncating {
+extension `IEEE_754.Conversions Tests`.Test.FloatToIntTruncating {
     @Suite
     struct `Edge Case` {
         @Test func `Value Exactly Two To The Sixty Three Returns Nil Not Trap`() {
@@ -293,7 +295,7 @@ extension IEEE_754.Conversions.Test.FloatToIntTruncating {
     }
 }
 
-extension IEEE_754.Conversions.Test {
+extension `IEEE_754.Conversions Tests`.Test {
     @Suite("IEEE_754.Conversions - Int to Float")
     struct IntToFloat {
         @Test(arguments: [0, 1, -1, 42, -42])
@@ -310,7 +312,7 @@ extension IEEE_754.Conversions.Test {
     }
 }
 
-extension IEEE_754.Conversions.Test {
+extension `IEEE_754.Conversions Tests`.Test {
     @Suite("IEEE_754.Conversions - Double to UInt")
     struct DoubleToUInt {
         @Test(arguments: [(3.14, UInt(3)), (3.5, UInt(4)), (0.0, UInt(0))])
@@ -331,7 +333,7 @@ extension IEEE_754.Conversions.Test {
     }
 }
 
-extension IEEE_754.Conversions.Test.DoubleToUInt {
+extension `IEEE_754.Conversions Tests`.Test.DoubleToUInt {
     @Suite
     struct `Edge Case` {
         @Test func `Value Exactly Two To The Sixty Four Returns Nil Not Trap`() {
@@ -346,7 +348,7 @@ extension IEEE_754.Conversions.Test.DoubleToUInt {
     }
 }
 
-extension IEEE_754.Conversions.Test {
+extension `IEEE_754.Conversions Tests`.Test {
     @Suite("IEEE_754.Conversions - UInt to Double")
     struct UIntToDouble {
         @Test(arguments: [UInt(0), UInt(1), UInt(42), UInt(1000)])
@@ -363,7 +365,7 @@ extension IEEE_754.Conversions.Test {
     }
 }
 
-extension IEEE_754.Conversions.Test {
+extension `IEEE_754.Conversions Tests`.Test {
     @Suite("IEEE_754.Conversions - Float to UInt")
     struct FloatToUInt {
         @Test(arguments: [(Float(3.14), UInt(3)), (Float(0.0), UInt(0))])
@@ -378,7 +380,7 @@ extension IEEE_754.Conversions.Test {
     }
 }
 
-extension IEEE_754.Conversions.Test.FloatToUInt {
+extension `IEEE_754.Conversions Tests`.Test.FloatToUInt {
     @Suite
     struct `Edge Case` {
         @Test func `Value Exactly Two To The Sixty Four Returns Nil Not Trap`() {
@@ -393,7 +395,7 @@ extension IEEE_754.Conversions.Test.FloatToUInt {
     }
 }
 
-extension IEEE_754.Conversions.Test {
+extension `IEEE_754.Conversions Tests`.Test {
     @Suite("IEEE_754.Conversions - UInt to Float")
     struct UIntToFloat {
         @Test(arguments: [UInt(0), UInt(1), UInt(42)])
@@ -404,7 +406,7 @@ extension IEEE_754.Conversions.Test {
     }
 }
 
-extension IEEE_754.Conversions.Test {
+extension `IEEE_754.Conversions Tests`.Test {
     @Suite("IEEE_754.Conversions - Round-trip Tests")
     struct ConversionRoundTrip {
         @Test(arguments: [Float(0.0), Float(1.0), Float(3.14), Float(-2.71)])

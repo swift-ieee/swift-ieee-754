@@ -52,7 +52,7 @@ import Testing
     }
 #endif
 
-extension IEEE_754.Exceptions.Test {
+extension `IEEE_754.Exceptions Tests`.Test {
     @Suite("Swift API - Exception Handling")
     struct SwiftAPIWrapper {
         @Test func `clear All Exceptions`() {
@@ -94,7 +94,7 @@ extension IEEE_754.Exceptions.Test {
 }
 
 #if IEEE_754_SHIMS
-    extension IEEE_754.Exceptions.Test {
+    extension `IEEE_754.Exceptions Tests`.Test {
         @Suite("Swift API - Signaling Comparisons")
         struct SignalingComparisons {
             @Test func `signaling Equal Normal`() {
@@ -147,7 +147,7 @@ extension IEEE_754.Exceptions.Test {
     }
 #endif
 
-extension IEEE_754.Exceptions.Test {
+extension `IEEE_754.Exceptions Tests`.Test {
     @Suite("Swift API - Integration Scenarios")
     struct IntegrationScenarios {
         #if IEEE_754_SHIMS

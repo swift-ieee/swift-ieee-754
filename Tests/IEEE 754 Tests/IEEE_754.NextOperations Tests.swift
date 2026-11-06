@@ -2,7 +2,9 @@ import Testing
 
 @testable import IEEE_754
 
-extension IEEE_754.NextOperations {
+enum `IEEE_754.NextOperations Tests` {}
+
+extension `IEEE_754.NextOperations Tests` {
     @Suite("IEEE_754.NextOperations - Double nextUp")
     struct Test {
         @Test func `normal Values`() {
@@ -58,7 +60,7 @@ extension IEEE_754.NextOperations {
     }
 }
 
-extension IEEE_754.NextOperations.Test {
+extension `IEEE_754.NextOperations Tests`.Test {
     @Suite("IEEE_754.NextOperations - Double nextDown")
     struct DoubleNextDown {
         @Test func `normal Values`() {
@@ -113,7 +115,7 @@ extension IEEE_754.NextOperations.Test {
     }
 }
 
-extension IEEE_754.NextOperations.Test {
+extension `IEEE_754.NextOperations Tests`.Test {
     @Suite("IEEE_754.NextOperations - Double nextAfter")
     struct DoubleNextAfter {
         @Test func `toward Larger`() {
@@ -163,7 +165,7 @@ extension IEEE_754.NextOperations.Test {
     }
 }
 
-extension IEEE_754.NextOperations.Test {
+extension `IEEE_754.NextOperations Tests`.Test {
     @Suite("IEEE_754.NextOperations - Float nextUp")
     struct FloatNextUp {
         @Test func `normal Values`() {
@@ -193,7 +195,7 @@ extension IEEE_754.NextOperations.Test {
     }
 }
 
-extension IEEE_754.NextOperations.Test {
+extension `IEEE_754.NextOperations Tests`.Test {
     @Suite("IEEE_754.NextOperations - Float nextDown")
     struct FloatNextDown {
         @Test func `normal Values`() {
@@ -218,7 +220,7 @@ extension IEEE_754.NextOperations.Test {
     }
 }
 
-extension IEEE_754.NextOperations.Test {
+extension `IEEE_754.NextOperations Tests`.Test {
     @Suite("IEEE_754.NextOperations - Float nextAfter")
     struct FloatNextAfter {
         @Test func `toward Larger`() {
@@ -244,7 +246,7 @@ extension IEEE_754.NextOperations.Test {
     }
 }
 
-extension IEEE_754.NextOperations.Test {
+extension `IEEE_754.NextOperations Tests`.Test {
     @Suite("IEEE_754.NextOperations - Edge Cases")
     struct NextOperationsEdgeCases {
         @Test func `ulp Consistency`() {

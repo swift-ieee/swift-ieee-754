@@ -2,7 +2,9 @@ import Testing
 
 @testable import IEEE_754
 
-extension IEEE_754.MinMax {
+enum `IEEE_754.MinMax Tests` {}
+
+extension `IEEE_754.MinMax Tests` {
     @Suite("IEEE_754.MinMax - Double minimum")
     struct Test {
         @Test(arguments: [(3.14, 2.71, 2.71), (2.71, 3.14, 2.71), (3.14, 3.14, 3.14)])
@@ -33,7 +35,7 @@ extension IEEE_754.MinMax {
     }
 }
 
-extension IEEE_754.MinMax.Test {
+extension `IEEE_754.MinMax Tests`.Test {
     @Suite("IEEE_754.MinMax - Double maximum")
     struct DoubleMaximum {
         @Test(arguments: [(3.14, 2.71, 3.14), (2.71, 3.14, 3.14), (3.14, 3.14, 3.14)])
@@ -57,7 +59,7 @@ extension IEEE_754.MinMax.Test {
     }
 }
 
-extension IEEE_754.MinMax.Test {
+extension `IEEE_754.MinMax Tests`.Test {
     @Suite("IEEE_754.MinMax - Double minimumNumber")
     struct DoubleMinimumNumber {
         @Test(arguments: [(3.14, 2.71, 2.71), (2.71, 3.14, 2.71)])
@@ -87,7 +89,7 @@ extension IEEE_754.MinMax.Test {
     }
 }
 
-extension IEEE_754.MinMax.Test {
+extension `IEEE_754.MinMax Tests`.Test {
     @Suite("IEEE_754.MinMax - Double maximumNumber")
     struct DoubleMaximumNumber {
         @Test(arguments: [(3.14, 2.71, 3.14), (2.71, 3.14, 3.14)])
@@ -112,7 +114,7 @@ extension IEEE_754.MinMax.Test {
     }
 }
 
-extension IEEE_754.MinMax.Test {
+extension `IEEE_754.MinMax Tests`.Test {
     @Suite("IEEE_754.MinMax - Double minimumMagnitude")
     struct DoubleMinimumMagnitude {
         @Test func `by Absolute Value`() {
@@ -142,7 +144,7 @@ extension IEEE_754.MinMax.Test {
     }
 }
 
-extension IEEE_754.MinMax.Test {
+extension `IEEE_754.MinMax Tests`.Test {
     @Suite("IEEE_754.MinMax - Double maximumMagnitude")
     struct DoubleMaximumMagnitude {
         @Test func `by Absolute Value`() {
@@ -168,7 +170,7 @@ extension IEEE_754.MinMax.Test {
     }
 }
 
-extension IEEE_754.MinMax.Test {
+extension `IEEE_754.MinMax Tests`.Test {
     @Suite("IEEE_754.MinMax - Double minimumMagnitudeNumber")
     struct DoubleMinimumMagnitudeNumber {
         @Test func `by Absolute Value`() {
@@ -195,7 +197,7 @@ extension IEEE_754.MinMax.Test {
     }
 }
 
-extension IEEE_754.MinMax.Test {
+extension `IEEE_754.MinMax Tests`.Test {
     @Suite("IEEE_754.MinMax - Double maximumMagnitudeNumber")
     struct DoubleMaximumMagnitudeNumber {
         @Test func `by Absolute Value`() {
@@ -222,7 +224,7 @@ extension IEEE_754.MinMax.Test {
     }
 }
 
-extension IEEE_754.MinMax.Test {
+extension `IEEE_754.MinMax Tests`.Test {
     @Suite("IEEE_754.MinMax - Float minimum")
     struct FloatMinimum {
         @Test(arguments: [
@@ -243,7 +245,7 @@ extension IEEE_754.MinMax.Test {
     }
 }
 
-extension IEEE_754.MinMax.Test {
+extension `IEEE_754.MinMax Tests`.Test {
     @Suite("IEEE_754.MinMax - Float maximum")
     struct FloatMaximum {
         @Test(arguments: [
@@ -260,7 +262,7 @@ extension IEEE_754.MinMax.Test {
     }
 }
 
-extension IEEE_754.MinMax.Test {
+extension `IEEE_754.MinMax Tests`.Test {
     @Suite("IEEE_754.MinMax - Float minimumNumber")
     struct FloatMinimumNumber {
         @Test func `nan Preference`() {
@@ -276,7 +278,7 @@ extension IEEE_754.MinMax.Test {
     }
 }
 
-extension IEEE_754.MinMax.Test {
+extension `IEEE_754.MinMax Tests`.Test {
     @Suite("IEEE_754.MinMax - Float maximumNumber")
     struct FloatMaximumNumber {
         @Test func `nan Preference`() {
@@ -292,7 +294,7 @@ extension IEEE_754.MinMax.Test {
     }
 }
 
-extension IEEE_754.MinMax.Test {
+extension `IEEE_754.MinMax Tests`.Test {
     @Suite("IEEE_754.MinMax - Float minimumMagnitude")
     struct FloatMinimumMagnitude {
         @Test func `by Absolute Value`() {
@@ -308,7 +310,7 @@ extension IEEE_754.MinMax.Test {
     }
 }
 
-extension IEEE_754.MinMax.Test {
+extension `IEEE_754.MinMax Tests`.Test {
     @Suite("IEEE_754.MinMax - Float maximumMagnitude")
     struct FloatMaximumMagnitude {
         @Test func `by Absolute Value`() {
@@ -324,7 +326,7 @@ extension IEEE_754.MinMax.Test {
     }
 }
 
-extension IEEE_754.MinMax.Test {
+extension `IEEE_754.MinMax Tests`.Test {
     @Suite("IEEE_754.MinMax - Hierarchical Operation API")
     struct MinMaxOperation {
         @Test

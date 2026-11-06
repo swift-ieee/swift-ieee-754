@@ -3,7 +3,7 @@ import Testing
 
 @testable import IEEE_754
 
-extension Double.Test {
+extension `Double Tests`.Test {
     @Suite("IEEE 754 - Double Powers of 2")
     struct PowersOfTwo {
         @Test func `powers of 2 have exact representations`() {
@@ -74,7 +74,7 @@ extension Double.Test {
     }
 }
 
-extension Float.Test {
+extension `Float Tests`.Test {
     @Suite("IEEE 754 - Float Powers of 2")
     struct PowersOfTwo {
         @Test func `powers of 2 have exact representations`() {
@@ -117,7 +117,7 @@ extension Float.Test {
     }
 }
 
-extension Double.Test {
+extension `Double Tests`.Test {
     @Suite("IEEE 754 - Double Exponent Sweep")
     struct ExponentSweep {
         @Test func `sample exponent values across range`() {
@@ -166,7 +166,7 @@ extension Double.Test {
     }
 }
 
-extension Float.Test {
+extension `Float Tests`.Test {
     @Suite("IEEE 754 - Float Exponent Sweep")
     struct ExponentSweep {
         @Test func `sample exponent values across range`() {
@@ -194,7 +194,7 @@ extension Float.Test {
     }
 }
 
-extension IEEE_754.Binary64.Test {
+extension `IEEE_754.Binary64 Tests`.Test {
     @Suite("IEEE 754 - Double Significand Bit Walking")
     struct SignificandBitWalking {
         @Test func `single bit set in each significand position`() {
@@ -240,7 +240,7 @@ extension IEEE_754.Binary64.Test {
     }
 }
 
-extension IEEE_754.Binary32.Test {
+extension `IEEE_754.Binary32 Tests`.Test {
     @Suite("IEEE 754 - Float Significand Bit Walking")
     struct SignificandBitWalking {
         @Test func `single bit set in each significand position`() {
@@ -306,7 +306,7 @@ struct NegativeNaNTests {
     }
 }
 
-extension Double.Test {
+extension `Double Tests`.Test {
     @Suite("IEEE 754 - Known Problematic Values")
     struct KnownProblematicValues {
         @Test func `famous Java bug value`() {

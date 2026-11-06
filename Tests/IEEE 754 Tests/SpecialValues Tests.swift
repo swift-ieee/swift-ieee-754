@@ -2,7 +2,7 @@ import Testing
 
 @testable import IEEE_754
 
-extension Double.Test {
+extension `Double Tests`.Test {
     @Suite("IEEE 754 - Double Special Values")
     struct SpecialValues {
         @Test(arguments: [0.0, -0.0])
@@ -68,7 +68,7 @@ extension Double.Test {
     }
 }
 
-extension Float.Test {
+extension `Float Tests`.Test {
     @Suite("IEEE 754 - Float Special Values")
     struct SpecialValues {
         @Test(arguments: [Float(0.0), Float(-0.0)])

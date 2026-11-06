@@ -2,7 +2,9 @@ import Testing
 
 @testable import IEEE_754
 
-extension IEEE_754.Payload {
+enum `IEEE_754.Payload Tests` {}
+
+extension `IEEE_754.Payload Tests` {
     @Suite("IEEE_754.Payload - Double extract")
     struct Test {
         @Test func `extract From Quiet NaN`() {
@@ -40,7 +42,7 @@ extension IEEE_754.Payload {
     }
 }
 
-extension IEEE_754.Payload.Test {
+extension `IEEE_754.Payload Tests`.Test {
     @Suite("IEEE_754.Payload - Double encodeQuietNaN")
     struct DoubleEncodeQuietNaN {
         @Test func `encode Zero Payload`() {
@@ -69,7 +71,7 @@ extension IEEE_754.Payload.Test {
     }
 }
 
-extension IEEE_754.Payload.Test {
+extension `IEEE_754.Payload Tests`.Test {
     @Suite("IEEE_754.Payload - Double encodeSignalingNaN")
     struct DoubleEncodeSignalingNaN {
         @Test func `encode Zero Payload`() {
@@ -94,7 +96,7 @@ extension IEEE_754.Payload.Test {
     }
 }
 
-extension IEEE_754.Payload.Test {
+extension `IEEE_754.Payload Tests`.Test {
     @Suite("IEEE_754.Payload - Double isQuietNaN")
     struct DoubleIsQuietNaN {
         @Test func `detect Quiet NaN`() {
@@ -116,7 +118,7 @@ extension IEEE_754.Payload.Test {
     }
 }
 
-extension IEEE_754.Payload.Test {
+extension `IEEE_754.Payload Tests`.Test {
     @Suite("IEEE_754.Payload - Double isSignalingNaN")
     struct DoubleIsSignalingNaN {
         @Test func `detect Signaling NaN`() {
@@ -144,7 +146,7 @@ extension IEEE_754.Payload.Test {
     }
 }
 
-extension IEEE_754.Payload.Test {
+extension `IEEE_754.Payload Tests`.Test {
     @Suite("IEEE_754.Payload - Float extract")
     struct FloatPayloadExtract {
         @Test func `extract From Quiet NaN`() {
@@ -181,7 +183,7 @@ extension IEEE_754.Payload.Test {
     }
 }
 
-extension IEEE_754.Payload.Test {
+extension `IEEE_754.Payload Tests`.Test {
     @Suite("IEEE_754.Payload - Float encodeQuietNaN")
     struct FloatEncodeQuietNaN {
         @Test func `encode Zero Payload`() {
@@ -199,7 +201,7 @@ extension IEEE_754.Payload.Test {
     }
 }
 
-extension IEEE_754.Payload.Test {
+extension `IEEE_754.Payload Tests`.Test {
     @Suite("IEEE_754.Payload - Float encodeSignalingNaN")
     struct FloatEncodeSignalingNaN {
         @Test func `encode Zero Payload`() {
@@ -217,7 +219,7 @@ extension IEEE_754.Payload.Test {
     }
 }
 
-extension IEEE_754.Payload.Test {
+extension `IEEE_754.Payload Tests`.Test {
     @Suite("IEEE_754.Payload - Float isQuietNaN")
     struct FloatIsQuietNaN {
         @Test func `detect Quiet NaN`() {
@@ -237,7 +239,7 @@ extension IEEE_754.Payload.Test {
     }
 }
 
-extension IEEE_754.Payload.Test {
+extension `IEEE_754.Payload Tests`.Test {
     @Suite("IEEE_754.Payload - Float isSignalingNaN")
     struct FloatIsSignalingNaN {
         @Test func `detect Signaling NaN`() {
@@ -263,7 +265,7 @@ extension IEEE_754.Payload.Test {
     }
 }
 
-extension IEEE_754.Payload.Test {
+extension `IEEE_754.Payload Tests`.Test {
     @Suite("IEEE_754.Payload - Payload Preservation")
     struct PayloadPreservation {
         @Test func `round Trip Quiet NaN`() {

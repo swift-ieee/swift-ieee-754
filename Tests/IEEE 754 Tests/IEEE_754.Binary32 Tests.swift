@@ -2,7 +2,9 @@ import Testing
 
 @testable import IEEE_754
 
-extension IEEE_754.Binary32 {
+enum `IEEE_754.Binary32 Tests` {}
+
+extension `IEEE_754.Binary32 Tests` {
     @Suite("IEEE_754.Binary32 - Constants")
     struct Test {
         @Test func `byte size is 4`() {
@@ -42,7 +44,7 @@ extension IEEE_754.Binary32 {
     }
 }
 
-extension IEEE_754.Binary32.Test {
+extension `IEEE_754.Binary32 Tests`.Test {
     @Suite("IEEE_754.Binary32 - Authoritative serialization")
     struct Serialization {
         @Test(arguments: [
@@ -75,7 +77,7 @@ extension IEEE_754.Binary32.Test {
     }
 }
 
-extension IEEE_754.Binary32.Test {
+extension `IEEE_754.Binary32 Tests`.Test {
     @Suite("IEEE_754.Binary32 - Authoritative deserialization")
     struct Deserialization {
         @Test(arguments: [
@@ -135,7 +137,7 @@ extension IEEE_754.Binary32.Test {
     }
 }
 
-extension IEEE_754.Binary32.Test {
+extension `IEEE_754.Binary32 Tests`.Test {
     @Suite("IEEE_754.Binary32 - Special values")
     struct SpecialValues {
         @Test func `NaN round-trip`() {

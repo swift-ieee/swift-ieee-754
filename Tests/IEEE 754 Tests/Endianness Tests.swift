@@ -2,7 +2,7 @@ import Testing
 
 @testable import IEEE_754
 
-extension Double.Test {
+extension `Double Tests`.Test {
     @Suite("IEEE 754 - Double Endianness")
     struct Endianness {
         @Test(arguments: [3.14159, 2.71828, 1.41421, 0.0, 1.0, -1.0, 42.0])
@@ -55,7 +55,7 @@ extension Double.Test {
     }
 }
 
-extension Float.Test {
+extension `Float Tests`.Test {
     @Suite("IEEE 754 - Float Endianness")
     struct Endianness {
         @Test(arguments: [
