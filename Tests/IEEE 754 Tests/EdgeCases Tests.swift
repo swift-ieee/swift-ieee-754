@@ -101,8 +101,8 @@ extension `Double Tests`.Test {
 }
 
 extension `Double Tests`.Test {
-    @Suite
-    struct `IEEE 754 - Double ULP (Unit in Last Place) Edge Cases` {
+    @Suite("IEEE 754 - Double ULP (Unit in Last Place) Edge Cases")
+    struct ULPEdgeCases {
         @Test func `one ULP above zero`() {
             let value = Double.leastNonzeroMagnitude
             let bytes = value.bytes()
@@ -233,8 +233,8 @@ extension `Double Tests`.Test {
 }
 
 extension `Double Tests`.Test {
-    @Suite
-    struct `IEEE 754 - Double Endianness Edge Cases` {
+    @Suite("IEEE 754 - Double Endianness Edge Cases")
+    struct EndiannessEdgeCases {
         @Test func `special values survive endianness conversion`() {
             let values: [Double] = [
                 0.0,
@@ -366,25 +366,21 @@ extension `Float Tests`.Test {
     }
 }
 
-enum `EdgeCases Tests` {}
+@Suite("IEEE 754 - Mixed Precision Edge Cases")
+struct MixedPrecisionEdgeCases {
+    @Test func `Float leastNonzeroMagnitude is different from Double`() {
+        let floatMin = Float.leastNonzeroMagnitude
+        let doubleMin = Double.leastNonzeroMagnitude
 
-extension `EdgeCases Tests` {
-    @Suite
-    struct `IEEE 754 - Mixed Precision Edge Cases` {
-        @Test func `Float leastNonzeroMagnitude is different from Double`() {
-            let floatMin = Float.leastNonzeroMagnitude
-            let doubleMin = Double.leastNonzeroMagnitude
+        #expect(Double(floatMin) != doubleMin, "Different precisions have different minimums")
+    }
 
-            #expect(Double(floatMin) != doubleMin, "Different precisions have different minimums")
-        }
+    @Test func `Float and Double infinity convert correctly`() {
+        let floatInf = Float.infinity
+        let doubleInf = Double.infinity
 
-        @Test func `Float and Double infinity convert correctly`() {
-            let floatInf = Float.infinity
-            let doubleInf = Double.infinity
-
-            #expect(Double(floatInf) == doubleInf, "Float infinity should convert to Double infinity")
-            #expect(Float(doubleInf) == floatInf, "Double infinity should convert to Float infinity")
-        }
+        #expect(Double(floatInf) == doubleInf, "Float infinity should convert to Double infinity")
+        #expect(Float(doubleInf) == floatInf, "Double infinity should convert to Float infinity")
     }
 }
 

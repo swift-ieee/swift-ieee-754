@@ -318,8 +318,8 @@ extension `Performance Tests` {
 }
 
 extension `Double Tests`.Test {
-    @Suite
-    struct `IEEE 754 - Concurrent Access Consistency` {
+    @Suite("IEEE 754 - Concurrent Access Consistency")
+    struct ConcurrentAccess {
         @Test func `concurrent serialization of same value`() async {
             let value: Double = 3.141592653589793
             let expectedBytes = value.bytes()
@@ -367,8 +367,8 @@ extension `Double Tests`.Test {
 }
 
 extension `Double Tests`.Test {
-    @Suite
-    struct `IEEE 754 - Deterministic Behavior` {
+    @Suite("IEEE 754 - Deterministic Behavior")
+    struct Determinism {
         @Test func `repeated serialization produces identical results`() {
             let value: Double = 2.718281828459045
 
