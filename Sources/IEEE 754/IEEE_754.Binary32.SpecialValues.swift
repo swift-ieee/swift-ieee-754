@@ -1,4 +1,4 @@
-public import Binary
+import Binary
 
 
 extension IEEE_754.Binary32 {

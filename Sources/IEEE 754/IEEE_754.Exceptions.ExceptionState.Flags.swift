@@ -1,5 +1,5 @@
-public import Dependency
-public import Synchronization
+import Dependency
+import Synchronization
 
 
 extension IEEE_754.Exceptions.ExceptionState {
