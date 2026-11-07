@@ -5,8 +5,8 @@
 
     @testable import IEEE_754
 
-    @Suite("IEEE 754 Shims - Rounding Mode Control")
-    struct CIEEERoundingModeTests {
+    @Suite
+    struct `IEEE 754 Shims - Rounding Mode Control` {
         @Test func `Get Rounding Mode`() {
 
             let mode = ieee754_get_rounding_mode()
@@ -72,8 +72,8 @@
         }
     }
 
-    @Suite("IEEE 754 Shims - Thread-Local Exceptions", .serialized)
-    struct CIEEEExceptionTests {
+    @Suite(.serialized)
+    struct `IEEE 754 Shims - Thread-Local Exceptions` {
         @Test func `Initial Exception State`() {
             ieee754_clear_all_exceptions()
             let exceptions = ieee754_get_exceptions()
@@ -168,8 +168,8 @@
         }
     }
 
-    @Suite("IEEE 754 Shims - Hardware FPU Exceptions")
-    struct CIEEEHardwareExceptionTests {
+    @Suite
+    struct `IEEE 754 Shims - Hardware FPU Exceptions` {
         @Test func `Clear FPU Exceptions`() {
             ieee754_clear_fpu_exceptions()
 
@@ -193,8 +193,8 @@
         }
     }
 
-    @Suite("IEEE 754 Shims - Signaling Comparisons (Double)", .serialized)
-    struct CIEEESignalingCompareDoubleTests {
+    @Suite(.serialized)
+    struct `IEEE 754 Shims - Signaling Comparisons (Double)` {
         @Test func `Signaling Equal Normal`() {
             ieee754_clear_all_exceptions()
             let result = ieee754_signaling_equal(3.14, 3.14)
@@ -281,8 +281,8 @@
         }
     }
 
-    @Suite("IEEE 754 Shims - Signaling Comparisons (Float)", .serialized)
-    struct CIEEESignalingCompareFloatTests {
+    @Suite(.serialized)
+    struct `IEEE 754 Shims - Signaling Comparisons (Float)` {
         @Test func `Signaling Equal Normal`() {
             ieee754_clear_all_exceptions()
             let result = ieee754_signaling_equal_f(3.14, 3.14)
@@ -328,8 +328,8 @@
         }
     }
 
-    @Suite("IEEE 754 Shims - Integration Scenarios")
-    struct CIEEEIntegrationTests {
+    @Suite
+    struct `IEEE 754 Shims - Integration Scenarios` {
         @Test func `Rounding Mode And Exceptions`() {
 
             let result = withRoundingModeAndClearedExceptions(IEEE754_ROUND_TOWARDZERO) {

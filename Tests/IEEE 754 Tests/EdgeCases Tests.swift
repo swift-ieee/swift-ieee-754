@@ -101,8 +101,8 @@ extension `Double Tests`.Test {
 }
 
 extension `Double Tests`.Test {
-    @Suite("IEEE 754 - Double ULP (Unit in Last Place) Edge Cases")
-    struct ULPEdgeCases {
+    @Suite
+    struct `IEEE 754 - Double ULP (Unit in Last Place) Edge Cases` {
         @Test func `one ULP above zero`() {
             let value = Double.leastNonzeroMagnitude
             let bytes = value.bytes()
@@ -233,8 +233,8 @@ extension `Double Tests`.Test {
 }
 
 extension `Double Tests`.Test {
-    @Suite("IEEE 754 - Double Endianness Edge Cases")
-    struct EndiannessEdgeCases {
+    @Suite
+    struct `IEEE 754 - Double Endianness Edge Cases` {
         @Test func `special values survive endianness conversion`() {
             let values: [Double] = [
                 0.0,
@@ -366,8 +366,8 @@ extension `Float Tests`.Test {
     }
 }
 
-@Suite("IEEE 754 - Mixed Precision Edge Cases")
-struct MixedPrecisionEdgeCases {
+@Suite
+struct `IEEE 754 - Mixed Precision Edge Cases` {
     @Test func `Float leastNonzeroMagnitude is different from Double`() {
         let floatMin = Float.leastNonzeroMagnitude
         let doubleMin = Double.leastNonzeroMagnitude

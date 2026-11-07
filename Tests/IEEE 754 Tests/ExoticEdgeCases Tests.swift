@@ -264,8 +264,8 @@ extension `IEEE_754.Binary32 Tests`.Test {
     }
 }
 
-@Suite("IEEE 754 - Negative NaN")
-struct NegativeNaNTests {
+@Suite
+struct `IEEE 754 - Negative NaN` {
     @Test func `negative NaN round-trips as NaN`() {
 
         let negNaNBytes: [UInt8] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF8, 0xFF]
@@ -307,8 +307,8 @@ struct NegativeNaNTests {
 }
 
 extension `Double Tests`.Test {
-    @Suite("IEEE 754 - Known Problematic Values")
-    struct KnownProblematicValues {
+    @Suite
+    struct `IEEE 754 - Known Problematic Values` {
         @Test func `famous Java bug value`() {
 
             let value: Double = 2.2250738585072014e-308
@@ -384,8 +384,8 @@ extension `Double Tests`.Test {
     }
 }
 
-@Suite("IEEE 754 - Exact Binary Fractions")
-struct ExactBinaryFractionsTests {
+@Suite
+struct `IEEE 754 - Exact Binary Fractions` {
     @Test func `powers of 2 fractions are exact`() {
         let fractions: [Double] = [
             0.5,
@@ -439,8 +439,8 @@ struct ExactBinaryFractionsTests {
     }
 }
 
-@Suite("IEEE 754 - Large Integer Boundaries")
-struct LargeIntegerBoundariesTests {
+@Suite
+struct `IEEE 754 - Large Integer Boundaries` {
     @Test func `largest exactly representable integer for Double`() {
 
         let maxInt: Double = 9007199254740992.0
@@ -502,8 +502,8 @@ struct LargeIntegerBoundariesTests {
     }
 }
 
-@Suite("IEEE 754 - Cross-Format Precision")
-struct CrossFormatPrecisionTests {
+@Suite
+struct `IEEE 754 - Cross-Format Precision` {
     @Test func `Float to Double preserves value`() {
         let floatValues: [Float] = [
             3.14159,

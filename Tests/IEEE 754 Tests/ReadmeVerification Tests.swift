@@ -2,8 +2,8 @@ import Testing
 
 @testable import IEEE_754
 
-@Suite("README Verification")
-struct ReadmeVerificationTests {
+@Suite
+struct `README Verification` {
 
     @Test
     func `Quick Start example (lines 46-56)`() throws {

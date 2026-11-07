@@ -53,8 +53,8 @@ import Testing
 #endif
 
 extension `IEEE_754.Exceptions Tests`.Test {
-    @Suite("Swift API - Exception Handling")
-    struct SwiftAPIWrapper {
+    @Suite
+    struct `Swift API - Exception Handling` {
         @Test func `clear All Exceptions`() {
             IEEE_754.Exceptions.clear()
             #expect(!IEEE_754.Exceptions.invalidOperation)
@@ -95,8 +95,8 @@ extension `IEEE_754.Exceptions Tests`.Test {
 
 #if IEEE_754_SHIMS
     extension `IEEE_754.Exceptions Tests`.Test {
-        @Suite("Swift API - Signaling Comparisons")
-        struct SignalingComparisons {
+        @Suite
+        struct `Swift API - Signaling Comparisons` {
             @Test func `signaling Equal Normal`() {
                 IEEE_754.Exceptions.clear()
 
@@ -148,8 +148,8 @@ extension `IEEE_754.Exceptions Tests`.Test {
 #endif
 
 extension `IEEE_754.Exceptions Tests`.Test {
-    @Suite("Swift API - Integration Scenarios")
-    struct IntegrationScenarios {
+    @Suite
+    struct `Swift API - Integration Scenarios` {
         #if IEEE_754_SHIMS
             @Test func `rounding And Exceptions`() throws {
                 IEEE_754.Exceptions.clear()
