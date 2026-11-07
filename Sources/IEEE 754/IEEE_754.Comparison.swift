@@ -9,12 +9,6 @@ extension IEEE_754 {
 
 extension IEEE_754.Comparison {
 
-    public enum Predicate: Sendable, Equatable {
-
-        case equality(EqualityMode)
-
-        case ordering(OrderingMode)
-    }
 
     @inlinable
     public static func compare(_ lhs: Double, _ rhs: Double, using predicate: Predicate) -> Bool {
@@ -64,20 +58,6 @@ extension IEEE_754.Comparison {
 }
 
 extension IEEE_754.Comparison.Predicate {
-
-    public enum EqualityMode: Sendable, Equatable {
-
-        case equal
-
-        case notEqual
-    }
-
-    public enum OrderingMode: Sendable, Equatable {
-
-        case less(orEqual: Bool)
-
-        case greater(orEqual: Bool)
-    }
 }
 
 extension IEEE_754.Comparison {

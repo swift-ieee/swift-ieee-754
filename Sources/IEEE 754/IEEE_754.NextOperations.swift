@@ -5,10 +5,6 @@ extension IEEE_754 {
 
 extension IEEE_754.NextOperations {
 
-    public enum Direction: Sendable, Equatable {
-
-        case toward(Target)
-    }
 
     @inlinable
     public static func next(_ value: Double, direction: Direction) -> Double {
@@ -72,15 +68,6 @@ extension IEEE_754.NextOperations {
 }
 
 extension IEEE_754.NextOperations.Direction {
-
-    public enum Target: Sendable, Equatable {
-
-        case positiveInfinity
-
-        case negativeInfinity
-
-        case value(Double)
-    }
 }
 
 extension IEEE_754.NextOperations.Direction.Target {
