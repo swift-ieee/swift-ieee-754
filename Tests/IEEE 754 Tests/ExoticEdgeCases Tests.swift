@@ -264,45 +264,49 @@ extension `IEEE_754.Binary32 Tests`.Test {
     }
 }
 
-@Suite
-struct `IEEE 754 - Negative NaN` {
-    @Test func `negative NaN round-trips as NaN`() {
+enum `ExoticEdgeCases Tests` {}
 
-        let negNaNBytes: [UInt8] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF8, 0xFF]
-        let value = IEEE_754.Binary64.value(from: negNaNBytes)
+extension `ExoticEdgeCases Tests` {
+    @Suite
+    struct `IEEE 754 - Negative NaN` {
+        @Test func `negative NaN round-trips as NaN`() {
 
-        #expect(value?.isNaN == true, "Negative NaN should be recognized as NaN")
+            let negNaNBytes: [UInt8] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF8, 0xFF]
+            let value = IEEE_754.Binary64.value(from: negNaNBytes)
 
-        if let value {
-            let roundTrip = value.bytes()
-            let restored = IEEE_754.Binary64.value(from: roundTrip)
-            #expect(restored?.isNaN == true, "Should remain NaN after round-trip")
+            #expect(value?.isNaN == true, "Negative NaN should be recognized as NaN")
+
+            if let value {
+                let roundTrip = value.bytes()
+                let restored = IEEE_754.Binary64.value(from: roundTrip)
+                #expect(restored?.isNaN == true, "Should remain NaN after round-trip")
+            }
         }
-    }
 
-    @Test func `negative NaN for Float`() {
-        let negNaNBytes: [UInt8] = [0x00, 0x00, 0xC0, 0xFF]
-        let value = IEEE_754.Binary32.value(from: negNaNBytes)
+        @Test func `negative NaN for Float`() {
+            let negNaNBytes: [UInt8] = [0x00, 0x00, 0xC0, 0xFF]
+            let value = IEEE_754.Binary32.value(from: negNaNBytes)
 
-        #expect(value?.isNaN == true, "Negative NaN should be recognized as NaN")
+            #expect(value?.isNaN == true, "Negative NaN should be recognized as NaN")
 
-        if let value {
-            let roundTrip = value.bytes()
-            let restored = IEEE_754.Binary32.value(from: roundTrip)
-            #expect(restored?.isNaN == true, "Should remain NaN after round-trip")
+            if let value {
+                let roundTrip = value.bytes()
+                let restored = IEEE_754.Binary32.value(from: roundTrip)
+                #expect(restored?.isNaN == true, "Should remain NaN after round-trip")
+            }
         }
-    }
 
-    @Test func `NaN sign bit variations`() {
+        @Test func `NaN sign bit variations`() {
 
-        let posNaN = Double.nan
-        let posBytes = posNaN.bytes()
+            let posNaN = Double.nan
+            let posBytes = posNaN.bytes()
 
-        var negBytes = posBytes
-        negBytes[7] |= 0x80
+            var negBytes = posBytes
+            negBytes[7] |= 0x80
 
-        let negNaN = Double(bytes: negBytes)
-        #expect(negNaN?.isNaN == true, "Negative NaN should be NaN")
+            let negNaN = Double(bytes: negBytes)
+            #expect(negNaN?.isNaN == true, "Negative NaN should be NaN")
+        }
     }
 }
 
@@ -384,179 +388,185 @@ extension `Double Tests`.Test {
     }
 }
 
-@Suite
-struct `IEEE 754 - Exact Binary Fractions` {
-    @Test func `powers of 2 fractions are exact`() {
-        let fractions: [Double] = [
-            0.5,
-            0.25,
-            0.125,
-            0.0625,
-            0.03125,
-            0.015625,
-        ]
+extension `ExoticEdgeCases Tests` {
+    @Suite
+    struct `IEEE 754 - Exact Binary Fractions` {
+        @Test func `powers of 2 fractions are exact`() {
+            let fractions: [Double] = [
+                0.5,
+                0.25,
+                0.125,
+                0.0625,
+                0.03125,
+                0.015625,
+            ]
 
-        for value in fractions {
-            let bytes = value.bytes()
-            let restored = Double(bytes: bytes)
-            #expect(restored == value, "\(value) should be exact")
+            for value in fractions {
+                let bytes = value.bytes()
+                let restored = Double(bytes: bytes)
+                #expect(restored == value, "\(value) should be exact")
 
-            let original = value
-            #expect(restored == original, "Should be bit-exact, not just approximately equal")
+                let original = value
+                #expect(restored == original, "Should be bit-exact, not just approximately equal")
+            }
         }
-    }
 
-    @Test func `sums of powers of 2 are exact`() {
-        let values: [Double] = [
-            0.75,
-            0.375,
-            0.875,
-            0.6875,
-        ]
+        @Test func `sums of powers of 2 are exact`() {
+            let values: [Double] = [
+                0.75,
+                0.375,
+                0.875,
+                0.6875,
+            ]
 
-        for value in values {
-            let bytes = value.bytes()
-            let restored = Double(bytes: bytes)
-            #expect(restored == value, "\(value) should be exact")
+            for value in values {
+                let bytes = value.bytes()
+                let restored = Double(bytes: bytes)
+                #expect(restored == value, "\(value) should be exact")
+            }
         }
-    }
 
-    @Test func `float exact fractions`() {
-        let fractions: [Float] = [
-            0.5,
-            0.25,
-            0.125,
-            0.0625,
-            0.75,
-            0.875,
-        ]
+        @Test func `float exact fractions`() {
+            let fractions: [Float] = [
+                0.5,
+                0.25,
+                0.125,
+                0.0625,
+                0.75,
+                0.875,
+            ]
 
-        for value in fractions {
-            let bytes = value.bytes()
-            let restored = Float(bytes: bytes)
-            #expect(restored == value, "\(value) should be exact")
-        }
-    }
-}
-
-@Suite
-struct `IEEE 754 - Large Integer Boundaries` {
-    @Test func `largest exactly representable integer for Double`() {
-
-        let maxInt: Double = 9007199254740992.0
-
-        let bytes = maxInt.bytes()
-        let restored = Double(bytes: bytes)
-
-        #expect(restored == maxInt, "2^53 should be exactly representable")
-    }
-
-    @Test func `one beyond largest exactly representable integer`() {
-
-        let beyondMax: Double = 9007199254740993.0
-
-        let bytes = beyondMax.bytes()
-        let restored = Double(bytes: bytes)
-
-        #expect(restored == beyondMax, "Should round-trip to same approximation")
-    }
-
-    @Test func `integer boundaries for Double`() {
-        let boundaries: [Double] = [
-            9007199254740992.0,
-            9007199254740991.0,
-            -9007199254740992.0,
-            -9007199254740991.0,
-        ]
-
-        for value in boundaries {
-            let bytes = value.bytes()
-            let restored = Double(bytes: bytes)
-            #expect(restored == value, "\(value) should round-trip exactly")
-        }
-    }
-
-    @Test func `largest exactly representable integer for Float`() {
-
-        let maxInt: Float = 16777216.0
-
-        let bytes = maxInt.bytes()
-        let restored = Float(bytes: bytes)
-
-        #expect(restored == maxInt, "2^24 should be exactly representable")
-    }
-
-    @Test func `integer boundaries for Float`() {
-        let boundaries: [Float] = [
-            16777216.0,
-            16777215.0,
-            -16777216.0,
-            -16777215.0,
-        ]
-
-        for value in boundaries {
-            let bytes = value.bytes()
-            let restored = Float(bytes: bytes)
-            #expect(restored == value, "\(value) should round-trip exactly")
+            for value in fractions {
+                let bytes = value.bytes()
+                let restored = Float(bytes: bytes)
+                #expect(restored == value, "\(value) should be exact")
+            }
         }
     }
 }
 
-@Suite
-struct `IEEE 754 - Cross-Format Precision` {
-    @Test func `Float to Double preserves value`() {
-        let floatValues: [Float] = [
-            3.14159,
-            2.71828,
-            0.1,
-            1000000.0,
-            Float.leastNonzeroMagnitude,
-            Float.leastNormalMagnitude,
-        ]
+extension `ExoticEdgeCases Tests` {
+    @Suite
+    struct `IEEE 754 - Large Integer Boundaries` {
+        @Test func `largest exactly representable integer for Double`() {
 
-        for floatVal in floatValues {
-            let doubleVal = Double(floatVal)
+            let maxInt: Double = 9007199254740992.0
+
+            let bytes = maxInt.bytes()
+            let restored = Double(bytes: bytes)
+
+            #expect(restored == maxInt, "2^53 should be exactly representable")
+        }
+
+        @Test func `one beyond largest exactly representable integer`() {
+
+            let beyondMax: Double = 9007199254740993.0
+
+            let bytes = beyondMax.bytes()
+            let restored = Double(bytes: bytes)
+
+            #expect(restored == beyondMax, "Should round-trip to same approximation")
+        }
+
+        @Test func `integer boundaries for Double`() {
+            let boundaries: [Double] = [
+                9007199254740992.0,
+                9007199254740991.0,
+                -9007199254740992.0,
+                -9007199254740991.0,
+            ]
+
+            for value in boundaries {
+                let bytes = value.bytes()
+                let restored = Double(bytes: bytes)
+                #expect(restored == value, "\(value) should round-trip exactly")
+            }
+        }
+
+        @Test func `largest exactly representable integer for Float`() {
+
+            let maxInt: Float = 16777216.0
+
+            let bytes = maxInt.bytes()
+            let restored = Float(bytes: bytes)
+
+            #expect(restored == maxInt, "2^24 should be exactly representable")
+        }
+
+        @Test func `integer boundaries for Float`() {
+            let boundaries: [Float] = [
+                16777216.0,
+                16777215.0,
+                -16777216.0,
+                -16777215.0,
+            ]
+
+            for value in boundaries {
+                let bytes = value.bytes()
+                let restored = Float(bytes: bytes)
+                #expect(restored == value, "\(value) should round-trip exactly")
+            }
+        }
+    }
+}
+
+extension `ExoticEdgeCases Tests` {
+    @Suite
+    struct `IEEE 754 - Cross-Format Precision` {
+        @Test func `Float to Double preserves value`() {
+            let floatValues: [Float] = [
+                3.14159,
+                2.71828,
+                0.1,
+                1000000.0,
+                Float.leastNonzeroMagnitude,
+                Float.leastNormalMagnitude,
+            ]
+
+            for floatVal in floatValues {
+                let doubleVal = Double(floatVal)
+
+                let floatBytes = floatVal.bytes()
+                let doubleBytes = doubleVal.bytes()
+
+                let restoredFloat = Float(bytes: floatBytes)
+                let restoredDouble = Double(bytes: doubleBytes)
+
+                #expect(restoredFloat == floatVal, "Float should round-trip")
+                #expect(restoredDouble == doubleVal, "Double should round-trip")
+                #expect(Double(restoredFloat!) == restoredDouble, "Conversion should be consistent")
+            }
+        }
+
+        @Test func `Double to Float loses precision but round-trips`() {
+
+            let value: Double = 1e100
+
+            let floatVal = Float(value)
+            #expect(floatVal.isInfinite, "Should overflow to infinity")
 
             let floatBytes = floatVal.bytes()
-            let doubleBytes = doubleVal.bytes()
-
-            let restoredFloat = Float(bytes: floatBytes)
-            let restoredDouble = Double(bytes: doubleBytes)
-
-            #expect(restoredFloat == floatVal, "Float should round-trip")
-            #expect(restoredDouble == doubleVal, "Double should round-trip")
-            #expect(Double(restoredFloat!) == restoredDouble, "Conversion should be consistent")
+            let restored = Float(bytes: floatBytes)
+            #expect(restored?.isInfinite == true, "Should remain infinity")
         }
-    }
 
-    @Test func `Double to Float loses precision but round-trips`() {
+        @Test func `precision loss scenarios`() {
 
-        let value: Double = 1e100
+            let doubleValues: [Double] = [
+                1.2345678901234567,
+                0.123456789012345,
+            ]
 
-        let floatVal = Float(value)
-        #expect(floatVal.isInfinite, "Should overflow to infinity")
+            for doubleVal in doubleValues {
+                let floatVal = Float(doubleVal)
+                let backToDouble = Double(floatVal)
 
-        let floatBytes = floatVal.bytes()
-        let restored = Float(bytes: floatBytes)
-        #expect(restored?.isInfinite == true, "Should remain infinity")
-    }
+                #expect(Float(bytes: floatVal.bytes()) == floatVal)
 
-    @Test func `precision loss scenarios`() {
+                #expect(Double(bytes: doubleVal.bytes()) == doubleVal)
 
-        let doubleValues: [Double] = [
-            1.2345678901234567,
-            0.123456789012345,
-        ]
-
-        for doubleVal in doubleValues {
-            let floatVal = Float(doubleVal)
-            let backToDouble = Double(floatVal)
-
-            #expect(Float(bytes: floatVal.bytes()) == floatVal)
-
-            #expect(Double(bytes: doubleVal.bytes()) == doubleVal)
-
-            #expect(backToDouble != doubleVal, "Should have lost precision")
+                #expect(backToDouble != doubleVal, "Should have lost precision")
+            }
         }
     }
 }

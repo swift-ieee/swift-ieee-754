@@ -366,21 +366,25 @@ extension `Float Tests`.Test {
     }
 }
 
-@Suite
-struct `IEEE 754 - Mixed Precision Edge Cases` {
-    @Test func `Float leastNonzeroMagnitude is different from Double`() {
-        let floatMin = Float.leastNonzeroMagnitude
-        let doubleMin = Double.leastNonzeroMagnitude
+enum `EdgeCases Tests` {}
 
-        #expect(Double(floatMin) != doubleMin, "Different precisions have different minimums")
-    }
+extension `EdgeCases Tests` {
+    @Suite
+    struct `IEEE 754 - Mixed Precision Edge Cases` {
+        @Test func `Float leastNonzeroMagnitude is different from Double`() {
+            let floatMin = Float.leastNonzeroMagnitude
+            let doubleMin = Double.leastNonzeroMagnitude
 
-    @Test func `Float and Double infinity convert correctly`() {
-        let floatInf = Float.infinity
-        let doubleInf = Double.infinity
+            #expect(Double(floatMin) != doubleMin, "Different precisions have different minimums")
+        }
 
-        #expect(Double(floatInf) == doubleInf, "Float infinity should convert to Double infinity")
-        #expect(Float(doubleInf) == floatInf, "Double infinity should convert to Float infinity")
+        @Test func `Float and Double infinity convert correctly`() {
+            let floatInf = Float.infinity
+            let doubleInf = Double.infinity
+
+            #expect(Double(floatInf) == doubleInf, "Float infinity should convert to Double infinity")
+            #expect(Float(doubleInf) == floatInf, "Double infinity should convert to Float infinity")
+        }
     }
 }
 
