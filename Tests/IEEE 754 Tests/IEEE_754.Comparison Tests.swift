@@ -212,7 +212,7 @@ extension `IEEE_754.Comparison Tests`.Test {
             let values: [Double] = [
                 -Double.infinity, -100.0, -1.0, -0.0, 0.0, 1.0, 100.0, Double.infinity,
             ]
-            for i in 0..<values.count - 1 {
+            (0..<values.count - 1).forEach { i in
                 #expect(
                     IEEE_754.Comparison.totalOrder(values[i], values[i + 1]),
                     "\(values[i]) should be ordered before \(values[i + 1])"
@@ -376,7 +376,7 @@ extension `IEEE_754.Comparison Tests`.Test {
                 Float(100.0),
                 Float.infinity,
             ]
-            for i in 0..<values.count - 1 {
+            (0..<values.count - 1).forEach { i in
                 #expect(
                     IEEE_754.Comparison.totalOrder(values[i], values[i + 1]),
                     "\(values[i]) should be ordered before \(values[i + 1])"

@@ -199,7 +199,7 @@ extension `IEEE_754.Binary64 Tests`.Test {
     struct SignificandBitWalking {
         @Test func `single bit set in each significand position`() {
 
-            for bitPosition in 0..<52 {
+            (0..<52).forEach { bitPosition in
 
                 var bytes: [UInt8] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
 
@@ -220,7 +220,7 @@ extension `IEEE_754.Binary64 Tests`.Test {
 
         @Test func `walking bits with normal exponent`() {
 
-            for bitPosition in 0..<10 {
+            (0..<10).forEach { bitPosition in
 
                 var bytes: [UInt8] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xF0, 0x3F]
 
@@ -244,7 +244,7 @@ extension `IEEE_754.Binary32 Tests`.Test {
     @Suite("IEEE 754 - Float Significand Bit Walking")
     struct SignificandBitWalking {
         @Test func `single bit set in each significand position`() {
-            for bitPosition in 0..<23 {
+            (0..<23).forEach { bitPosition in
                 var bytes: [UInt8] = [0x00, 0x00, 0x00, 0x00]
 
                 let byteIndex = bitPosition / 8

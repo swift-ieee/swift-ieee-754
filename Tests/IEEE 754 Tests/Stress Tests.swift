@@ -83,7 +83,7 @@ extension `Performance Tests` {
         func `alternating endianness 100 times`() {
             let original: Double = 1.41421356237309504880
 
-            for i in 0..<100 {
+            (0..<100).forEach { i in
                 let endianness: Binary.Endianness = i % 2 == 0 ? .little : .big
                 let bytes = original.bytes(endianness: endianness)
                 _ = Double(bytes: bytes, endianness: endianness)
@@ -145,7 +145,7 @@ extension `Performance Tests` {
         func `alternating endianness 100 times`() {
             let original: Float = 2.71828
 
-            for i in 0..<100 {
+            (0..<100).forEach { i in
                 let endianness: Binary.Endianness = i % 2 == 0 ? .little : .big
                 let bytes = original.bytes(endianness: endianness)
                 _ = Float(bytes: bytes, endianness: endianness)
@@ -248,7 +248,7 @@ extension `Performance Tests` {
     struct `Bit Patterns - Performance` {
         @Test
         func `all 256 byte values in each Double position`() {
-            for position in 0..<8 {
+            (0..<8).forEach { position in
                 for byteValue in UInt8.min...UInt8.max {
                     var bytes: [UInt8] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
                     bytes[position] = byteValue
@@ -259,7 +259,7 @@ extension `Performance Tests` {
 
         @Test
         func `all 256 byte values in each Float position`() {
-            for position in 0..<4 {
+            (0..<4).forEach { position in
                 for byteValue in UInt8.min...UInt8.max {
                     var bytes: [UInt8] = [0x00, 0x00, 0x00, 0x00]
                     bytes[position] = byteValue

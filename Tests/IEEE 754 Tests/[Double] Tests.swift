@@ -236,7 +236,7 @@ extension `Performance Tests` {
         @Test
         func `deserialize 1000 Doubles from bytes`() {
             var bytes: [UInt8] = []
-            for i in 0..<1_000 {
+            (0..<1_000).forEach { i in
                 bytes += Double(i).bytes()
             }
 
@@ -272,7 +272,7 @@ extension `Performance Tests` {
         @Test
         func `deserialize 100 Doubles repeatedly`() {
             var bytes: [UInt8] = []
-            for i in 0..<100 {
+            (0..<100).forEach { i in
                 bytes += Double(i).bytes()
             }
 
@@ -285,7 +285,7 @@ extension `Performance Tests` {
         func `alternating endianness 1000 values`() {
             let value: Double = 3.141592653589793
 
-            for i in 0..<1_000 {
+            (0..<1_000).forEach { i in
                 let endianness: Binary.Endianness = i % 2 == 0 ? .little : .big
                 let bytes = value.bytes(endianness: endianness)
                 _ = [Double](bytes: [bytes].flatMap { $0 }, endianness: endianness)
