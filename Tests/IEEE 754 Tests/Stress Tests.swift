@@ -249,7 +249,7 @@ extension `Performance Tests` {
         @Test
         func `all 256 byte values in each Double position`() {
             (0..<8).forEach { position in
-                for byteValue in UInt8.min...UInt8.max {
+                (UInt8.min...UInt8.max).forEach { byteValue in
                     var bytes: [UInt8] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
                     bytes[position] = byteValue
                     _ = Double(bytes: bytes)
@@ -260,7 +260,7 @@ extension `Performance Tests` {
         @Test
         func `all 256 byte values in each Float position`() {
             (0..<4).forEach { position in
-                for byteValue in UInt8.min...UInt8.max {
+                (UInt8.min...UInt8.max).forEach { byteValue in
                     var bytes: [UInt8] = [0x00, 0x00, 0x00, 0x00]
                     bytes[position] = byteValue
                     _ = Float(bytes: bytes)
