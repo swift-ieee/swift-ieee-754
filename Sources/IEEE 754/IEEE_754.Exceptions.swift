@@ -1,5 +1,5 @@
 public import Dependency
-public import Synchronization
+import Synchronization
 
 extension IEEE_754 {
 
