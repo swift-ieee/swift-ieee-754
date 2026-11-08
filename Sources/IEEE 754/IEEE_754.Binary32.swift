@@ -37,6 +37,8 @@ extension IEEE_754.Binary32 {
 }
 
 extension IEEE_754.Binary32 {
+
+    public enum SpecialValues {}
 }
 
 extension IEEE_754.Binary32.SpecialValues {
