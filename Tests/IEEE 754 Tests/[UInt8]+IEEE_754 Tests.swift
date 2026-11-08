@@ -2,56 +2,62 @@ import Testing
 
 @testable import IEEE_754
 
-@Suite
-struct `[UInt8] Tests` {
-    @Test(arguments: [3.14159265358979323846, 2.71828, 1.41421, 0.0, 1.0, -1.0])
-    func `unlabeled init with Double`(value: Double) {
-        let bytes = [UInt8](value)
-        let restored = Double(bytes: bytes)
+enum `[UInt8]+IEEE_754 Tests` {}
 
-        #expect(restored == value, "\(value) should round-trip through [UInt8](Double)")
-    }
+extension `[UInt8]+IEEE_754 Tests` {
+    @Suite
+    struct `[UInt8] Tests` {
+        @Test(arguments: [3.14159265358979323846, 2.71828, 1.41421, 0.0, 1.0, -1.0])
+        func `unlabeled init with Double`(value: Double) {
+            let bytes = [UInt8](value)
+            let restored = Double(bytes: bytes)
 
-    @Test(arguments: [3.14159, 2.71828, 1.41421])
-    func `unlabeled init with Double big-endian`(value: Double) {
-        let bytes = [UInt8](value, endianness: .big)
-        let restored = Double(bytes: bytes, endianness: .big)
+            #expect(restored == value, "\(value) should round-trip through [UInt8](Double)")
+        }
 
-        #expect(restored == value, "\(value) should round-trip with big-endian")
-    }
+        @Test(arguments: [3.14159, 2.71828, 1.41421])
+        func `unlabeled init with Double big-endian`(value: Double) {
+            let bytes = [UInt8](value, endianness: .big)
+            let restored = Double(bytes: bytes, endianness: .big)
 
-    @Test func `Double serialization produces 8 bytes`() {
-        let value: Double = 3.14159
-        let bytes = [UInt8](value)
+            #expect(restored == value, "\(value) should round-trip with big-endian")
+        }
 
-        #expect(bytes.count == 8, "Double serialization should produce exactly 8 bytes")
+        @Test func `Double serialization produces 8 bytes`() {
+            let value: Double = 3.14159
+            let bytes = [UInt8](value)
+
+            #expect(bytes.count == 8, "Double serialization should produce exactly 8 bytes")
+        }
     }
 }
 
-@Suite
-struct `[UInt8] Float Serialization Tests` {
-    @Test(arguments: [
-        Float(3.14159), Float(2.71828), Float(1.41421), Float(0.0), Float(1.0), Float(-1.0),
-    ])
-    func `unlabeled init with Float`(value: Float) {
-        let bytes = [UInt8](value)
-        let restored = Float(bytes: bytes)
+extension `[UInt8]+IEEE_754 Tests` {
+    @Suite
+    struct `[UInt8] Float Serialization Tests` {
+        @Test(arguments: [
+            Float(3.14159), Float(2.71828), Float(1.41421), Float(0.0), Float(1.0), Float(-1.0),
+        ])
+        func `unlabeled init with Float`(value: Float) {
+            let bytes = [UInt8](value)
+            let restored = Float(bytes: bytes)
 
-        #expect(restored == value, "\(value) should round-trip through [UInt8](Float)")
-    }
+            #expect(restored == value, "\(value) should round-trip through [UInt8](Float)")
+        }
 
-    @Test(arguments: [Float(3.14), Float(2.718), Float(1.414)])
-    func `unlabeled init with Float big-endian`(value: Float) {
-        let bytes = [UInt8](value, endianness: .big)
-        let restored = Float(bytes: bytes, endianness: .big)
+        @Test(arguments: [Float(3.14), Float(2.718), Float(1.414)])
+        func `unlabeled init with Float big-endian`(value: Float) {
+            let bytes = [UInt8](value, endianness: .big)
+            let restored = Float(bytes: bytes, endianness: .big)
 
-        #expect(restored == value, "\(value) should round-trip with big-endian")
-    }
+            #expect(restored == value, "\(value) should round-trip with big-endian")
+        }
 
-    @Test func `Float serialization produces 4 bytes`() {
-        let value: Float = 3.14159
-        let bytes = [UInt8](value)
+        @Test func `Float serialization produces 4 bytes`() {
+            let value: Float = 3.14159
+            let bytes = [UInt8](value)
 
-        #expect(bytes.count == 4, "Float serialization should produce exactly 4 bytes")
+            #expect(bytes.count == 4, "Float serialization should produce exactly 4 bytes")
+        }
     }
 }
