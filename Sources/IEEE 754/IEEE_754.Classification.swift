@@ -127,14 +127,14 @@ extension IEEE_754.Classification {
         }
 
         let kind: NumberClass.Finite
-        if value.isInfinite {
-            kind = .infinity
+        kind = if value.isInfinite {
+            .infinity
         } else if value.isZero {
-            kind = .zero
+            .zero
         } else if value.isSubnormal {
-            kind = .subnormal
+            .subnormal
         } else {
-            kind = .normal
+            .normal
         }
 
         return value.sign == .minus ? .negative(kind) : .positive(kind)
@@ -147,14 +147,14 @@ extension IEEE_754.Classification {
         }
 
         let kind: NumberClass.Finite
-        if value.isInfinite {
-            kind = .infinity
+        kind = if value.isInfinite {
+            .infinity
         } else if value.isZero {
-            kind = .zero
+            .zero
         } else if value.isSubnormal {
-            kind = .subnormal
+            .subnormal
         } else {
-            kind = .normal
+            .normal
         }
 
         return value.sign == .minus ? .negative(kind) : .positive(kind)

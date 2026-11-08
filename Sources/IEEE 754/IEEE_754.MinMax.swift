@@ -163,13 +163,13 @@ extension IEEE_754.MinMax {
         let xMag = Swift::abs(x)
         let yMag = Swift::abs(y)
 
-        if xMag < yMag {
-            return x
+        return if xMag < yMag {
+            x
         } else if yMag < xMag {
-            return y
+            y
         } else {
 
-            return minimum(x, y)
+            minimum(x, y)
         }
     }
 
@@ -183,13 +183,13 @@ extension IEEE_754.MinMax {
         let xMag = Swift::abs(x)
         let yMag = Swift::abs(y)
 
-        if xMag > yMag {
-            return x
+        return if xMag > yMag {
+            x
         } else if yMag > xMag {
-            return y
+            y
         } else {
 
-            return maximum(x, y)
+            maximum(x, y)
         }
     }
 
@@ -291,12 +291,12 @@ extension IEEE_754.MinMax {
         }
         let xMag = Swift::abs(x)
         let yMag = Swift::abs(y)
-        if xMag < yMag {
-            return x
+        return if xMag < yMag {
+            x
         } else if yMag < xMag {
-            return y
+            y
         } else {
-            return minimum(x, y)
+            minimum(x, y)
         }
     }
 
@@ -307,12 +307,12 @@ extension IEEE_754.MinMax {
         }
         let xMag = Swift::abs(x)
         let yMag = Swift::abs(y)
-        if xMag > yMag {
-            return x
+        return if xMag > yMag {
+            x
         } else if yMag > xMag {
-            return y
+            y
         } else {
-            return maximum(x, y)
+            maximum(x, y)
         }
     }
 
