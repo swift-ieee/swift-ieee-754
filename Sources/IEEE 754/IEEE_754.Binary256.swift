@@ -29,6 +29,4 @@ extension IEEE_754.Binary256 {
 }
 
 extension IEEE_754.Binary256 {
-
-    public enum SpecialValuesDocumentation {}
 }
