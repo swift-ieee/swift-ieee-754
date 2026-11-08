@@ -5,14 +5,6 @@ extension IEEE_754 {
 
 extension IEEE_754.MinMax {
 
-    public enum Operation: Sendable, Equatable {
-
-        case standard(Mode)
-
-        case number(Mode)
-
-        case magnitude(Mode, preferNumber: Bool)
-    }
 
     @inlinable
     public static func apply(_ x: Double, _ y: Double, operation: Operation) -> Double {
@@ -74,13 +66,6 @@ extension IEEE_754.MinMax {
 }
 
 extension IEEE_754.MinMax.Operation {
-
-    public enum Mode: Sendable, Equatable {
-
-        case minimum
-
-        case maximum
-    }
 }
 
 extension IEEE_754.MinMax {

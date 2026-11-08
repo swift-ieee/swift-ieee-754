@@ -111,14 +111,6 @@ extension IEEE_754.Classification {
 
 extension IEEE_754.Classification {
 
-    public enum NumberClass: Sendable, Equatable {
-
-        case nan(NaN)
-
-        case positive(Finite)
-
-        case negative(Finite)
-    }
 
     @inlinable
     public static func numberClass(_ value: Double) -> NumberClass {
@@ -162,22 +154,4 @@ extension IEEE_754.Classification {
 }
 
 extension IEEE_754.Classification.NumberClass {
-
-    public enum NaN: Sendable, Equatable {
-
-        case signaling
-
-        case quiet
-    }
-
-    public enum Finite: Sendable, Equatable {
-
-        case infinity
-
-        case normal
-
-        case subnormal
-
-        case zero
-    }
 }

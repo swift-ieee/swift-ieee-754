@@ -5,14 +5,6 @@ extension IEEE_754 {
 
 extension IEEE_754.Rounding {
 
-    public enum Direction: Sendable, Equatable {
-
-        case towardInfinity(Sign)
-
-        case towardZero
-
-        case toNearest(TieBreaking)
-    }
 
     @inlinable
     public static func apply(_ value: Double, direction: Direction) -> Double {
@@ -56,20 +48,6 @@ extension IEEE_754.Rounding {
 }
 
 extension IEEE_754.Rounding.Direction {
-
-    public enum Sign: Sendable, Equatable {
-
-        case positive
-
-        case negative
-    }
-
-    public enum TieBreaking: Sendable, Equatable {
-
-        case toEven
-
-        case awayFromZero
-    }
 }
 
 extension IEEE_754.Rounding {

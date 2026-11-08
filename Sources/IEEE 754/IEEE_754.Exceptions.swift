@@ -7,19 +7,6 @@ extension IEEE_754 {
 }
 
 extension IEEE_754.Exceptions {
-
-    public enum Flag: Sendable, Equatable, CaseIterable {
-
-        case invalid
-
-        case divisionByZero
-
-        case overflow
-
-        case underflow
-
-        case inexact
-    }
 }
 
 extension IEEE_754.Exceptions.Flag: CustomStringConvertible {
@@ -36,14 +23,6 @@ extension IEEE_754.Exceptions.Flag: CustomStringConvertible {
 
 extension IEEE_754.Exceptions {
 
-    @usableFromInline
-    final class ExceptionState: @unchecked Sendable {
-        @usableFromInline
-        let state: Mutex<Flags> = Mutex(Flags())
-
-        @usableFromInline
-        init() {}
-    }
 
     @usableFromInline
     static var state: ExceptionState {
@@ -52,14 +31,7 @@ extension IEEE_754.Exceptions {
 }
 
 extension IEEE_754.Exceptions.ExceptionState {
-    @usableFromInline
-    struct Flags {
-        var invalid: Bool = false
-        var divisionByZero: Bool = false
-        var overflow: Bool = false
-        var underflow: Bool = false
-        var inexact: Bool = false
-    }
+
 
     @usableFromInline
     static let _global = IEEE_754.Exceptions.ExceptionState()
