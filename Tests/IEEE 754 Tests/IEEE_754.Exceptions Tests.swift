@@ -5,7 +5,7 @@ import Testing
 enum `IEEE_754.Exceptions Tests` {}
 
 extension `IEEE_754.Exceptions Tests` {
-    @Suite("IEEE_754.Exceptions - Flag Operations", .serialized)
+    @Suite(.serialized)
     struct Test {
         @Test func `Raise And Test Invalid`() {
             IEEE_754.Exceptions.clear()
@@ -139,7 +139,7 @@ extension `IEEE_754.Exceptions Tests` {
 }
 
 extension `IEEE_754.Exceptions Tests`.Test {
-    @Suite("IEEE_754.Exceptions - Compatibility Properties", .serialized)
+    @Suite(.serialized)
     struct Compatibility {
         @Test func `Invalid Operation Property`() {
             IEEE_754.Exceptions.clear()
@@ -179,7 +179,7 @@ extension `IEEE_754.Exceptions Tests`.Test {
 }
 
 extension `IEEE_754.Exceptions Tests`.Test {
-    @Suite("IEEE_754.Exceptions - Flag Enum")
+    @Suite
     struct FlagEnum {
         @Test func `Flag Description`() {
             #expect(IEEE_754.Exceptions.Flag.invalid.description == "invalid")
@@ -210,7 +210,7 @@ extension `IEEE_754.Exceptions Tests`.Test {
 }
 
 extension `IEEE_754.Exceptions Tests`.Test {
-    @Suite("IEEE_754.Exceptions - Idempotency", .serialized)
+    @Suite(.serialized)
     struct Idempotency {
         @Test func `Raising Twice Has No Effect`() {
             IEEE_754.Exceptions.clear()
@@ -241,7 +241,7 @@ extension `IEEE_754.Exceptions Tests`.Test {
 }
 
 extension `IEEE_754.Exceptions Tests`.Test {
-    @Suite("IEEE_754.Exceptions - Flag Independence", .serialized)
+    @Suite(.serialized)
     struct Independence {
         @Test func `Flags Are Independent`() {
             IEEE_754.Exceptions.clear()
@@ -277,7 +277,7 @@ extension `IEEE_754.Exceptions Tests`.Test {
 }
 
 extension `IEEE_754.Exceptions Tests`.Test {
-    @Suite("IEEE_754.Exceptions - Thread Independence", .serialized)
+    @Suite(.serialized)
     struct Thread {
         @Test func `Initial State Is Clean`() {
             IEEE_754.Exceptions.clear()
@@ -312,7 +312,7 @@ extension `IEEE_754.Exceptions Tests`.Test {
     import IEEE_754_Shims
 
     extension `IEEE_754.Exceptions Tests`.Test {
-        @Suite("IEEE_754.Exceptions - Single Store Discipline", .serialized)
+        @Suite(.serialized)
         struct SingleStoreDiscipline {
             @Test func `Raise Does Not Leak Into C Shim Thread Local Store`() {
                 ieee754_clear_all_exceptions()

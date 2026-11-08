@@ -5,7 +5,7 @@ import Testing
 enum `Double Tests` {}
 
 extension `Double Tests` {
-    @Suite("Double+IEEE_754 - Direct bytes() method")
+    @Suite
     struct Test {
         @Test(arguments: [
             3.14159265358979323846,
@@ -44,7 +44,7 @@ extension `Double Tests` {
 }
 
 extension `Double Tests`.Test {
-    @Suite("Double+IEEE_754 - Namespace API")
+    @Suite
     struct Namespace {
         @Test(arguments: [3.14159, 2.71828, 1.41421])
         func `namespace bytes round-trip`(value: Double) {
@@ -73,7 +73,7 @@ extension `Double Tests`.Test {
 }
 
 extension `Double Tests`.Test {
-    @Suite("Double+IEEE_754 - Canonical init")
+    @Suite
     struct CanonicalInit {
         @Test(arguments: [3.14159265358979323846, 2.71828, 1.41421, 0.0, 1.0, -1.0])
         func `canonical init bytes parameter`(value: Double) {

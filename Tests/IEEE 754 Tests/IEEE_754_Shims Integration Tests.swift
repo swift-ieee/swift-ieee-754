@@ -5,7 +5,7 @@
 
     @testable import IEEE_754
 
-    @Suite("IEEE 754 Shims - Rounding Mode Control")
+    @Suite
     struct CIEEERoundingModeTests {
         @Test func `Get Rounding Mode`() {
 
@@ -72,7 +72,7 @@
         }
     }
 
-    @Suite("IEEE 754 Shims - Thread-Local Exceptions", .serialized)
+    @Suite(.serialized)
     struct CIEEEExceptionTests {
         @Test func `Initial Exception State`() {
             ieee754_clear_all_exceptions()
@@ -168,7 +168,7 @@
         }
     }
 
-    @Suite("IEEE 754 Shims - Hardware FPU Exceptions")
+    @Suite
     struct CIEEEHardwareExceptionTests {
         @Test func `Clear FPU Exceptions`() {
             ieee754_clear_fpu_exceptions()
@@ -193,7 +193,7 @@
         }
     }
 
-    @Suite("IEEE 754 Shims - Signaling Comparisons (Double)", .serialized)
+    @Suite(.serialized)
     struct CIEEESignalingCompareDoubleTests {
         @Test func `Signaling Equal Normal`() {
             ieee754_clear_all_exceptions()
@@ -281,7 +281,7 @@
         }
     }
 
-    @Suite("IEEE 754 Shims - Signaling Comparisons (Float)", .serialized)
+    @Suite(.serialized)
     struct CIEEESignalingCompareFloatTests {
         @Test func `Signaling Equal Normal`() {
             ieee754_clear_all_exceptions()
@@ -328,7 +328,7 @@
         }
     }
 
-    @Suite("IEEE 754 Shims - Integration Scenarios")
+    @Suite
     struct CIEEEIntegrationTests {
         @Test func `Rounding Mode And Exceptions`() {
 

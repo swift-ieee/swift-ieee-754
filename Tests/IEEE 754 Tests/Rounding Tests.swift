@@ -5,7 +5,7 @@ import Testing
 enum `IEEE_754.Rounding Tests` {}
 
 extension `IEEE_754.Rounding Tests` {
-    @Suite("IEEE 754 Rounding Operations")
+    @Suite
     struct Test {}
 }
 

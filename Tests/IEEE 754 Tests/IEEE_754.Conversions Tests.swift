@@ -5,7 +5,7 @@ import Testing
 enum `IEEE_754.Conversions Tests` {}
 
 extension `IEEE_754.Conversions Tests` {
-    @Suite("IEEE_754.Conversions - Float to Double")
+    @Suite
     struct Test {
         @Test(arguments: [
             Float(3.14), Float(-3.14), Float(0.0), Float(-0.0), Float(1.0), Float(100.0),
@@ -38,7 +38,7 @@ extension `IEEE_754.Conversions Tests` {
 }
 
 extension `IEEE_754.Conversions Tests`.Test {
-    @Suite("IEEE_754.Conversions - Double to Float")
+    @Suite
     struct DoubleToFloat {
         @Test(arguments: [1.0, -1.0, 3.14, -2.71, 0.0, -0.0])
         func `Normal Values`(value: Double) {
@@ -83,7 +83,7 @@ extension `IEEE_754.Conversions Tests`.Test {
 }
 
 extension `IEEE_754.Conversions Tests`.Test {
-    @Suite("IEEE_754.Conversions - Double to Int")
+    @Suite
     struct DoubleToInt {
         @Test(arguments: [(3.14, 3), (3.5, 4), (4.5, 4), (-3.5, -4)])
         func `Ties To Even`(value: Double, expected: Int) {
@@ -152,7 +152,7 @@ extension `IEEE_754.Conversions Tests`.Test.DoubleToInt {
 }
 
 extension `IEEE_754.Conversions Tests`.Test {
-    @Suite("IEEE_754.Conversions - Double to Int Truncating")
+    @Suite
     struct DoubleToIntTruncating {
         @Test(arguments: [(3.9, 3), (-3.9, -3), (3.1, 3), (-3.1, -3)])
         func truncation(value: Double, expected: Int) {
@@ -198,7 +198,7 @@ extension `IEEE_754.Conversions Tests`.Test.DoubleToIntTruncating {
 }
 
 extension `IEEE_754.Conversions Tests`.Test {
-    @Suite("IEEE_754.Conversions - Int to Double")
+    @Suite
     struct IntToDouble {
         @Test(arguments: [0, 1, -1, 42, -42, 1000, -1000])
         func `Small Integers`(value: Int) {
@@ -221,7 +221,7 @@ extension `IEEE_754.Conversions Tests`.Test {
 }
 
 extension `IEEE_754.Conversions Tests`.Test {
-    @Suite("IEEE_754.Conversions - Float to Int")
+    @Suite
     struct FloatToInt {
         @Test(arguments: [(Float(3.14), 3), (Float(3.5), 4), (Float(4.5), 4)])
         func `Ties To Even`(value: Float, expected: Int) {
@@ -261,7 +261,7 @@ extension `IEEE_754.Conversions Tests`.Test.FloatToInt {
 }
 
 extension `IEEE_754.Conversions Tests`.Test {
-    @Suite("IEEE_754.Conversions - Float to Int Truncating")
+    @Suite
     struct FloatToIntTruncating {
         @Test(arguments: [(Float(3.9), 3), (Float(-3.9), -3)])
         func truncation(value: Float, expected: Int) {
@@ -296,7 +296,7 @@ extension `IEEE_754.Conversions Tests`.Test.FloatToIntTruncating {
 }
 
 extension `IEEE_754.Conversions Tests`.Test {
-    @Suite("IEEE_754.Conversions - Int to Float")
+    @Suite
     struct IntToFloat {
         @Test(arguments: [0, 1, -1, 42, -42])
         func `Small Integers`(value: Int) {
@@ -313,7 +313,7 @@ extension `IEEE_754.Conversions Tests`.Test {
 }
 
 extension `IEEE_754.Conversions Tests`.Test {
-    @Suite("IEEE_754.Conversions - Double to UInt")
+    @Suite
     struct DoubleToUInt {
         @Test(arguments: [(3.14, UInt(3)), (3.5, UInt(4)), (0.0, UInt(0))])
         func `Positive Values`(value: Double, expected: UInt) {
@@ -349,7 +349,7 @@ extension `IEEE_754.Conversions Tests`.Test.DoubleToUInt {
 }
 
 extension `IEEE_754.Conversions Tests`.Test {
-    @Suite("IEEE_754.Conversions - UInt to Double")
+    @Suite
     struct UIntToDouble {
         @Test(arguments: [UInt(0), UInt(1), UInt(42), UInt(1000)])
         func `Normal Values`(value: UInt) {
@@ -366,7 +366,7 @@ extension `IEEE_754.Conversions Tests`.Test {
 }
 
 extension `IEEE_754.Conversions Tests`.Test {
-    @Suite("IEEE_754.Conversions - Float to UInt")
+    @Suite
     struct FloatToUInt {
         @Test(arguments: [(Float(3.14), UInt(3)), (Float(0.0), UInt(0))])
         func `Positive Values`(value: Float, expected: UInt) {
@@ -396,7 +396,7 @@ extension `IEEE_754.Conversions Tests`.Test.FloatToUInt {
 }
 
 extension `IEEE_754.Conversions Tests`.Test {
-    @Suite("IEEE_754.Conversions - UInt to Float")
+    @Suite
     struct UIntToFloat {
         @Test(arguments: [UInt(0), UInt(1), UInt(42)])
         func `Normal Values`(value: UInt) {
@@ -407,7 +407,7 @@ extension `IEEE_754.Conversions Tests`.Test {
 }
 
 extension `IEEE_754.Conversions Tests`.Test {
-    @Suite("IEEE_754.Conversions - Round-trip Tests")
+    @Suite
     struct ConversionRoundTrip {
         @Test(arguments: [Float(0.0), Float(1.0), Float(3.14), Float(-2.71)])
         func `Float Double Float Round Trip`(value: Float) {

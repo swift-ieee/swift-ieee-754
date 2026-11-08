@@ -5,7 +5,7 @@ import Testing
 enum `Float Tests` {}
 
 extension `Float Tests` {
-    @Suite("Float+IEEE_754 - Direct bytes() method")
+    @Suite
     struct Test {
         @Test(arguments: [
             Float(3.14159),
@@ -44,7 +44,7 @@ extension `Float Tests` {
 }
 
 extension `Float Tests`.Test {
-    @Suite("Float+IEEE_754 - Namespace API")
+    @Suite
     struct Namespace {
         @Test(arguments: [Float(3.14159), Float(2.71828), Float(1.41421)])
         func `namespace bytes round-trip`(value: Float) {
@@ -73,7 +73,7 @@ extension `Float Tests`.Test {
 }
 
 extension `Float Tests`.Test {
-    @Suite("Float+IEEE_754 - Canonical init")
+    @Suite
     struct CanonicalInit {
         @Test(arguments: [
             Float(3.14159), Float(2.71828), Float(1.41421), Float(0.0), Float(1.0), Float(-1.0),

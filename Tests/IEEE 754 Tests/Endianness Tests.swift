@@ -3,7 +3,7 @@ import Testing
 @testable import IEEE_754
 
 extension `Double Tests`.Test {
-    @Suite("IEEE 754 - Double Endianness")
+    @Suite
     struct Endianness {
         @Test(arguments: [3.14159, 2.71828, 1.41421, 0.0, 1.0, -1.0, 42.0])
         func `little-endian round-trip`(value: Double) {
@@ -56,7 +56,7 @@ extension `Double Tests`.Test {
 }
 
 extension `Float Tests`.Test {
-    @Suite("IEEE 754 - Float Endianness")
+    @Suite
     struct Endianness {
         @Test(arguments: [
             Float(3.14159), Float(2.71828), Float(1.41421), Float(0.0), Float(1.0), Float(-1.0),

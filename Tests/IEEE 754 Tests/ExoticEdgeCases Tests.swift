@@ -4,7 +4,7 @@ import Testing
 @testable import IEEE_754
 
 extension `Double Tests`.Test {
-    @Suite("IEEE 754 - Double Powers of 2")
+    @Suite
     struct PowersOfTwo {
         @Test func `powers of 2 have exact representations`() {
 
@@ -75,7 +75,7 @@ extension `Double Tests`.Test {
 }
 
 extension `Float Tests`.Test {
-    @Suite("IEEE 754 - Float Powers of 2")
+    @Suite
     struct PowersOfTwo {
         @Test func `powers of 2 have exact representations`() {
             let powers: [(Int, Float)] = [
@@ -118,7 +118,7 @@ extension `Float Tests`.Test {
 }
 
 extension `Double Tests`.Test {
-    @Suite("IEEE 754 - Double Exponent Sweep")
+    @Suite
     struct ExponentSweep {
         @Test func `sample exponent values across range`() {
 
@@ -167,7 +167,7 @@ extension `Double Tests`.Test {
 }
 
 extension `Float Tests`.Test {
-    @Suite("IEEE 754 - Float Exponent Sweep")
+    @Suite
     struct ExponentSweep {
         @Test func `sample exponent values across range`() {
             let exponents: [Int] = [
@@ -195,7 +195,7 @@ extension `Float Tests`.Test {
 }
 
 extension `IEEE_754.Binary64 Tests`.Test {
-    @Suite("IEEE 754 - Double Significand Bit Walking")
+    @Suite
     struct SignificandBitWalking {
         @Test func `single bit set in each significand position`() {
 
@@ -241,7 +241,7 @@ extension `IEEE_754.Binary64 Tests`.Test {
 }
 
 extension `IEEE_754.Binary32 Tests`.Test {
-    @Suite("IEEE 754 - Float Significand Bit Walking")
+    @Suite
     struct SignificandBitWalking {
         @Test func `single bit set in each significand position`() {
             (0..<23).forEach { bitPosition in
@@ -264,7 +264,7 @@ extension `IEEE_754.Binary32 Tests`.Test {
     }
 }
 
-@Suite("IEEE 754 - Negative NaN")
+@Suite
 struct NegativeNaNTests {
     @Test func `negative NaN round-trips as NaN`() {
 
@@ -307,7 +307,7 @@ struct NegativeNaNTests {
 }
 
 extension `Double Tests`.Test {
-    @Suite("IEEE 754 - Known Problematic Values")
+    @Suite
     struct KnownProblematicValues {
         @Test func `famous Java bug value`() {
 
@@ -384,7 +384,7 @@ extension `Double Tests`.Test {
     }
 }
 
-@Suite("IEEE 754 - Exact Binary Fractions")
+@Suite
 struct ExactBinaryFractionsTests {
     @Test func `powers of 2 fractions are exact`() {
         let fractions: [Double] = [
@@ -439,7 +439,7 @@ struct ExactBinaryFractionsTests {
     }
 }
 
-@Suite("IEEE 754 - Large Integer Boundaries")
+@Suite
 struct LargeIntegerBoundariesTests {
     @Test func `largest exactly representable integer for Double`() {
 
@@ -502,7 +502,7 @@ struct LargeIntegerBoundariesTests {
     }
 }
 
-@Suite("IEEE 754 - Cross-Format Precision")
+@Suite
 struct CrossFormatPrecisionTests {
     @Test func `Float to Double preserves value`() {
         let floatValues: [Float] = [

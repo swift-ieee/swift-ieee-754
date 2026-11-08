@@ -3,7 +3,7 @@ import Testing
 @testable import IEEE_754
 
 extension `Double Tests`.Test {
-    @Suite("IEEE 754 - Double Round-trip Conversions")
+    @Suite
     struct RoundTrip {
         @Test(arguments: [
             3.14159265358979323846,
@@ -55,7 +55,7 @@ extension `Double Tests`.Test {
 }
 
 extension `Float Tests`.Test {
-    @Suite("IEEE 754 - Float Round-trip Conversions")
+    @Suite
     struct RoundTrip {
         @Test(arguments: [
             Float(3.14159),

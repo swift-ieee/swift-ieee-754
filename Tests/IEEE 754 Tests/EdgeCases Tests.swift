@@ -3,7 +3,7 @@ import Testing
 @testable import IEEE_754
 
 extension `Double Tests`.Test {
-    @Suite("IEEE 754 - Double Subnormal Numbers")
+    @Suite
     struct Subnormal {
         @Test func `smallest subnormal number round-trips`() {
             let value = Double.leastNonzeroMagnitude
@@ -47,7 +47,7 @@ extension `Double Tests`.Test {
 }
 
 extension `Double Tests`.Test {
-    @Suite("IEEE 754 - Double Sign Bit Edge Cases")
+    @Suite
     struct SignEdgeCases {
         @Test func `positive zero has correct sign bit`() {
             let zero: Double = 0.0
@@ -101,7 +101,7 @@ extension `Double Tests`.Test {
 }
 
 extension `Double Tests`.Test {
-    @Suite("IEEE 754 - Double ULP (Unit in Last Place) Edge Cases")
+    @Suite
     struct ULPEdgeCases {
         @Test func `one ULP above zero`() {
             let value = Double.leastNonzeroMagnitude
@@ -154,7 +154,7 @@ extension `Double Tests`.Test {
 }
 
 extension `Double Tests`.Test {
-    @Suite("IEEE 754 - Double Extreme Values")
+    @Suite
     struct ExtremeValues {
         @Test func `maximum finite value round-trips`() {
             let value = Double.greatestFiniteMagnitude
@@ -190,7 +190,7 @@ extension `Double Tests`.Test {
 }
 
 extension `Double Tests`.Test {
-    @Suite("IEEE 754 - Double NaN Bit Patterns")
+    @Suite
     struct NaNEdgeCases {
         @Test func `quiet NaN round-trips`() {
             let nan = Double.nan
@@ -233,7 +233,7 @@ extension `Double Tests`.Test {
 }
 
 extension `Double Tests`.Test {
-    @Suite("IEEE 754 - Double Endianness Edge Cases")
+    @Suite
     struct EndiannessEdgeCases {
         @Test func `special values survive endianness conversion`() {
             let values: [Double] = [
@@ -268,7 +268,7 @@ extension `Double Tests`.Test {
 }
 
 extension `Float Tests`.Test {
-    @Suite("IEEE 754 - Float Subnormal Numbers")
+    @Suite
     struct Subnormal {
         @Test func `smallest subnormal number round-trips`() {
             let value = Float.leastNonzeroMagnitude
@@ -302,7 +302,7 @@ extension `Float Tests`.Test {
 }
 
 extension `Float Tests`.Test {
-    @Suite("IEEE 754 - Float Sign Bit Edge Cases")
+    @Suite
     struct SignEdgeCases {
         @Test func `positive and negative zero byte patterns`() {
             let posZero: Float = 0.0
@@ -321,7 +321,7 @@ extension `Float Tests`.Test {
 }
 
 extension `Float Tests`.Test {
-    @Suite("IEEE 754 - Float Extreme Values")
+    @Suite
     struct ExtremeValues {
         @Test func `maximum finite value round-trips`() {
             let value = Float.greatestFiniteMagnitude
@@ -346,7 +346,7 @@ extension `Float Tests`.Test {
 }
 
 extension `Float Tests`.Test {
-    @Suite("IEEE 754 - Float NaN Bit Patterns")
+    @Suite
     struct NaNEdgeCases {
         @Test func `NaN with different payloads`() {
             let nanPatterns: [[UInt8]] = [
@@ -366,7 +366,7 @@ extension `Float Tests`.Test {
     }
 }
 
-@Suite("IEEE 754 - Mixed Precision Edge Cases")
+@Suite
 struct MixedPrecisionEdgeCases {
     @Test func `Float leastNonzeroMagnitude is different from Double`() {
         let floatMin = Float.leastNonzeroMagnitude
@@ -385,7 +385,7 @@ struct MixedPrecisionEdgeCases {
 }
 
 extension `IEEE_754.Binary64 Tests`.Test {
-    @Suite("IEEE 754 - Binary64 Bit Pattern Validation")
+    @Suite
     struct BitPatternValidation {
         @Test func `all zeros produces positive zero`() {
             let bytes: [UInt8] = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
@@ -428,7 +428,7 @@ extension `IEEE_754.Binary64 Tests`.Test {
 }
 
 extension `IEEE_754.Binary32 Tests`.Test {
-    @Suite("IEEE 754 - Binary32 Bit Pattern Validation")
+    @Suite
     struct BitPatternValidation {
         @Test func `all zeros produces positive zero`() {
             let bytes: [UInt8] = [0x00, 0x00, 0x00, 0x00]

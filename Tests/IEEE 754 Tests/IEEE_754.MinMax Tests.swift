@@ -5,7 +5,7 @@ import Testing
 enum `IEEE_754.MinMax Tests` {}
 
 extension `IEEE_754.MinMax Tests` {
-    @Suite("IEEE_754.MinMax - Double minimum")
+    @Suite
     struct Test {
         @Test(arguments: [(3.14, 2.71, 2.71), (2.71, 3.14, 2.71), (3.14, 3.14, 3.14)])
         func `normal Values`(x: Double, y: Double, expected: Double) {
@@ -36,7 +36,7 @@ extension `IEEE_754.MinMax Tests` {
 }
 
 extension `IEEE_754.MinMax Tests`.Test {
-    @Suite("IEEE_754.MinMax - Double maximum")
+    @Suite
     struct DoubleMaximum {
         @Test(arguments: [(3.14, 2.71, 3.14), (2.71, 3.14, 3.14), (3.14, 3.14, 3.14)])
         func `normal Values`(x: Double, y: Double, expected: Double) {
@@ -60,7 +60,7 @@ extension `IEEE_754.MinMax Tests`.Test {
 }
 
 extension `IEEE_754.MinMax Tests`.Test {
-    @Suite("IEEE_754.MinMax - Double minimumNumber")
+    @Suite
     struct DoubleMinimumNumber {
         @Test(arguments: [(3.14, 2.71, 2.71), (2.71, 3.14, 2.71)])
         func `normal Values`(x: Double, y: Double, expected: Double) {
@@ -90,7 +90,7 @@ extension `IEEE_754.MinMax Tests`.Test {
 }
 
 extension `IEEE_754.MinMax Tests`.Test {
-    @Suite("IEEE_754.MinMax - Double maximumNumber")
+    @Suite
     struct DoubleMaximumNumber {
         @Test(arguments: [(3.14, 2.71, 3.14), (2.71, 3.14, 3.14)])
         func `normal Values`(x: Double, y: Double, expected: Double) {
@@ -115,7 +115,7 @@ extension `IEEE_754.MinMax Tests`.Test {
 }
 
 extension `IEEE_754.MinMax Tests`.Test {
-    @Suite("IEEE_754.MinMax - Double minimumMagnitude")
+    @Suite
     struct DoubleMinimumMagnitude {
         @Test func `by Absolute Value`() {
             #expect(IEEE_754.MinMax.minimumMagnitude(3.14, -2.71) == -2.71, "Select by magnitude")
@@ -145,7 +145,7 @@ extension `IEEE_754.MinMax Tests`.Test {
 }
 
 extension `IEEE_754.MinMax Tests`.Test {
-    @Suite("IEEE_754.MinMax - Double maximumMagnitude")
+    @Suite
     struct DoubleMaximumMagnitude {
         @Test func `by Absolute Value`() {
             #expect(IEEE_754.MinMax.maximumMagnitude(3.14, -2.71) == 3.14, "Select by magnitude")
@@ -171,7 +171,7 @@ extension `IEEE_754.MinMax Tests`.Test {
 }
 
 extension `IEEE_754.MinMax Tests`.Test {
-    @Suite("IEEE_754.MinMax - Double minimumMagnitudeNumber")
+    @Suite
     struct DoubleMinimumMagnitudeNumber {
         @Test func `by Absolute Value`() {
             #expect(
@@ -198,7 +198,7 @@ extension `IEEE_754.MinMax Tests`.Test {
 }
 
 extension `IEEE_754.MinMax Tests`.Test {
-    @Suite("IEEE_754.MinMax - Double maximumMagnitudeNumber")
+    @Suite
     struct DoubleMaximumMagnitudeNumber {
         @Test func `by Absolute Value`() {
             #expect(
@@ -225,7 +225,7 @@ extension `IEEE_754.MinMax Tests`.Test {
 }
 
 extension `IEEE_754.MinMax Tests`.Test {
-    @Suite("IEEE_754.MinMax - Float minimum")
+    @Suite
     struct FloatMinimum {
         @Test(arguments: [
             (Float(3.14), Float(2.71), Float(2.71)), (Float(2.71), Float(3.14), Float(2.71)),
@@ -246,7 +246,7 @@ extension `IEEE_754.MinMax Tests`.Test {
 }
 
 extension `IEEE_754.MinMax Tests`.Test {
-    @Suite("IEEE_754.MinMax - Float maximum")
+    @Suite
     struct FloatMaximum {
         @Test(arguments: [
             (Float(3.14), Float(2.71), Float(3.14)), (Float(2.71), Float(3.14), Float(3.14)),
@@ -263,7 +263,7 @@ extension `IEEE_754.MinMax Tests`.Test {
 }
 
 extension `IEEE_754.MinMax Tests`.Test {
-    @Suite("IEEE_754.MinMax - Float minimumNumber")
+    @Suite
     struct FloatMinimumNumber {
         @Test func `nan Preference`() {
             #expect(
@@ -279,7 +279,7 @@ extension `IEEE_754.MinMax Tests`.Test {
 }
 
 extension `IEEE_754.MinMax Tests`.Test {
-    @Suite("IEEE_754.MinMax - Float maximumNumber")
+    @Suite
     struct FloatMaximumNumber {
         @Test func `nan Preference`() {
             #expect(
@@ -295,7 +295,7 @@ extension `IEEE_754.MinMax Tests`.Test {
 }
 
 extension `IEEE_754.MinMax Tests`.Test {
-    @Suite("IEEE_754.MinMax - Float minimumMagnitude")
+    @Suite
     struct FloatMinimumMagnitude {
         @Test func `by Absolute Value`() {
             #expect(
@@ -311,7 +311,7 @@ extension `IEEE_754.MinMax Tests`.Test {
 }
 
 extension `IEEE_754.MinMax Tests`.Test {
-    @Suite("IEEE_754.MinMax - Float maximumMagnitude")
+    @Suite
     struct FloatMaximumMagnitude {
         @Test func `by Absolute Value`() {
             #expect(
@@ -327,7 +327,7 @@ extension `IEEE_754.MinMax Tests`.Test {
 }
 
 extension `IEEE_754.MinMax Tests`.Test {
-    @Suite("IEEE_754.MinMax - Hierarchical Operation API")
+    @Suite
     struct MinMaxOperation {
         @Test
         func `apply with Operation enum - standard(.minimum)`() {

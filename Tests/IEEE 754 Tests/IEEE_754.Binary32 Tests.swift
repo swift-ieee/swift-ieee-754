@@ -5,7 +5,7 @@ import Testing
 enum `IEEE_754.Binary32 Tests` {}
 
 extension `IEEE_754.Binary32 Tests` {
-    @Suite("IEEE_754.Binary32 - Constants")
+    @Suite
     struct Test {
         @Test func `byte size is 4`() {
             #expect(IEEE_754.Binary32.byteSize == 4)
@@ -45,7 +45,7 @@ extension `IEEE_754.Binary32 Tests` {
 }
 
 extension `IEEE_754.Binary32 Tests`.Test {
-    @Suite("IEEE_754.Binary32 - Authoritative serialization")
+    @Suite
     struct Serialization {
         @Test(arguments: [
             Float(3.14159),
@@ -78,7 +78,7 @@ extension `IEEE_754.Binary32 Tests`.Test {
 }
 
 extension `IEEE_754.Binary32 Tests`.Test {
-    @Suite("IEEE_754.Binary32 - Authoritative deserialization")
+    @Suite
     struct Deserialization {
         @Test(arguments: [
             Float(3.14159),
@@ -138,7 +138,7 @@ extension `IEEE_754.Binary32 Tests`.Test {
 }
 
 extension `IEEE_754.Binary32 Tests`.Test {
-    @Suite("IEEE_754.Binary32 - Special values")
+    @Suite
     struct SpecialValues {
         @Test func `NaN round-trip`() {
             let nan = Float.nan

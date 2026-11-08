@@ -2,7 +2,7 @@ import Testing
 
 @testable import IEEE_754
 
-@Suite("README Verification")
+@Suite
 struct ReadmeVerificationTests {
 
     @Test

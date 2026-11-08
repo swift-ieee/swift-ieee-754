@@ -6,7 +6,7 @@ import Testing
 enum `IEEE_754.Scaling Tests` {}
 
 extension `IEEE_754.Scaling Tests` {
-    @Suite("IEEE_754.Scaling - Double scaleB")
+    @Suite
     struct Test {
         @Test(arguments: [
             (1.0, 0, 1.0),
@@ -60,7 +60,7 @@ extension `IEEE_754.Scaling Tests` {
 }
 
 extension `IEEE_754.Scaling Tests`.Test {
-    @Suite("IEEE_754.Scaling - Double logB")
+    @Suite
     struct DoubleLogB {
         @Test(arguments: [
             (1.0, 0),
@@ -112,7 +112,7 @@ extension `IEEE_754.Scaling Tests`.Test {
 }
 
 extension `IEEE_754.Scaling Tests`.Test {
-    @Suite("IEEE_754.Scaling - Double exponent")
+    @Suite
     struct DoubleExponent {
         @Test(arguments: [
             (1.0, 0.0),
@@ -142,7 +142,7 @@ extension `IEEE_754.Scaling Tests`.Test {
 }
 
 extension `IEEE_754.Scaling Tests`.Test {
-    @Suite("IEEE_754.Scaling - Double significand")
+    @Suite
     struct DoubleSignificand {
         @Test func `powers Of Two`() {
             #expect(IEEE_754.Scaling.significand(8.0) == 1.0, "significand(8.0) should be 1.0")
@@ -184,7 +184,7 @@ extension `IEEE_754.Scaling Tests`.Test {
 }
 
 extension `IEEE_754.Scaling Tests`.Test {
-    @Suite("IEEE_754.Scaling - Float scaleB")
+    @Suite
     struct FloatScaleB {
         @Test(arguments: [
             (Float(1.0), 0, Float(1.0)),
@@ -218,7 +218,7 @@ extension `IEEE_754.Scaling Tests`.Test {
 }
 
 extension `IEEE_754.Scaling Tests`.Test {
-    @Suite("IEEE_754.Scaling - Float logB")
+    @Suite
     struct FloatLogB {
         @Test(arguments: [
             (Float(1.0), 0),
@@ -242,7 +242,7 @@ extension `IEEE_754.Scaling Tests`.Test {
 }
 
 extension `IEEE_754.Scaling Tests`.Test {
-    @Suite("IEEE_754.Scaling - Float exponent")
+    @Suite
     struct FloatExponent {
         @Test(arguments: [
             (Float(1.0), Float(0.0)),
@@ -271,7 +271,7 @@ extension `IEEE_754.Scaling Tests`.Test {
 }
 
 extension `IEEE_754.Scaling Tests`.Test {
-    @Suite("IEEE_754.Scaling - Float significand")
+    @Suite
     struct FloatSignificand {
         @Test func `powers Of Two`() {
             #expect(
@@ -295,7 +295,7 @@ extension `IEEE_754.Scaling Tests`.Test {
 }
 
 extension `IEEE_754.Scaling Tests`.Test {
-    @Suite("IEEE_754.Scaling - Edge Cases")
+    @Suite
     struct ScalingEdgeCases {
         @Test func `subnormal Scaling`() {
             let subnorm = Double.leastNonzeroMagnitude

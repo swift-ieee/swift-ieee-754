@@ -5,7 +5,7 @@ import Testing
 enum `IEEE_754.Arithmetic Tests` {}
 
 extension `IEEE_754.Arithmetic Tests` {
-    @Suite("IEEE_754.Arithmetic - Addition")
+    @Suite
     struct Test {
         @Test func `Basic Addition`() {
             let result = IEEE_754.Arithmetic.addition(3.14, 2.86)
@@ -44,7 +44,7 @@ extension `IEEE_754.Arithmetic Tests` {
 }
 
 extension `IEEE_754.Arithmetic Tests`.Test {
-    @Suite("IEEE_754.Arithmetic - Subtraction")
+    @Suite
     struct Subtraction {
         @Test func `Basic Subtraction`() {
             let result = IEEE_754.Arithmetic.subtraction(10.0, 3.0)
@@ -70,7 +70,7 @@ extension `IEEE_754.Arithmetic Tests`.Test {
 }
 
 extension `IEEE_754.Arithmetic Tests`.Test {
-    @Suite("IEEE_754.Arithmetic - Multiplication")
+    @Suite
     struct Multiplication {
         @Test func `Basic Multiplication`() {
             let result = IEEE_754.Arithmetic.multiplication(3.0, 4.0)
@@ -104,7 +104,7 @@ extension `IEEE_754.Arithmetic Tests`.Test {
 }
 
 extension `IEEE_754.Arithmetic Tests`.Test {
-    @Suite("IEEE_754.Arithmetic - Division")
+    @Suite
     struct Division {
         @Test func `Basic Division`() {
             let result = IEEE_754.Arithmetic.division(10.0, 2.0)
@@ -140,7 +140,7 @@ extension `IEEE_754.Arithmetic Tests`.Test {
 }
 
 extension `IEEE_754.Arithmetic Tests`.Test {
-    @Suite("IEEE_754.Arithmetic - Remainder")
+    @Suite
     struct Remainder {
         @Test func `Basic Remainder`() {
             let result = IEEE_754.Arithmetic.remainder(7.0, 3.0)
@@ -168,7 +168,7 @@ extension `IEEE_754.Arithmetic Tests`.Test {
 }
 
 extension `IEEE_754.Arithmetic Tests`.Test {
-    @Suite("IEEE_754.Arithmetic - Square Root")
+    @Suite
     struct SquareRoot {
         @Test func `Perfect Squares`() {
             #expect(IEEE_754.Arithmetic.squareRoot(4.0) == 2.0)
@@ -206,7 +206,7 @@ extension `IEEE_754.Arithmetic Tests`.Test {
 }
 
 extension `IEEE_754.Arithmetic Tests`.Test {
-    @Suite("IEEE_754.Arithmetic - Fused Multiply-Add")
+    @Suite
     struct FMA {
         @Test func `Basic FMA`() {
 
@@ -250,7 +250,7 @@ extension `IEEE_754.Arithmetic Tests`.Test {
 }
 
 extension `IEEE_754.Arithmetic Tests`.Test {
-    @Suite("IEEE_754.Arithmetic - Absolute Value")
+    @Suite
     struct AbsoluteValue {
         @Test func `Positive Abs`() {
             #expect(IEEE_754.Arithmetic.absoluteValue(5.0) == 5.0)
@@ -285,7 +285,7 @@ extension `IEEE_754.Arithmetic Tests`.Test {
 }
 
 extension `IEEE_754.Arithmetic Tests`.Test {
-    @Suite("IEEE_754.Arithmetic - Negate")
+    @Suite
     struct Negate {
         @Test func `Positive Negate`() {
             #expect(IEEE_754.Arithmetic.negate(5.0) == -5.0)
@@ -319,7 +319,7 @@ extension `IEEE_754.Arithmetic Tests`.Test {
 }
 
 extension `IEEE_754.Arithmetic Tests`.Test {
-    @Suite("IEEE_754.Arithmetic - Edge Cases")
+    @Suite
     struct EdgeCases {
         @Test func `Max Finite Operations`() {
             let max = Double.greatestFiniteMagnitude
@@ -363,7 +363,7 @@ extension `IEEE_754.Arithmetic Tests`.Test {
 }
 
 extension `IEEE_754.Arithmetic Tests`.Test {
-    @Suite("IEEE_754.Arithmetic - Consistency with Operators")
+    @Suite
     struct Consistency {
         @Test func `Addition Consistency`() {
             let values: [(Double, Double)] = [(3.0, 2.0), (-5.0, 3.0), (0.0, 0.0), (1e100, 1e-100)]

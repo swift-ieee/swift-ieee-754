@@ -4,7 +4,7 @@ import Testing
 
 #if IEEE_754_SHIMS
     extension IEEE_754.RoundingControl {
-        @Suite("Swift API - Rounding Control")
+        @Suite
         struct Test {
             @Test func `get Rounding Mode`() {
                 let mode = IEEE_754.RoundingControl.get()
@@ -53,7 +53,7 @@ import Testing
 #endif
 
 extension `IEEE_754.Exceptions Tests`.Test {
-    @Suite("Swift API - Exception Handling")
+    @Suite
     struct SwiftAPIWrapper {
         @Test func `clear All Exceptions`() {
             IEEE_754.Exceptions.clear()
@@ -95,7 +95,7 @@ extension `IEEE_754.Exceptions Tests`.Test {
 
 #if IEEE_754_SHIMS
     extension `IEEE_754.Exceptions Tests`.Test {
-        @Suite("Swift API - Signaling Comparisons")
+        @Suite
         struct SignalingComparisons {
             @Test func `signaling Equal Normal`() {
                 IEEE_754.Exceptions.clear()
@@ -148,7 +148,7 @@ extension `IEEE_754.Exceptions Tests`.Test {
 #endif
 
 extension `IEEE_754.Exceptions Tests`.Test {
-    @Suite("Swift API - Integration Scenarios")
+    @Suite
     struct IntegrationScenarios {
         #if IEEE_754_SHIMS
             @Test func `rounding And Exceptions`() throws {

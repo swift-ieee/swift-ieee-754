@@ -5,7 +5,7 @@ import Testing
 enum `IEEE_754.NextOperations Tests` {}
 
 extension `IEEE_754.NextOperations Tests` {
-    @Suite("IEEE_754.NextOperations - Double nextUp")
+    @Suite
     struct Test {
         @Test func `normal Values`() {
             let value = 1.0
@@ -61,7 +61,7 @@ extension `IEEE_754.NextOperations Tests` {
 }
 
 extension `IEEE_754.NextOperations Tests`.Test {
-    @Suite("IEEE_754.NextOperations - Double nextDown")
+    @Suite
     struct DoubleNextDown {
         @Test func `normal Values`() {
             let value = 1.0
@@ -116,7 +116,7 @@ extension `IEEE_754.NextOperations Tests`.Test {
 }
 
 extension `IEEE_754.NextOperations Tests`.Test {
-    @Suite("IEEE_754.NextOperations - Double nextAfter")
+    @Suite
     struct DoubleNextAfter {
         @Test func `toward Larger`() {
             let result = IEEE_754.NextOperations.nextAfter(1.0, toward: 2.0)
@@ -166,7 +166,7 @@ extension `IEEE_754.NextOperations Tests`.Test {
 }
 
 extension `IEEE_754.NextOperations Tests`.Test {
-    @Suite("IEEE_754.NextOperations - Float nextUp")
+    @Suite
     struct FloatNextUp {
         @Test func `normal Values`() {
             let value = Float(1.0)
@@ -196,7 +196,7 @@ extension `IEEE_754.NextOperations Tests`.Test {
 }
 
 extension `IEEE_754.NextOperations Tests`.Test {
-    @Suite("IEEE_754.NextOperations - Float nextDown")
+    @Suite
     struct FloatNextDown {
         @Test func `normal Values`() {
             let value = Float(1.0)
@@ -221,7 +221,7 @@ extension `IEEE_754.NextOperations Tests`.Test {
 }
 
 extension `IEEE_754.NextOperations Tests`.Test {
-    @Suite("IEEE_754.NextOperations - Float nextAfter")
+    @Suite
     struct FloatNextAfter {
         @Test func `toward Larger`() {
             let result = IEEE_754.NextOperations.nextAfter(Float(1.0), toward: Float(2.0))
@@ -247,7 +247,7 @@ extension `IEEE_754.NextOperations Tests`.Test {
 }
 
 extension `IEEE_754.NextOperations Tests`.Test {
-    @Suite("IEEE_754.NextOperations - Edge Cases")
+    @Suite
     struct NextOperationsEdgeCases {
         @Test func `ulp Consistency`() {
             let value = 1.0

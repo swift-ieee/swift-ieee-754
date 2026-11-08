@@ -5,7 +5,7 @@ import Testing
 enum `IEEE_754.Classification Tests` {}
 
 extension `IEEE_754.Classification Tests` {
-    @Suite("IEEE_754.Classification - Double isSignMinus")
+    @Suite
     struct Test {
         @Test(arguments: [
             (3.14, false),
@@ -40,7 +40,7 @@ extension `IEEE_754.Classification Tests` {
 }
 
 extension `IEEE_754.Classification Tests`.Test {
-    @Suite("IEEE_754.Classification - Double isNormal")
+    @Suite
     struct DoubleIsNormal {
         @Test(arguments: [1.0, -1.0, 3.14, -2.71, 1000.0, -0.001])
         func `Normal Values`(value: Double) {
@@ -86,7 +86,7 @@ extension `IEEE_754.Classification Tests`.Test {
 }
 
 extension `IEEE_754.Classification Tests`.Test {
-    @Suite("IEEE_754.Classification - Double isFinite")
+    @Suite
     struct DoubleIsFinite {
         @Test(arguments: [0.0, -0.0, 1.0, -1.0, 3.14, -2.71, 1e308, -1e308])
         func `Finite Values`(value: Double) {
@@ -123,7 +123,7 @@ extension `IEEE_754.Classification Tests`.Test {
 }
 
 extension `IEEE_754.Classification Tests`.Test {
-    @Suite("IEEE_754.Classification - Double isZero")
+    @Suite
     struct DoubleIsZero {
         @Test(arguments: [0.0, -0.0])
         func zeros(value: Double) {
@@ -145,7 +145,7 @@ extension `IEEE_754.Classification Tests`.Test {
 }
 
 extension `IEEE_754.Classification Tests`.Test {
-    @Suite("IEEE_754.Classification - Double isSubnormal")
+    @Suite
     struct DoubleIsSubnormal {
         @Test func `Min Subnormal`() {
             let minSubnorm = Double.leastNonzeroMagnitude
@@ -185,7 +185,7 @@ extension `IEEE_754.Classification Tests`.Test {
 }
 
 extension `IEEE_754.Classification Tests`.Test {
-    @Suite("IEEE_754.Classification - Double isInfinite")
+    @Suite
     struct DoubleIsInfinite {
         @Test(arguments: [Double.infinity, -Double.infinity])
         func infinities(value: Double) {
@@ -214,7 +214,7 @@ extension `IEEE_754.Classification Tests`.Test {
 }
 
 extension `IEEE_754.Classification Tests`.Test {
-    @Suite("IEEE_754.Classification - Double isNaN")
+    @Suite
     struct DoubleIsNaN {
         @Test(arguments: [Double.nan, Double.signalingNaN, -Double.nan])
         func nans(value: Double) {
@@ -234,7 +234,7 @@ extension `IEEE_754.Classification Tests`.Test {
 }
 
 extension `IEEE_754.Classification Tests`.Test {
-    @Suite("IEEE_754.Classification - Double isSignaling")
+    @Suite
     struct DoubleIsSignaling {
         @Test func `Signaling NaN`() {
             let snan = Double.signalingNaN
@@ -254,7 +254,7 @@ extension `IEEE_754.Classification Tests`.Test {
 }
 
 extension `IEEE_754.Classification Tests`.Test {
-    @Suite("IEEE_754.Classification - Double isCanonical")
+    @Suite
     struct DoubleIsCanonical {
         @Test(arguments: [
             0.0, -0.0, 1.0, -1.0, 3.14, Double.infinity, -Double.infinity, Double.nan,
@@ -270,7 +270,7 @@ extension `IEEE_754.Classification Tests`.Test {
 }
 
 extension `IEEE_754.Classification Tests`.Test {
-    @Suite("IEEE_754.Classification - Double radix")
+    @Suite
     struct DoubleRadix {
         @Test(arguments: [0.0, 1.0, -1.0, 3.14, Double.infinity, Double.nan])
         func `Radix Is Two`(value: Double) {
@@ -283,7 +283,7 @@ extension `IEEE_754.Classification Tests`.Test {
 }
 
 extension `IEEE_754.Classification Tests`.Test {
-    @Suite("IEEE_754.Classification - Double numberClass")
+    @Suite
     struct DoubleNumberClass {
         @Test func `Signaling NaN`() {
             let snan = Double.signalingNaN
@@ -344,7 +344,7 @@ extension `IEEE_754.Classification Tests`.Test {
 }
 
 extension `IEEE_754.Classification Tests`.Test {
-    @Suite("IEEE_754.Classification - Float isSignMinus")
+    @Suite
     struct FloatIsSignMinus {
         @Test(arguments: [
             (Float(3.14), false),
@@ -361,7 +361,7 @@ extension `IEEE_754.Classification Tests`.Test {
 }
 
 extension `IEEE_754.Classification Tests`.Test {
-    @Suite("IEEE_754.Classification - Float isNormal")
+    @Suite
     struct FloatIsNormal {
         @Test(arguments: [Float(1.0), Float(-1.0), Float(3.14)])
         func `Normal Values`(value: Float) {
@@ -381,7 +381,7 @@ extension `IEEE_754.Classification Tests`.Test {
 }
 
 extension `IEEE_754.Classification Tests`.Test {
-    @Suite("IEEE_754.Classification - Float isFinite")
+    @Suite
     struct FloatIsFinite {
         @Test(arguments: [Float(0.0), Float(1.0), Float(-1.0), Float(3.14)])
         func `Finite Values`(value: Float) {
@@ -396,7 +396,7 @@ extension `IEEE_754.Classification Tests`.Test {
 }
 
 extension `IEEE_754.Classification Tests`.Test {
-    @Suite("IEEE_754.Classification - Float numberClass")
+    @Suite
     struct FloatNumberClass {
         @Test(arguments: [
             (Float(-0.0), IEEE_754.Classification.NumberClass.negative(.zero)),

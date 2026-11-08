@@ -3,7 +3,7 @@ import Testing
 @testable import IEEE_754
 
 extension `Double Tests`.Test {
-    @Suite("IEEE 754 - Double Special Values")
+    @Suite
     struct SpecialValues {
         @Test(arguments: [0.0, -0.0])
         func `zero values`(value: Double) {
@@ -69,7 +69,7 @@ extension `Double Tests`.Test {
 }
 
 extension `Float Tests`.Test {
-    @Suite("IEEE 754 - Float Special Values")
+    @Suite
     struct SpecialValues {
         @Test(arguments: [Float(0.0), Float(-0.0)])
         func `zero values`(value: Float) {

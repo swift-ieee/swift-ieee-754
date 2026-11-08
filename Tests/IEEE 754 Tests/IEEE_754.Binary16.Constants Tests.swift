@@ -5,7 +5,7 @@ import Testing
 enum `IEEE_754.Binary16 Tests` {}
 
 extension `IEEE_754.Binary16 Tests` {
-    @Suite("IEEE_754.Binary16 Constants - Format Parameters")
+    @Suite
     struct Test {
         @Test func `Byte Size`() {
             #expect(IEEE_754.Binary16.byteSize == 2, "Binary16 should be 2 bytes")
@@ -50,7 +50,7 @@ extension `IEEE_754.Binary16 Tests` {
 }
 
 extension `IEEE_754.Binary16 Tests`.Test {
-    @Suite("IEEE_754.Binary16 Constants - Consistency Tests")
+    @Suite
     struct Consistency {
         @Test func `Format Size Consistency`() {
             let byteSize = IEEE_754.Binary16.byteSize
