@@ -12,7 +12,7 @@ extension IEEE_754.Scaling {
             return value
         }
 
-        return value * Double(sign: .plus, exponent: n, significand: 1.0)
+        return Double(sign: .plus, exponent: n, significand: value)
     }
 
     @inlinable
@@ -59,7 +59,7 @@ extension IEEE_754.Scaling {
             return value
         }
 
-        return value * Float(sign: .plus, exponent: n, significand: 1.0)
+        return Float(sign: .plus, exponent: n, significand: value)
     }
 
     @inlinable

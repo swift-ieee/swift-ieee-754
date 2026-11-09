@@ -322,3 +322,34 @@ extension `IEEE_754.Scaling Tests`.Test {
         }
     }
 }
+
+extension `IEEE_754.Scaling Tests`.Test {
+    @Suite
+    struct `Out Of Range Factor` {
+        @Test func `subnormal Double Scaled Into Normal Range`() {
+            let subnormal = Double.leastNonzeroMagnitude
+            #expect(IEEE_754.Scaling.scaleB(subnormal, 1100) == 0x1p26)
+            #expect(IEEE_754.Scaling.scaleB(-subnormal, 1100) == -0x1p26)
+        }
+
+        @Test func `large Double Scaled Into Subnormal Range`() {
+            #expect(IEEE_754.Scaling.scaleB(0x1p1000, -2074) == Double.leastNonzeroMagnitude)
+        }
+
+        @Test func `subnormal Float Scaled Into Normal Range`() {
+            let subnormal = Float.leastNonzeroMagnitude
+            #expect(IEEE_754.Scaling.scaleB(subnormal, 200) == Float(0x1p51))
+        }
+
+        @Test func `large Float Scaled Into Subnormal Range`() {
+            #expect(IEEE_754.Scaling.scaleB(Float(0x1p100), -249) == Float.leastNonzeroMagnitude)
+        }
+
+        @Test func `extreme Exponents Saturate`() {
+            #expect(IEEE_754.Scaling.scaleB(1.0, Int.max) == .infinity)
+            #expect(IEEE_754.Scaling.scaleB(1.0, Int.min) == 0.0)
+            #expect(IEEE_754.Scaling.scaleB(Float(1.0), Int.max) == .infinity)
+            #expect(IEEE_754.Scaling.scaleB(Float(1.0), Int.min) == 0.0)
+        }
+    }
+}
