@@ -101,12 +101,7 @@ extension IEEE_754.Conversions {
 
     @inlinable
     public static func doubleToUInt(_ value: Double) -> UInt? {
-        if value.isNaN || value.isInfinite || value < 0 {
-            return nil
-        }
-
-        let rounded = value.rounded(.toNearestOrEven)
-        return UInt(exactly: rounded)
+        UInt(exactly: value.rounded(.toNearestOrEven))
     }
 
     @inlinable
@@ -116,12 +111,7 @@ extension IEEE_754.Conversions {
 
     @inlinable
     public static func floatToUInt(_ value: Float) -> UInt? {
-        if value.isNaN || value.isInfinite || value < 0 {
-            return nil
-        }
-
-        let rounded = value.rounded(.toNearestOrEven)
-        return UInt(exactly: rounded)
+        UInt(exactly: value.rounded(.toNearestOrEven))
     }
 
     @inlinable

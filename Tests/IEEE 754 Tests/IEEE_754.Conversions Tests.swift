@@ -436,3 +436,23 @@ extension `IEEE_754.Conversions Tests`.Test {
         }
     }
 }
+
+extension `IEEE_754.Conversions Tests`.Test {
+    @Suite
+    struct `Negative Values Rounding To Zero` {
+        @Test(arguments: [-0.4, -0.5, -0.0])
+        func `double Converts To Zero`(value: Double) {
+            #expect(IEEE_754.Conversions.doubleToUInt(value) == 0)
+        }
+
+        @Test(arguments: [Float(-0.4), Float(-0.5), Float(-0.0)])
+        func `float Converts To Zero`(value: Float) {
+            #expect(IEEE_754.Conversions.floatToUInt(value) == 0)
+        }
+
+        @Test func `negative Values Rounding Below Zero Return Nil`() {
+            #expect(IEEE_754.Conversions.doubleToUInt(-0.6) == nil)
+            #expect(IEEE_754.Conversions.floatToUInt(Float(-0.6)) == nil)
+        }
+    }
+}
