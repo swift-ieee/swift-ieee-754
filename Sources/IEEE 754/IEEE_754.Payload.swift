@@ -27,10 +27,10 @@ extension IEEE_754.Payload {
     public static func encode(_ type: NaNType) -> Float {
         switch type {
         case .quiet(let payload):
-            return encodeQuietNaN(payload: UInt32(payload & 0x001F_FFFF))
+            return encodeQuietNaN(payload: UInt32(payload & 0x003F_FFFF))
 
         case .signaling(let payload):
-            return encodeSignalingNaN(payload: UInt32(payload & 0x001F_FFFF))
+            return encodeSignalingNaN(payload: UInt32(payload & 0x003F_FFFF))
         }
     }
 
@@ -111,7 +111,7 @@ extension IEEE_754.Payload {
 
         let bits = value.bitPattern
 
-        let payloadMask: UInt32 = 0x001F_FFFF
+        let payloadMask: UInt32 = 0x003F_FFFF
         return bits & payloadMask
     }
 
@@ -120,7 +120,7 @@ extension IEEE_754.Payload {
 
         let exponentMask: UInt32 = 0x7F80_0000
         let quietBit: UInt32 = 0x0040_0000
-        let payloadMask: UInt32 = 0x001F_FFFF
+        let payloadMask: UInt32 = 0x003F_FFFF
 
         let bits = exponentMask | quietBit | (payload & payloadMask)
         return Float(bitPattern: bits)
@@ -129,7 +129,7 @@ extension IEEE_754.Payload {
     @inlinable
     public static func encodeSignalingNaN(payload: UInt32 = 1) -> Float {
         let exponentMask: UInt32 = 0x7F80_0000
-        let payloadMask: UInt32 = 0x001F_FFFF
+        let payloadMask: UInt32 = 0x003F_FFFF
 
         let actualPayload = (payload & payloadMask) == 0 ? 1 : (payload & payloadMask)
 

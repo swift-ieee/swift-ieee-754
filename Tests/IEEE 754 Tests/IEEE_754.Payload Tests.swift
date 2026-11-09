@@ -295,3 +295,27 @@ extension `IEEE_754.Payload Tests`.Test {
         }
     }
 }
+
+extension `IEEE_754.Payload Tests`.Test {
+    @Suite
+    struct FloatPayloadRoundTrip {
+        @Test func `largest Quiet Payload Round Trips`() {
+            let payload: UInt32 = 0x003F_FFFF
+            let nan = IEEE_754.Payload.encodeQuietNaN(payload: payload)
+            #expect(IEEE_754.Payload.extract(from: nan) == payload)
+            #expect(!nan.isSignalingNaN)
+        }
+
+        @Test func `largest Signaling Payload Round Trips`() {
+            let payload: UInt32 = 0x003F_FFFF
+            let nan = IEEE_754.Payload.encodeSignalingNaN(payload: payload)
+            #expect(IEEE_754.Payload.extract(from: nan) == payload)
+            #expect(nan.isSignalingNaN)
+        }
+
+        @Test func `largest Payload Round Trips Through NaNType`() {
+            let nan: Float = IEEE_754.Payload.encode(.quiet(payload: 0x003F_FFFF))
+            #expect(IEEE_754.Payload.decode(nan) == .quiet(payload: 0x003F_FFFF))
+        }
+    }
+}
